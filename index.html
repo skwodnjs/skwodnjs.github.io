@@ -11,9 +11,6 @@
         <h1>My GitHub Blog</h1>
         <nav class="categories">
             <ul>
-                <li><a href="#">Category 1</a></li>
-                <li><a href="#">Category 2</a></li>
-                <li><a href="#">Category 3</a></li>
             </ul>
         </nav>
     </header>
@@ -41,5 +38,19 @@
     <footer>
         <p>&copy; 2025 My GitHub Blog. All rights reserved.</p>
     </footer>
+
+    <script>
+        // 카테고리 목록을 동적으로 생성하는 스크립트
+        fetch('/posts/categories.json')
+        .then(response => response.json())
+        .then(data => {
+            const nav = document.querySelector('.categories ul');
+            data.categories.forEach(category => {
+                const li = document.createElement('li');
+                li.innerHTML = `<a href="#">${category}</a>`;
+                nav.appendChild(li);
+            });
+        });
+    </script>
 </body>
 </html>
