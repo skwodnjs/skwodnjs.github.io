@@ -1,0 +1,77 @@
+---
+---
+
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+/* append your custom style below */
+
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap');
+
+// font of tags & categories(mx-2) & post meta
+.post-tags, .post-meta, #tags, .mx-2 {
+  font-family: "Nanum Pen Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.post-meta, #tags, .mx-2 {
+  font-size: large;
+}
+
+.post-tags {
+  font-size: medium;
+}
+
+// breadcrumb example: Home > Getting Started
+#breadcrumb {
+  font-family: "Nanum Pen Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.1rem !important;
+}
+
+// font of title in profile bar (on the left side)
+.site-title {
+  font-family: "Nanum Pen Script", cursive !important;
+  font-size: 2rem !important;
+}
+
+.site-subtitle {
+  font-family: "Nanum Pen Script", cursive !important;
+  font-size: 120% !important;
+}
+
+// font of the card-title (in 'HOME' page)
+.card-title {
+  font-family: "Gamja Flower", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.45rem !important;
+}
+
+// font of the article header
+article header h1 {
+  font-family: "Gamja Flower", sans-serif !important;
+  font-size: 2.5rem;
+}
+article header p {
+  font-style: italic;
+  font-size: 0.925rem !important;
+}
+
+// font of the archives
+#archives ul li a {
+  font-family: "Nanum Pen Script", sans-serif !important;
+  font-size: 1.25rem;
+}
+
+// font of the post-navigation
+.post-navigation a p {
+  font-family: "Gamja Flower", sans-serif;
+  font-size: 1.25rem;
+}

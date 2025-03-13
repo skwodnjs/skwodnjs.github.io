@@ -1,7 +1,7 @@
 ---
 title: Category "Math" "Paper Review"
 date: 2025-02-16 22:01:00 +0900
-categories: [Math, Paper Review]
+categories: [단편소설]
 tags: []     # TAG names should always be lowercase
 author: skwodnjs
 math: true
