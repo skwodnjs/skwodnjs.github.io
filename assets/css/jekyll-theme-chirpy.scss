@@ -30,10 +30,25 @@
   font-size: 120% !important;
 }
 
-// 'HOME' 의 카드들 폰트
+// HOME의 카드들 폰트
 .card-title {
   font-family: "Gamja Flower", sans-serif;
   font-size: 1.45rem !important;
+}
+
+.card-text {
+  font-size: 0.95rem;
+} 
+
+// HOME의 Recently Updated 와 Trending Tags 폰트
+#access-lastmod ul li {
+  font-family: "Nanum Pen Script", cursive;
+  font-size: 1.1rem;
+}
+
+.panel-heading + div a {
+  font-family: "Nanum Pen Script", cursive;
+  font-size: 0.95rem !important;
 }
 
 // CATEGORIES 폰트
