@@ -68,7 +68,7 @@
   font-size: 1.05rem;
 }
 
-// 글 제목 폰트
+// 글 Title 폰트
 article header h1 {
   font-family: "Gamja Flower", sans-serif !important;
   font-size: 2.5rem;
@@ -76,6 +76,28 @@ article header h1 {
 article header p {
   font-style: italic;
   font-size: 0.925rem !important;
+}
+
+// 글 h 폰트
+
+.content h1, .content h2, .content h3, .content h4 {
+  font-family: "Gamja Flower", sans-serif !important;
+}
+
+.content h1 {
+  font-size: 2.3rem;
+}
+
+.content h2 {
+  font-size: 1.8rem;
+}
+
+.content h3 {
+  font-size: 1.55rem;
+}
+
+.content h4 {
+  font-size: 1.4rem;
 }
 
 // 글 하단의 '이전 글' & '다음 글' 폰트
@@ -88,4 +110,11 @@ article header p {
 #archives ul li a {
   font-family: "Nanum Pen Script", sans-serif !important;
   font-size: 1.25rem;
+}
+
+// LaTex
+mjx-math {
+  font-size: 90% !important;
+  padding: 1px 2px !important;
+  line-height: normal !important;
 }
