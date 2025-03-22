@@ -9,8 +9,10 @@
 
 /* append your custom style below */
 
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap');
+p {
+  font-family: "Noto Sans", sans-serif;
+  font-size: .95rem;
+}
 
 // breadcrumb example: Home > Getting Started
 #breadcrumb {
@@ -32,7 +34,7 @@
 
 // HOME의 카드들 폰트
 .card-title {
-  font-family: "Gamja Flower", sans-serif;
+  font-family: "Ownglyph RDO ballpen", sans-serif;
   font-size: 1.45rem !important;
 }
 
@@ -70,39 +72,23 @@
 
 // 글 Title 폰트
 article header h1 {
-  font-family: "Gamja Flower", sans-serif !important;
+  font-family: "Ownglyph RDO ballpen", sans-serif !important;
   font-size: 2.5rem;
 }
 article header p {
   font-style: italic;
-  font-size: 0.925rem !important;
+  font-size: 1rem !important;
 }
 
 // 글 h 폰트
 
 .content h1, .content h2, .content h3, .content h4 {
-  font-family: "Gamja Flower", sans-serif !important;
-}
-
-.content h1 {
-  font-size: 2.3rem;
-}
-
-.content h2 {
-  font-size: 1.8rem;
-}
-
-.content h3 {
-  font-size: 1.55rem;
-}
-
-.content h4 {
-  font-size: 1.4rem;
+  font-family: "Ownglyph RDO ballpen", sans-serif !important;
 }
 
 // 글 하단의 '이전 글' & '다음 글' 폰트
 .post-navigation a p {
-  font-family: "Gamja Flower", sans-serif;
+  font-family: "Ownglyph RDO ballpen", sans-serif;
   font-size: 1.25rem;
 }
 
@@ -114,13 +100,43 @@ article header p {
 
 // LaTex
 mjx-math {
-  font-size: 90% !important;
+  font-size: 1rem !important;
   padding: 1px 2px !important;
-  line-height: normal !important;
+}
+
+mjx-utext {
+  font-family: "Noto Sans", sans-serif !important;
+}
+
+mjx-mtd {
+  padding: .5em 0 !important;
 }
 
 // Custom
 .subheading {
-  font-family: "Gamja Flower", sans-serif !important;
-  font-size: 1.55rem;
+  font-family: "Ownglyph RDO ballpen", sans-serif !important;
+  font-size: 1.4rem;
+  font-style: italic;
+}
+.subheading::before {
+  content: "<";
+  margin-right: 0.3rem;
+}
+.subheading::after {
+  content: ">";
+  margin-left: 0.3rem;
+}
+
+
+
+.text-block {
+  border: 1px solid #dadce0;
+  padding: 1rem;
+  margin: 0 0 40px 0;
+  line-height: 3;
+  box-shadow: -4px 4px 2px #eee;
+}
+
+hr {
+  margin: 40px 0;
 }

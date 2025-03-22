@@ -1,0 +1,36 @@
+@forward 'base';
+@forward 'components';
+@forward 'layout';
+@forward 'pages';
+
+
+// Custom font
+
+@import url('//fonts.googleapis.com/earlyaccess/nanumpenscript.css');
+
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('/assets/fonts/NotoSans-VariableFont_wdth,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('/assets/fonts/NotoSans-Italic-VariableFont_wdth,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Ownglyph RDO ballpen';
+    src: url('/assets/fonts/온글잎 레디오 볼펜체 Ownglyph RDO ballpen.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cafe24Shiningstar';
+    src: url('/assets/fonts/Cafe24Shiningstar-v2.0.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
