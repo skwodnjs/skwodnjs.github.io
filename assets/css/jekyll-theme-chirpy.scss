@@ -108,14 +108,10 @@ mjx-utext {
   font-family: "Noto Sans", sans-serif !important;
 }
 
-mjx-mtd {
-  padding: .5em 0 !important;
-}
-
 // Custom
 .subheading {
   font-family: "Ownglyph RDO ballpen", sans-serif !important;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-style: italic;
 }
 .subheading::before {
@@ -127,9 +123,7 @@ mjx-mtd {
   margin-left: 0.3rem;
 }
 
-
-
-.text-block {
+.text-box {
   border: 1px solid #dadce0;
   padding: 1rem;
   margin: 0 0 40px 0;
@@ -139,4 +133,16 @@ mjx-mtd {
 
 hr {
   margin: 40px 0;
+}
+
+#toc a {
+  font-family: "Ownglyph RDO ballpen", sans-serif !important;
+  font-size: 11.5pt !important;
+}
+
+img {
+  border: 1px solid #CCCED3;
+  padding: 4px;
+  margin: 0 0 40px 0;
+  box-shadow: -4px 4px 2px #eee;
 }
