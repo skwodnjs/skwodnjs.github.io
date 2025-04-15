@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from tex2md import *
+
 def find_all_tex_files(root_dir):
   tex_files = []
   for path in Path(root_dir).rglob("*.tex"):
@@ -21,4 +23,8 @@ if __name__ == "__main__":
   tex_files = find_all_tex_files(root)
   print(tex_files)
   for tex_file in tex_files:
-    print(read_tex_files_content(tex_file))
+    tex = read_tex_files_content(tex_file)
+    tex_oneline = document_of_tex(tex)
+    print(get_title(tex_oneline))
+  # tex = read_tex_files_content(tex_files[0])
+  # print(document_of_tex(tex))
