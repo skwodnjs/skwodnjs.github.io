@@ -217,18 +217,47 @@ def extract_tags(tex):
 
   return "[" + document[start:i - 1].strip().replace('\n', ' ') + "]" if brace_count == 0 else None
 
+
+def extract_author(tex):
+  """
+  string 형태의 tex 로부터 author 를 꺼내온다.
+  \author{...} 의 마지막 항목을 가져오며, 없거나 비어 있으면 None을 반환한다.
+
+  :param tex:
+  :return: author (str) 또는 None
+  """
+  document = extract_document(tex)
+  matches = list(re.finditer(r'\\author\s*\{', document))
+  if not matches:
+    return None
+
+  last_match = matches[-1]
+  start = last_match.end()
+  brace_count = 1
+  i = start
+  while i < len(document) and brace_count > 0:
+    if document[i] == '{':
+      brace_count += 1
+    elif document[i] == '}':
+      brace_count -= 1
+    i += 1
+
+  content = document[start:i - 1].strip()
+  return content if content else None
+
 def get_markdown_header(relative_path, tex):
   title = extract_title(tex) or "Untitled"
   date = extract_date(tex) or datetime.now().astimezone().strftime("%Y-%m-%d %H:%M:%S %z")
-  tags = extract_tags(tex) or "[]"
   categories = get_categories_from_path(relative_path)
+  tags = extract_tags(tex) or "[]"
+  auther = extract_author(tex) or "skwodnjs"
 
   header = "---\n"
   header += f"title: {title}\n"
   header += f"date: {date}\n"
   header += f"categories: {categories}\n"
   header += f"tags: {tags}\n"
-  header += "author: skwodnjs\n"
+  header += f"author: {auther}\n"
   header += "math: true\n"
   header += "---"
 
@@ -351,7 +380,6 @@ def get_filename(relative_path, tex):
   :param tex: string 형태의 .tex 전체 내용
   :return: 파일명 (str)
   """
-  from jamo import h2j
 
   # 한글을 두벌식 키보드 기준으로 영문 치환
   def hangul_to_keyboard_roman(text):
@@ -383,7 +411,6 @@ def get_filename(relative_path, tex):
 
   # 카테고리 경로를 한글 처리 포함해 정제
   categories = '-'.join(hangul_to_keyboard_roman(part) for part in relative_path.parts[:-1])
-  print(categories)
 
   # 제목
   title = extract_title(tex)

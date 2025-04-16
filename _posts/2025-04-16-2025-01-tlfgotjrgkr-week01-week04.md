@@ -1,6 +1,6 @@
 ---
 title: week 01 ~ week 04
-date: 2025-04-16 19:06:40 +0900
+date: 2025-04-16 19:25:58 +0900
 categories: [2025-01, 실해석학]
 tags: []
 author: skwodnjs
