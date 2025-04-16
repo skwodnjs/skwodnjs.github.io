@@ -1,0 +1,48 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\geometry{a4paper, margin=1in}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+
+\title{Metric Spaces and Examples}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+수업에서 다루는 dataset은 앞으로 ""finite metric measure space""라 생각하자.
+
+\section*{Metric Space}
+
+\subsection*{Definition}
+
+\begin{tcolorbox}[colback=gray!5!white, colframe=gray!75!black, title=Definition]
+A metric space $(X, d_X)$ is a pair consisting of a set $X$ and a function $d_X : X \times X \to \mathbb{R}_+$ such that
+\[
+\begin{aligned}
+    & d_X(x, y) = 0 \iff x = y \\
+    & d_X(x, y) = d_X(y, x) \\
+    & d_X(x, y) + d_X(y, z) \ge d_X(x, z)
+\end{aligned}
+\]
+A function $d_X$ is referred to as a ``metric'' or ``distance''.
+\end{tcolorbox}
+
+$d_X(x, y) + d_X(y, z) \ge d_X(x, z)$는 ``최단거리''에 대한 일반화이다.
+
+\subsection*{Example}
+
+\begin{tcolorbox}[colback=gray!5!white, colframe=gray!75!black, title=Example]
+The following are some metrics on $\mathbb{R}^n$.
+
+\textbf{1.} $d_1(x, y) = \Vert x - y \Vert_p := \left( \sum_{i=1}^n \vert x_i - y_i \vert \right)^{1/p}$ for $p \in \{1, 2, \cdots\}$.
+\end{tcolorbox}
+
+\end{document}

@@ -48,84 +48,69 @@
 \newcommand{\ep}{\epsilon}
 \newcommand{\lx}{{\lambda, \xi}}
 \newcommand{\pa}{\partial}
-
-\newcommand{\mc}{\mathcal{C}}
-\newcommand{\mh}{\mathcal{H}}
-\newcommand{\mt}{\mathcal{T}}
-\newcommand{\mv}{\mathcal{V}}
-\newcommand{\mn}{\mathbb{N}}
-\newcommand{\mr}{\mathbb{R}}
-\newcommand{\G}{\mathcal{G}}
-\newcommand{\E}{\mathcal{E}}
-\newcommand{\cW}{\mathcal{W}}
-
-\newcommand{\diag}{{\rm diag}}
-
 \renewcommand{\(}{\left(}
 \renewcommand{\)}{\right)}
+\renewcommand{\[}{\right[}
+\renewcommand{\]}{\right]}
 
 % MATH ------------------------------------------------
 
-\newcommand{\supp}{\text{supp }}
-\newcommand{\inp}[2]{\langle #1,#2 \rangle}
-\newcommand{\dist}{\text{dist }}
-\newcommand{\ty}{{\widetilde y}}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\inner}[2]{\left< #1, #2 \right>}
+\newcommand{\test}[1]{\left[ #1 \right]}
+\newcommand{\setdefine}{ \ \big| \ }
 
 %-----------------------------------------------------------------
 
-\newcommand {\com}[1]{\texttt{($\leftarrow$ #1)}}
-\newcommand{\inner}[2]{\left< #1, #2 \right>}
-
 \newenvironment{text-box}{}{}
+\newcommand{\tags}[1]{#1}
+\newcommand{\subheading}[1]{#1}
 
 % ----------------------------------------------------------------
 \begin{document}
 \title[]
 %{Convergence rate of numerical scheme finding extremal functions of Sobolev inequalities}
-{test - 1}
+{test - 3}
+
+\date{2025-04-16}
 
 \maketitle
 
-\section{}
+\tags{
+    supremum, infimum, bounded, approximation property, 
+    completeness axiom, archimedean principle, density of rationals, 
+    reflection principle, monotone property
+}
 
-\subsection{}
+\section{test}
 
-Quadratic Programming (QP) problems are the following form:
-\begin{align}
-    \min_x \frac{1}{2} x^T Q x + q^T x \\
-    \rm s.t. \quad & Gx \le g \\
-    & Fx = f.
-\end{align}
-where $Q \in \R^{n \times n}$ positive semi-definite. $F \in \R ^{p \times n}$, $G \in \R ^{q \times n}$,
-and $x \in \R^n$, $q \in \R^n$, $f \in \R ^p$, $g \in \R ^q$ are vectors.
-Using slack variable, we can derive the following equation:
-\begin{align}
-    \min_x \frac{1}{2} x^T Q x + q^T x + I_{\R^+}(z) \\
-    \rm s.t. \quad & Ax + Bz = c
-\end{align}
-where
+\subsection{test - 3}
+
+This is test. Note that $S^n := \{ x \in \R^{n+1} \setdefine \| x \| = 1 \}$.
+
+\subheading{Definition}
+
 \begin{equation}
-    I_{\R^+}(z) = \begin{cases}
-        0 & \quad z \ge 0 \\
-        \infty & \quad \rm otherwise
-    \end{cases}
+    3 \epsilon + 2 \lx - \pa f(x) = \test{Hello}
 \end{equation}
-and
-\begin{equation}
-    A = \begin{bmatrix}
-        G \\ F
-    \end{bmatrix},
-    \quad
-    B = \begin{bmatrix}
-        I_p \\ 0
-    \end{bmatrix},
-    \quad
-    c = \begin{bmatrix}
-        g \\ f
-    \end{bmatrix}.
-\end{equation}
-$I_p$ is an $p \times p$ identity matrix.
+
+\begin{align}
+    \( \R \in \inner{f}{g} \) \\
+    3 \ep + 2 \lx - \pa f(x) = \test{Hello}
+\end{align}
+
+\begin{text-box}
+    1) This is test. Note that $S^n := \{ x \in \R^{n+1} \setdefine \| x \| = 1 \}$.
+
+    2) This is test. Note that $S^n := \{ x \in \R^{n+1} \setdefine \| x \| = 1 \}$. \\
+    3) This is test. Note that $S^n := \{ x \in \R^{n+1} \setdefine \| x \| = 1 \}$.
+
+    \begin{equation}
+        ax + by = c
+    \end{equation}
+    
+    4) This is test. Note that $S^n := \{ x \in \R^{n+1} \setdefine \| x \| = 1 \}$.
+\end{text-box}
 
 \end{document}
 
