@@ -110,43 +110,72 @@ def apply_newcommands_to_document(document, commands):
   r"""
   커스텀 commands 로부터 document를 원상복귀시킨다.
   허용된 명령어 이름: \foo, \bar, \(, \), \[, \]
-
-  :param document:
-  :param commands:
-  :return: new document
+  명령어와 인자 전체를 치환하고, 인자 처리 후 남은 인자들은 버림.
   """
-  def replace_command(match):
-      full = match.group(0)
-      name = match.group(1)
-      if name in ('tags', 'subheading'):
-        return full
 
-      args = [arg for arg in match.groups()[1:] if arg is not None]
+  def parse_brace_content(text, start):
+    if text[start] != '{':
+      return None, start
+    depth = 1
+    i = start + 1
+    while i < len(text) and depth > 0:
+      if text[i] == '{':
+        depth += 1
+      elif text[i] == '}':
+        depth -= 1
+      i += 1
+    if depth == 0:
+      return text[start+1:i-1], i
+    else:
+      return None, start
 
-      cmd_key = '\\' + name
-      if cmd_key not in commands:
-          return full
+  i = 0
+  result = ""
+  while i < len(document):
+    if document[i] == '\\':
+      match = re.match(r'\\([a-zA-Z]+|\(|\)|\[|\])', document[i:])
+      if match:
+        name = match.group(1)
+        full_cmd = '\\' + name
+        if name in ('tags', 'subheading') or full_cmd not in commands:
+          result += match.group(0)
+          i += len(match.group(0))
+          continue
 
-      n_args, default, body = commands[cmd_key]
+        n_args, default, body = commands[full_cmd]
+        i += len(match.group(0))
+        args = []
 
-      if n_args >= 1 and default is not None and len(args) == n_args - 1:
+        for _ in range(n_args):
+          while i < len(document) and document[i].isspace():
+            i += 1
+          if i < len(document) and document[i] == '{':
+            content, new_i = parse_brace_content(document, i)
+            if content is None:
+              break
+            args.append(content)
+            i = new_i
+          else:
+            break
+
+        if len(args) == n_args - 1 and default is not None:
           args.insert(0, default)
 
-      if len(args) != n_args:
-          return full
+        if len(args) == n_args:
+          replaced = body
+          for j, arg in enumerate(args):
+            replaced = replaced.replace(f'#{j+1}', arg)
+          result += replaced
+        else:
+          result += full_cmd  # fallback if 인자 부족
+      else:
+        result += document[i]
+        i += 1
+    else:
+      result += document[i]
+      i += 1
 
-      for i, arg in enumerate(args):
-          body = body.replace(f'#{i+1}', arg)
-
-      return body
-
-  pattern = re.compile(
-      r'\\([a-zA-Z@]+|\(|\)|\[|\])' +     # 알파벳 또는 \( \) \[ \]
-      r'(?:\{([^\{\}]*)\})?' * 5 +
-      r'(?=[^a-zA-Z_]|$)'                 # 뒤에 이어지는 것이 명령어가 아니어야 함
-  )
-
-  return pattern.sub(replace_command, document)
+  return result
 
 ### ### ### ### ### ### MARKDOWN ### ### ### ### ### ### ###
 
@@ -217,7 +246,6 @@ def extract_tags(tex):
 
   return "[" + document[start:i - 1].strip().replace('\n', ' ') + "]" if brace_count == 0 else None
 
-
 def extract_author(tex):
   """
   string 형태의 tex 로부터 author 를 꺼내온다.
@@ -264,11 +292,24 @@ def get_markdown_header(relative_path, tex):
   return header
 
 def get_markdown_body(tex):
+  r"""
+  LaTeX 문서 본문을 Markdown 형식으로 변환한다.
+
+  1. 메타 및 문서 구조 관련 LaTeX 명령어 제거
+  2. \section → # ..., \subsection → ## ..., \subsubsection → ###
+  3. equation, align 환경을 $$로 감싸기
+  4. $...$ 내부의 | 와 \| 를 각각 \vert 와 \Vert 로 변환
+  5. $...$ 내부의 _ 를 \_ 로 변환
+  6. \begin{text-box} 정리하고 {: .text-box} 붙이기
+  7. \subheading{...} → Markdown 스타일로 변환
+  8. 줄 단위 공백 정리 및 연속 빈 줄 하나로 축소
+  """
+
   document = extract_document(tex)
   command = extract_newcommands(tex)
   document = apply_newcommands_to_document(document, command)
 
-  # 메타 및 문서 구조 관련 LaTeX 명령어 제거
+  # 1. 메타 및 문서 구조 관련 LaTeX 명령어 제거
   document = re.sub(r'\\title(?:\[[^\]]*\])?\s*\{.*?\}', '', document)
   document = re.sub(r'\\author\s*\{.*?\}', '', document)
   document = re.sub(r'\\date\s*\{.*?\}', '', document)
@@ -282,12 +323,12 @@ def get_markdown_body(tex):
   document = re.sub(r'\\end\{document\}', '', document)
   document = document.strip()
 
-  # \section → ## ...\n, \subsection → ### ...\n
+  # 2. \section → # ..., \subsection → ## ..., \subsubsection → ###
   document = re.sub(r'\\section\*?\{(.*?)\}', r'\n\n# \1\n\n', document)
   document = re.sub(r'\\subsection\*?\{(.*?)\}', r'\n\n## \1\n\n', document)
   document = re.sub(r'\\subsubsection\*?\{(.*?)\}', r'\n\n### \1\n\n', document)
 
-  # equation/align 환경 전체를 $$로 감싸기
+  # 3. equation, align 환경을 $$로 감싸기
   def wrap_math_env(match):
     return f"\n\n$$\n{match.group(0)}\n$$\n\n"
 
@@ -296,7 +337,24 @@ def get_markdown_body(tex):
     pattern = re.compile(rf'\\begin\{{{env}\}}.*?\\end\{{{env}\}}', re.DOTALL)
     document = pattern.sub(wrap_math_env, document)
 
-  # \begin{text-box} ... \end{text-box} → 한 줄로 정리하고 .text-box 붙이기
+  # 4. $...$ 내부의 | 와 \| 를 각각 \vert 와 \Vert 로 변환
+  def replace_bars(match):
+    content = match.group(1)
+    content = content.replace(r'\|', r'\Vert ')
+    content = content.replace('|', r'\vert ')
+    return f"${content}$"
+
+  document = re.sub(r'\$(.*?)\$', replace_bars, document)
+
+  # 5. $...$ 내부의 _ 를 \_ 로 변환
+  def escape_underscore(match):
+    content = match.group(1)
+    content = content.replace('_', r'\_')
+    return f"${content}$"
+
+  document = re.sub(r'\$(.*?)\$', escape_underscore, document)
+
+  # 6. \begin{text-box} 정리하고 {: .text-box} 붙이기
   def process_textbox(match):
     content = match.group(1)
     lines = [line.strip() for line in content.strip().splitlines() if line.strip()]
@@ -339,16 +397,7 @@ def get_markdown_body(tex):
     flags=re.DOTALL
   )
 
-  # $...$ 내부의 | 와 \| 변환
-  def replace_bars(match):
-    content = match.group(1)
-    content = content.replace(r'\|', r'\Vert')
-    content = content.replace('|', r'\vert')
-    return f"${content}$"
-
-  document = re.sub(r'\$(.*?)\$', replace_bars, document)
-
-  # \subheading{...} → Markdown 스타일로 변환
+  # 7. \subheading{...} → Markdown 스타일로 변환
   document = re.sub(
     r'\\subheading\s*\{(.*?)\}',
     lambda m: f"{m.group(1).strip()}\n{{: .subheading}}",
@@ -356,7 +405,7 @@ def get_markdown_body(tex):
     flags=re.DOTALL
   )
 
-  # 줄 단위 공백 정리 및 연속 빈 줄 하나로
+  # 8. 줄 단위 공백 정리 및 연속 빈 줄 하나로 축소
   lines = [line.strip() for line in document.splitlines()]
   cleaned = []
   blank = False
