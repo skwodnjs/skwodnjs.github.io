@@ -1,0 +1,88 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage[notcite,notref]{showkeys}
+\usepackage{kotex}
+
+\usepackage{url}
+\usepackage{hyperref}
+
+% PAGE SETTING ---------------------------------------
+
+\textheight 22.5  true cm
+\textwidth 15 true cm
+\voffset -1.0 true cm
+\hoffset -1.0 true cm
+\marginparwidth= 2 true cm
+\renewcommand{\baselinestretch}{1.8}
+
+% CUSTOM COMMAND -------------------------------------------
+
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\renewcommand{\[}{\left[}
+\renewcommand{\]}{\right]}
+
+\newcommand{\inp}[2]{\langle #1,#2 \rangle}
+\newcommand{\diag}{{\rm diag}}
+
+\newcommand{\dist}{\text{dist }}
+\newcommand{\supp}{\text{supp }}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rp}{\mathbb{R}_+}
+\newcommand{\Rpp}{\mathbb{R}_{++}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\newcommand{\ep}{\epsilon}
+\newcommand{\pa}{\partial}
+
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcH}{\mathcal{H}}
+\newcommand{\mcT}{\mathcal{T}}
+\newcommand{\mcV}{\mathcal{V}}
+\newcommand{\mcG}{\mathcal{G}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\mcW}{\mathcal{W}}
+
+\newcommand{\midbar}{ \; \big| \; }
+
+%-----------------------------------------------------------------
+
+\newcommand{\tags}[1]{#1}
+\newenvironment{text-box}{}{}
+\newcommand{\subheading}[1]{#1}
+
+% ----------------------------------------------------------------
+
+\begin{document}
+\title{week 01 ~ week 04}
+\date{2025-03-26}
+\tags{}
+
+\maketitle
+
+\section{CHATPER 1 : Abstract Integration}
+
+\subsection{The Concept of Measurability}
+
+\subheading{Recall}
+
+\begin{text-box}
+    A collection $\tau$ of subsets of $X$ is called a topology on $X$ if \\
+    (i) $X, \emptyset \in \tau$. \\
+    (ii) The union of any collection of sets in $\tau$ is also in $\tau$. \\
+    (iii) The finite intersection of sets in $\tau$ is also in $\tau$.
+\end{text-box}
+
+\begin{text-box}
+    Let $(X, \tau)$: a topological space. \\
+    $V \in \tau$이면 $V$: open set in $X$.    
+\end{text-box}
+
+\end{document}

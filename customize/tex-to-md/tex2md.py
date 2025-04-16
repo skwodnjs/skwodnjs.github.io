@@ -21,6 +21,7 @@ def extract_newcommands(tex):
   string 형태의 tex 로부터 newcommand 또는 renewcommand 를 꺼내온다.
   허용된 명령어 이름: \foo, \bar, \(, \), \[, \]
   \newcommand, \renewcommand 는 무조건 한 줄에 있다고 가정한다.
+  \newcommand, \renewcommand 뒤에 주석이 붙어도 안된다.
 
   :param tex:
   :return: commands[name] = (n_args, default, body)
@@ -253,8 +254,9 @@ def get_markdown_body(tex):
   document = document.strip()
 
   # \section → ## ...\n, \subsection → ### ...\n
-  document = re.sub(r'\\section\*?\{(.*?)\}', r'\n\n## \1\n\n', document)
-  document = re.sub(r'\\subsection\*?\{(.*?)\}', r'\n\n### \1\n\n', document)
+  document = re.sub(r'\\section\*?\{(.*?)\}', r'\n\n# \1\n\n', document)
+  document = re.sub(r'\\subsection\*?\{(.*?)\}', r'\n\n## \1\n\n', document)
+  document = re.sub(r'\\subsubsection\*?\{(.*?)\}', r'\n\n### \1\n\n', document)
 
   # equation/align 환경 전체를 $$로 감싸기
   def wrap_math_env(match):
@@ -343,22 +345,54 @@ def get_markdown_body(tex):
 def get_filename(relative_path, tex):
   """
   상대경로와 tex로부터 파일명을 생성한다.
-  예: 2025-04-16-analysis-chapter1.md
+  예: 2025-04-16-tlfgotjrgkr-week01.md
 
-  :param relative_path: pathlib.Path 객체 (test-tex/test-tex-1/test.tex 등)
+  :param relative_path: pathlib.Path 객체 (예: test-tex/test-tex-1/test.tex)
   :param tex: string 형태의 .tex 전체 내용
   :return: 파일명 (str)
   """
+  from jamo import h2j
+
+  # 한글을 두벌식 키보드 기준으로 영문 치환
+  def hangul_to_keyboard_roman(text):
+    table = {
+      'ㄱ': 'r', 'ㄲ': 'R', 'ㄴ': 's', 'ㄷ': 'e', 'ㄸ': 'E',
+      'ㄹ': 'f', 'ㅁ': 'a', 'ㅂ': 'q', 'ㅃ': 'Q', 'ㅅ': 't',
+      'ㅆ': 'T', 'ㅇ': 'd', 'ㅈ': 'w', 'ㅉ': 'W', 'ㅊ': 'c',
+      'ㅋ': 'z', 'ㅌ': 'x', 'ㅍ': 'v', 'ㅎ': 'g',
+      'ㅏ': 'k', 'ㅐ': 'o', 'ㅑ': 'i', 'ㅒ': 'O', 'ㅓ': 'j',
+      'ㅔ': 'p', 'ㅕ': 'u', 'ㅖ': 'P', 'ㅗ': 'h', 'ㅘ': 'hk',
+      'ㅙ': 'ho', 'ㅚ': 'hl', 'ㅛ': 'y', 'ㅜ': 'n', 'ㅝ': 'nj',
+      'ㅞ': 'np', 'ㅟ': 'nl', 'ㅠ': 'b', 'ㅡ': 'm', 'ㅢ': 'ml',
+      'ㅣ': 'l'
+    }
+
+    import jamo
+    result = []
+    for ch in text:
+      if '\uac00' <= ch <= '\ud7a3':  # 한글 음절이면
+        j1 = jamo.j2hcj(jamo.h2j(ch))  # 자모 문자열로 (초중종 포함)
+        for j in j1:
+          result.append(table.get(j, ''))
+      else:
+        result.append(ch)
+    return ''.join(result)
+
+  # 날짜
   date = datetime.now().strftime("%Y-%m-%d")
-  categories = '-'.join(relative_path.parts[:-1])  # 디렉터리들 연결
+
+  # 카테고리 경로를 한글 처리 포함해 정제
+  categories = '-'.join(hangul_to_keyboard_roman(part) for part in relative_path.parts[:-1])
+  print(categories)
+
+  # 제목
   title = extract_title(tex)
-  if title is None:
+  if not title:
     title = 'untitled'
   else:
-    # 마크다운 파일명에 쓸 수 있도록 공백, 특수문자 제거/변환
+    title = hangul_to_keyboard_roman(title)
     title = title.strip().lower().replace(' ', '')
-    title = re.sub(r'[^\w\-]', '', title)  # 알파벳, 숫자, 하이픈만 허용
+    title = re.sub(r'[^\w\-]', '-', title)
 
   filename = f"{date}-{categories}-{title}.md"
   return filename
-
