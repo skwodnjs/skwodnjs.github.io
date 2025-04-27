@@ -198,28 +198,14 @@ def extract_date(tex):
   :return: date
   """
   document = extract_document(tex)
-  matches = list(re.finditer(r'\\date\s*\{', document))
+  matches = list(re.finditer(r'\\date\s*\{([^}]*)\}', document))
   if not matches:
     return None
 
-  last_match = matches[-1]
-  start = last_match.end()
-  brace_count = 1
-  i = start
-  while i < len(document) and brace_count > 0:
-    if document[i] == '{':
-      brace_count += 1
-    elif document[i] == '}':
-      brace_count -= 1
-    i += 1
+  # 가장 마지막 match
+  last_date_content = matches[-1].group(1).strip()
 
-  if brace_count != 0:
-    return None
-
-  # 현재 시간 기준으로 포맷
-  now = datetime.now().astimezone()
-  formatted = now.strftime("%Y-%m-%d %H:%M:%S %z")
-  return formatted
+  return last_date_content
 
 def extract_tags(tex):
   """
@@ -456,7 +442,9 @@ def get_filename(relative_path, tex):
     return ''.join(result)
 
   # 날짜
-  date = datetime.now().strftime("%Y-%m-%d")
+  date = extract_date(tex)
+
+  # datetime.now().strftime("%Y-%m-%d")
 
   # 카테고리 경로를 한글 처리 포함해 정제
   categories = '-'.join(hangul_to_keyboard_roman(part) for part in relative_path.parts[:-1])

@@ -6,7 +6,7 @@ from tex2md import *
 def find_all_tex_files(root_dir):
   tex_files = []
   for path in Path(root_dir).rglob("*.tex"):
-    if path.is_file() and not str(path).endswith("preset.tex"):
+    if path.is_file():
       tex_files.append(path)
   return tex_files
 
