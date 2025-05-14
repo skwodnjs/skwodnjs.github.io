@@ -1,0 +1,118 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage[notcite,notref]{showkeys}
+\usepackage{kotex}
+\usepackage{graphicx}
+
+\usepackage{url}
+\usepackage{hyperref}
+
+% PAGE SETTING ---------------------------------------
+
+\usepackage[a4paper, margin=1in]{geometry}
+\linespread{1.5}
+
+% CUSTOM COMMAND -------------------------------------------
+
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\renewcommand{\[}{\left[}
+\renewcommand{\]}{\right]}
+
+\newcommand{\inp}[2]{\langle #1,#2 \rangle}
+\newcommand{\diag}{{\rm diag}}
+
+\newcommand{\dist}{\text{dist }}
+\newcommand{\supp}{\text{supp }}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rp}{\mathbb{R}_+}
+\newcommand{\Rpp}{\mathbb{R}_{++}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\newcommand{\ep}{\epsilon}
+\newcommand{\pa}{\partial}
+
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcH}{\mathcal{H}}
+\newcommand{\mcT}{\mathcal{T}}
+\newcommand{\mcV}{\mathcal{V}}
+\newcommand{\mcG}{\mathcal{G}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\mcW}{\mathcal{W}}
+
+\newcommand{\suchthat}{ \; \big| \; }
+
+%-----------------------------------------------------------------
+
+\newcommand{\tags}[1]{#1}
+\newenvironment{text-box}{}{}
+\newcommand{\subheading}[1]{\noindent[ #1 ]}
+
+% ----------------------------------------------------------------
+
+\begin{document}
+\title{This Is My LaTeX-to-Markdown Preset}
+\date{2025-05-14}
+\tags{}
+\author{skwodnjs}
+
+\maketitle
+
+\section{Who am I?}
+
+\subsection{Profile Image}
+
+This is my profile image:
+
+\begin{center}
+    \includegraphics[width=0.3\textwidth]{../../../../assets/img/profile.jpg}
+\end{center}
+
+But it's not actually my cat.
+
+\subsection{My Github Page}
+
+My GitHub page is available at \url{https://skwodnjs.github.io/}. 
+It contains mathematical knowledge I have studied and documented.
+I first write in LaTeX, then convert it to Markdown.
+I have written a Python script to automate this conversion.
+
+\section{Github page?}
+
+\subsection{How it works}
+
+\begin{enumerate}
+    \item Remove LaTeX commands related to metadata and document structure
+    \item Convert \verb|\section| to \verb|#|, \verb|\subsection| to \verb|##|, and \verb|\subsubsection| to \verb|###|, \dots
+    \item Wrap \verb|equation| and \verb|align| environments with \verb|$$|
+    \item Replace \verb!|! and \verb!\|! inside \verb|$...$| with \verb|\vert| and \verb|\Vert| respectively
+    \item Replace underscores \verb|_| inside \verb|$...$| with \verb|\_|
+    \item Clean up \verb|\begin{text-box}| and add \verb|{: .text-box}|
+    \item Convert \verb|\subheading{...}| to Markdown-style headings
+    \item Process image-related commands such as \verb|\includegraphics| and convert to Markdown format
+    \item Trim leading/trailing whitespace and reduce consecutive blank lines to a single blank line
+\end{enumerate}
+
+\subsection{Example}
+
+The \verb|\subheading| command is used for emphasis.
+
+\subheading{proof}
+
+The \verb|text-box| environment can be used to group and highlight explanations.
+
+\begin{text-box}
+    A collection $\tau$ of subsets of $X$ is called a topology on $X$ if \\
+    (i) $X, \emptyset \in \tau$. \\
+    (ii) The union of any collection of sets in $\tau$ is also in $\tau$. \\
+    (iii) The finite intersection of sets in $\tau$ is also in $\tau$.
+\end{text-box}
+
+\end{document}
