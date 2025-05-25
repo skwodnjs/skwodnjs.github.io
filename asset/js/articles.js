@@ -9,8 +9,8 @@ Promise.all([
   allPosts = posts;
   categoryData = categories;
 
-  handleHashChange(); // 처음 렌더링
-  window.addEventListener('hashchange', handleHashChange); // 해시 변경 감지
+  handleHashChange();
+  window.addEventListener('hashchange', handleHashChange);
 })
 .catch(error => {
   console.error('데이터 로딩 오류:', error);
@@ -22,7 +22,6 @@ function handleHashChange() {
   const countLabel = document.querySelector('.title-search span');
   const areaMain = document.querySelector('.area-main');
 
-  // 🧠 1. 제목, 글 수 (categoryData 기준)
   if (titleLabel && countLabel) {
     if (!hash || hash === '전체 글') {
       titleLabel.textContent = '전체 글';
@@ -58,7 +57,6 @@ function handleHashChange() {
     }
   }
 
-  // 🧠 2. 글 목록 렌더링 (allPosts 기준)
   if (!areaMain) return;
   areaMain.querySelectorAll('.article').forEach(el => el.remove());
 
