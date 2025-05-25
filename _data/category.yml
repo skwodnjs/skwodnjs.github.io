@@ -1,0 +1,43 @@
+- name: GAME
+  count: 9
+  children:
+    - name: MINECRAFT DIARY
+      count: 6
+    - name: STEAM
+      count: 3
+
+- name: Dev
+  count: 19
+  children:
+    - name: Minecraft Modding
+      count: 8
+    - name: PYTHON
+      count: 7
+    - name: 게임 개발
+      count: 3
+    - name: DART & FLUTTER
+      count: 1
+
+- name: STUDY
+  count: 9
+  children:
+    - name: 3D Printing
+      count: 3
+    - name: Arduino
+      count: 2
+    - name: 전자기기기능사
+      count: 1
+    - name: VOCA
+      count: 1
+
+- name: MUSIC
+  count: 5
+
+- name: Pet
+  count: 5
+  children:
+    - name: 크레스티드게코
+      count: 5
+
+- name: 실험실
+  count: 3
