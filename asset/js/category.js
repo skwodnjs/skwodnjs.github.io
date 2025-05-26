@@ -1,3 +1,5 @@
+const ROOT = 'https://skwodnjs.github.io/'
+
 fetch('https://raw.githubusercontent.com/skwodnjs/skwodnjs.github.io/main/_data/category.yml')
   .then(response => response.text())
   .then(yamlText => {
@@ -16,13 +18,9 @@ function renderCategoryList(data) {
     const li = document.createElement('li');
 
     const a = document.createElement('a');
-    a.href = '#';
+    a.href = `${ROOT}#${encodeURIComponent(category.name)}`;
     a.className = 'link_item';
     a.innerHTML = `${category.name} <span class="c_cnt">(${category.count})</span>`;
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      window.location.href = `#${encodeURIComponent(category.name)}`;
-    });
     li.appendChild(a);
 
     if (category.children && category.children.length > 0) {
@@ -31,14 +29,10 @@ function renderCategoryList(data) {
       category.children.forEach(sub => {
         const subLi = document.createElement('li');
         const subA = document.createElement('a');
-        subA.href = '#';
+        const fullPath = `${category.name}/${sub.name}`;
+        subA.href = `${ROOT}#${encodeURIComponent(fullPath)}`;
         subA.className = 'link-sub-item';
         subA.innerHTML = `${sub.name} <span class="c_cnt">(${sub.count})</span>`;
-        subA.addEventListener('click', e => {
-          e.preventDefault();
-          const fullPath = `${category.name}/${sub.name}`;
-          window.location.hash = encodeURIComponent(fullPath);
-        });
         subLi.appendChild(subA);
         subUl.appendChild(subLi);
       });
