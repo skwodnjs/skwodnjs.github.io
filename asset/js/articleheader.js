@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!header) return;
 
     const randomIndex = Math.floor(Math.random() * 14) + 1;
-    const imageUrl = `../asset/img/article header/article header (${randomIndex}).jpg`;
+    const imageUrl = `asset/img/article header/article header (${randomIndex}).jpg`;
 
     header.style.backgroundImage = `url("${imageUrl}")`;
 });

@@ -1,5 +1,3 @@
-const ROOT = 'https://skwodnjs.github.io/'
-
 fetch('https://raw.githubusercontent.com/skwodnjs/skwodnjs.github.io/main/_data/category.yml')
   .then(response => response.text())
   .then(yamlText => {
@@ -18,7 +16,7 @@ function renderCategoryList(data) {
     const li = document.createElement('li');
 
     const a = document.createElement('a');
-    a.href = `${ROOT}#${encodeURIComponent(category.name)}`;
+    a.href = `./#${encodeURIComponent(category.name)}`;
     a.className = 'link_item';
     a.innerHTML = `${category.name} <span class="c_cnt">(${category.count})</span>`;
     li.appendChild(a);
@@ -30,7 +28,7 @@ function renderCategoryList(data) {
         const subLi = document.createElement('li');
         const subA = document.createElement('a');
         const fullPath = `${category.name}/${sub.name}`;
-        subA.href = `${ROOT}#${encodeURIComponent(fullPath)}`;
+        subA.href = `./#${encodeURIComponent(fullPath)}`;
         subA.className = 'link-sub-item';
         subA.innerHTML = `${sub.name} <span class="c_cnt">(${sub.count})</span>`;
         subLi.appendChild(subA);

@@ -1,0 +1,147 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage[notcite,notref]{showkeys}
+\usepackage{kotex}
+
+\usepackage{url}
+\usepackage{hyperref}
+
+\usepackage{graphicx}
+
+% PAGE SETTING ---------------------------------------
+
+\textheight 22.5  true cm
+\textwidth 15 true cm
+\voffset -1.0 true cm
+\hoffset -1.0 true cm
+\marginparwidth= 2 true cm
+\renewcommand{\baselinestretch}{1.8}
+
+% CUSTOM COMMAND -------------------------------------------
+
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\renewcommand{\[}{\left[}
+\renewcommand{\]}{\right]}
+
+\newcommand{\inp}[2]{\langle #1,#2 \rangle}
+\newcommand{\diag}{{\rm diag}}
+
+\newcommand{\dist}{\text{dist }}
+\newcommand{\supp}{\text{supp }}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rp}{\mathbb{R}_+}
+\newcommand{\Rpp}{\mathbb{R}_{++}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\newcommand{\ep}{\epsilon}
+\newcommand{\pa}{\partial}
+
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcH}{\mathcal{H}}
+\newcommand{\mcT}{\mathcal{T}}
+\newcommand{\mcV}{\mathcal{V}}
+\newcommand{\mcG}{\mathcal{G}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\mcW}{\mathcal{W}}
+
+\newcommand{\suchthat}{ \; \big| \; }
+
+%-----------------------------------------------------------------
+
+\newcommand{\tags}[1]{#1}
+\newenvironment{text-box}{}{}
+\newcommand{\subheading}[1]{#1}
+
+% ----------------------------------------------------------------
+
+\begin{document}
+\title{Continuous, Lipschitz continuous, Hölder continuous}
+\date{2025-05-23}
+\tags{}
+\author{skwodnjs}
+
+\maketitle
+
+\section{Continuous}
+
+\subsection{엡실론 델타 논법}
+
+Let $X, Y$ be metric spaces, $f: X \to Y$ be a function. \\
+$f$ is continuous at $x \in X$ if \\
+\begin{text-box}
+    $\forall \epsilon > 0$, $\exists \delta > 0$ such that
+    \begin{equation}
+        d_X(x, y) < \delta \Rightarrow d_Y(f(x), f(y)) < \epsilon
+    \end{equation}
+\end{text-box}
+
+\subsection{Topological Space}
+
+Let $X, Y$ be topological spaces, $f: X \to Y$ be a function. \\
+$f$ is continuous at $x \in X$ if \\
+for every neighborhood $V$ of $f(x)$, there exists a neighborhood $U$ of $x$ 
+such that $f(U) \subset V$.
+
+$f(U) \subset V$를 풀어 쓰면 $x \in U \Rightarrow f(x) \in V$이다.
+
+이 정의는 거리공간에서 정의했던 연속에 대한 정의를 위상공간으로 확장한 정의이다. 
+거리공간에서의 정의를 완벽하게 유지하면서도, 위상공간에서의 연속성에 대해 논하고 있다. 
+$X, Y$가 거리공간일 때, 위 정의는 엡실론 델타 논법과 동치이다.
+
+\subheading{proof}
+
+\begin{text-box}
+    Let $X, Y$ be metric spaces, $f: X \to Y$ be a function. \\
+    (i) Assume that for every neighborhood $V$ of $f(x)$, there exists a neighborhood $U$ of $x$ 
+    such that $f(U) \subset V$. \\
+    Then $\forall \epsilon > 0$, $\{ y \in Y \suchthat d_Y(f(x), y) < \epsilon \}$ 
+    is a neighborhood of $f(x)$, and by the assumption, there exists a neighborhood $U$ of $x$ 
+    such that $f(U) \subset \{ y \in Y \suchthat d_Y(f(x), y) < \epsilon \}$. And we can find 
+    $\delta$ such that $\{ z \in X \suchthat d_X(x, z) < \delta \} \subset U$, since $U$ is open.
+       
+    (ii) Assume that $\forall \epsilon > 0$, $\exists \delta > 0$ such that
+    \begin{equation}
+        d_X(x, y) < \delta \Rightarrow d_Y(f(x), f(y)) < \epsilon
+    \end{equation}
+    Let $V$ be a neighborhood of $f(x)$. And Let $E$ be a preimage of $V$. That is, $E := f^{-1} (V)$. 
+    Then, for each $x \in E$, we can find $\epsilon_x > 0$ such that $\mathcal B_Y(f(x), \epsilon_x) \subset V$, since $V$ is open. 
+    And by assumption, we can find $\delta_x > 0$ such that $f(\mathcal B_X(x, \delta_x)) \subset \mathcal B_Y(f(x), \epsilon_x)$. 
+    Define $\displaystyle U := \bigcup_{x \in E} \mathcal B_X(x, \delta_x)$. Then \begin{equation}
+        f(U) = f(\bigcup_{x \in E} \mathcal B_X(x, \delta_x)) = \bigcup_{x \in E} f(\mathcal B_X(x, \delta_x)) \subset V
+    \end{equation}
+\end{text-box}
+
+\subsection{Continuous on X}
+
+연속의 정의를 다음과 같이 확장할 수 있다. \\
+\begin{text-box}
+    Let $X, Y$ be topological spaces, $f: X \to Y$ be a function. \\
+    $f$ is continuous on $X$ if for every open set $V$ in $Y$, $f^{-1}(V)$ is open in $X$. \\
+    $f$ is continuous on $E \subseteq X$ if for every open set $V$ in $Y$, $f^{-1}(V)$ is open in the subspace topology on $E$.
+\end{text-box}
+
+위와 같은 정의는 아래와 동치이다. \\
+\begin{text-box}
+    Let $X, Y$ be topological spaces, $f: X \to Y$ be a function. \\
+    $f$ is continuous on $X$ if $f$ is continuous at $\forall x \in X$. \\
+    $f$ is continuous on $E \subseteq X$ if $f$ is continuous at $\forall x \in E$.
+\end{text-box}
+
+\subheading{proof}
+
+"추가 바람".
+
+\section{Lipschitz Continuous}
+
+어떤 점을 중심으로 f의 제한이 생기면 그 제한 안으로 골인시키는 x가 존재해야 그 점에서 continuous라고 하는데, 
+그 골인시키는 x의 구간이 f의 제한에 대하여 linear하면 그게바로 lipschitz.
+
+\end{document}
