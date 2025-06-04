@@ -1,0 +1,55 @@
+## tex => html 번역 과정 요약
+
+1. 뭉텅이로 쪼개기
+전체 글을 <h2>, <h3>, <h4>, <h4 class="subheading"> / <p>, <div class="textbox"> 로 쪼개기
+
+2. <p>, <div class="textbox"> 안에서 \\를 <br> 로 바꾸기
+
+3. 수식 등 필요한 부분 수정하기
+
+
+
+## 기타 내용 메모
+
+tex에서는 줄바꿈을 \\ 로 함. \\ 는 <br> 로 번역할 예정이다.
+html에서 줄바꿈을 하나 하고싶다면 무조건 \\ 하기.
+예를 들어, html에서 
+
+"""
+안녕하세요
+
+나재원입니다
+"""
+
+처럼 출력하고 싶다면, tex에서는
+
+"""
+안녕하세요 \\ \\
+나재원입니다
+"""
+로 쳐야 함.
+
+\equation 은 $$ $$로 감싸면 됨. 
+"""
+<span>
+$$
+  \begin{aligned}
+    a &= b + c \\
+    d &= e - f
+  \end{aligned}
+$$
+<\span>
+"""
+그냥 알아서 적절하게 \\ 를 사용할 수 있도록 하자.
+
+\textbox 는
+
+"""
+<div class="textbox">
+    (내용)
+<\div>
+"""
+
+으로 번역할 예정임. 
+
+section 는 h2, subsection 은 h3, paragraph 는 h4로 번역할 예정이다.

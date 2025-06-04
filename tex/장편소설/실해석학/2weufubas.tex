@@ -1,0 +1,466 @@
+% ---------- This is the blog post preset. -----------
+
+\documentclass[11pt,reqno]{amsart}
+
+% PACKAGE --------------------------------------------
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{enumerate}
+\usepackage[notcite,notref]{showkeys}
+\usepackage[usenames]{color}
+\usepackage{url} 
+\usepackage{kotex}
+
+\usepackage{graphicx}
+
+% PAGE SETTING ---------------------------------------
+
+\textheight 22.5  true cm
+\textwidth 15 true cm
+\voffset -1.0 true cm
+\hoffset -1.0 true cm
+\marginparwidth= 2 true cm
+\renewcommand{\baselinestretch}{1.2}
+
+% blog post setting
+\usepackage{titlesec}
+\setlength{\parindent}{0pt}
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{}{0pt}{}
+\titleformat{\subsection}[block]{\normalfont\large\bfseries}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+\titleformat{\paragraph}[block]{\normalfont}{}{0pt}{}
+\titlespacing*{\paragraph}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+% blog post setting end
+
+% COSTOM COMMAND -------------------------------------
+
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\renewcommand{\[}{\left[}
+\renewcommand{\]}{\right]}
+
+\newcommand{\inp}[2]{\langle #1,#2 \rangle}
+
+\newcommand{\diag}{{\rm diag}}
+\newcommand{\supp}{\text{supp }}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rp}{\mathbb{R}_+}
+\newcommand{\Rpp}{\mathbb{R}_{++}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\newcommand{\ep}{\epsilon}
+\newcommand{\pa}{\partial}
+
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcH}{\mathcal{H}}
+\newcommand{\mcT}{\mathcal{T}}
+\newcommand{\mcV}{\mathcal{V}}
+\newcommand{\mcG}{\mathcal{G}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\mcW}{\mathcal{W}}
+
+\newcommand{\st}{ \; \big| \; }
+
+% blog post setting
+\usepackage{tcolorbox}
+\newenvironment{textbox}
+  {\begin{tcolorbox}[
+    colback=gray!10, 
+    colframe=gray!50, 
+    boxrule=0.5pt,
+    fontupper=\normalfont
+  ]}
+  {\end{tcolorbox}}
+\newcommand{\subheading}[1]{\vspace{1em}{\noindent\large\bfseries \textlangle{} #1 \textrangle{} \par}\vspace{1em}}
+% blog post setting end
+
+% COSTOM COMMAND -------------------------------------
+
+\newcommand{\M}{\mathfrak{M}}
+
+% DOCUMENT -------------------------------------------
+
+\begin{document}
+
+\title[]{실해석학 스터디 4주차}
+\author{Jeawon Na}
+\date{2025. 6. 3.}
+%\address{}
+%\email{naa3000@skku.edu}
+
+\maketitle
+
+\vspace{0.5em}
+
+교재: Walter Rudin - Real and Complex Analysis-McGraw-Hill Education (1986) \\
+범위: CHAPER TWO, "POSITIVE BOREL MEASURES": The Riesz Representation Theorem
+
+\section{The Riesz Representation Theorem}
+
+\subsection{2.14}
+
+\begin{textbox}
+  Let $X$ be a locally compact Hausdorff space, and let $\Lambda$ be a positive linear functional on $C_c(X)$. \\
+  Then there exists a $\sigma$-algebra $\M$ in $X$ which contains all Borel sets in $X$, 
+  and there exists a unique positive measure $\mu$ on $\M$ which represents $\Lambda$ in the sense that \\ \\
+  (a) $\Lambda f = \int_X f d \mu$ for every $f \in C_c(X)$, and which has the following additional properties: \\
+  (b) $\mu(K) < \infty$ for every compact set $K \subset X$. \\
+  (c) For every $E \in \M$, we have 
+  \begin{equation*}
+    \mu(E) = \inf \{ \mu(V) : E \subset V, \, V \text{ open} \}.
+  \end{equation*} \\
+  (d) The relation
+  \begin{equation*}
+    \mu(E) = \sup \{ \mu(K) : K \subset E, \, K \text{ compact} \}
+  \end{equation*}
+  holds for every open set $E$, and for every $E \in \M$ with $\mu(E) < \infty$. \\
+  (e) If $E \in \M$, $A \subset E$, and $\mu(E) = 0$, then $A \in \M$.
+\end{textbox}
+
+Riesz 표현 정리는 positive linear functional과 measure를 1대1 대응시켜주는 정리이다. 
+여기서 positive linear functional은 다음과 같이 정의된다.
+\begin{textbox}
+  $\Lambda$ is assumed to be a linear functional on the complex vector space $C_c(X)$,
+  with the additional property that $\Lambda f$ is a nonnegative 
+  real number for every $f$ whose range consists of nonnegative real numbers.
+  Briefly, if $f(X) \subset [0, \infty )$ then $\Lambda f \in [0, \infty)$.
+\end{textbox}
+
+range가 0 이상의 finite한 실수에 놓이는 함수 $f$를 넣었을 때, 그 결과가 항상 0 이상의 finite한 실수가 나오는
+linear functional $\Lambda$를 positive linear functional이라고 한다. \\ \\
+Riesz 표현 정리에 의하면 임의의 positive linear functional에 대해서 적분 표현으로 이어지는 
+unique한 measure를 찾아낼 수 있다. 이전 시간에 measure는 하나의 linear functional로 이해할 수 있다는
+것을 확인했기 때문에, Riesz 표현 정리에 의해 둘의 관계가 완전한 1대1 대응이라는 사실을 확인할 수 있다. \\ \\
+
+Riesz 표현 정리의 핵심은 (a)에 있다. 그리고 이 Theorem의 증명과정으로부터, (b)~(e)가 만족한다는 사실을 밝혀낼 수 있다. \\ \\
+(b)와 (c)는 positive linear functional 로부터 얻은 measure가 가지는 중요한 특징들인데, 
+E의 measure가 open set에 의해 위에서부터 근사될 수 있고, compact set에 의해 아래에서부터 
+근사될 수 있다는 것을 보여준다. \\ \\
+
+증명을 시작하기에 앞서, 만약 (a)~(e)를 모두 만족하는 $\M$과 $\mu$가 있다고 가정하면, 그러한 $\mu$는 unique함을 보일 수 있다.
+
+\subheading{proof}
+
+\begin{textbox}
+  (a)부터 (e)까지를 모두 만족하는 $\sigma$-algebra $\M$과 measure $\mu_1$, $\mu_2$가 있다고 치자. 
+  만약 모든 compact한 $K \in \M$에 대해 $\mu_1(K) = \mu_2(K)$이면, (d)에 의해 모든 open set $V$에
+  대해 $\mu_1(V) = \mu_2(V)$가 된다. 그리고 다시 (c)에 의해, 모든 $E \in \M$에 대해 
+  $\mu_1(E) = \mu_2(E)$가 된다. 그러므로 $\mu_1 \equiv \mu_2$, 즉 $\mu_1(E) = \mu_2(E)$ 
+  $\forall E \in \M$을 보이기 위해서는 $\mu_1(K) = \mu_2(K)$ $\forall K \in \M$, $K$: compact 를
+  보이는 것으로 충분하다. \\ \\
+  Let $\ep > 0$. By (c), $\exists V_0$ such that $\mu_2(E) \le \mu_2(V_0) < \mu_2(E) + \ep$. \\
+  By Uryshon's lemma, $\exists f$ such that $K \prec f \prec V$, hence \\
+  \begin{align*}
+    \mu_1(K) & = \int_X \chi_K d\mu_1 \quad (\because \text{the definition of Lebesgue integral})\\
+    & \le \int_X f d\mu_1 = \Lambda f = \int_X f d\mu_2 \quad (\because \text{(a)})\\
+    & \le \int_x \chi_V d\mu_2 = \mu_2 (V) < \mu_2 (K) + \ep.
+  \end{align*}
+  따라서 $\mu_1(K) \le \mu_2(K)$. $\mu_1$과 $\mu_2$의 자리를 바꾸어서 동일한 과정을 진행하면, 
+  $\mu_2(K) \le \mu_1(K)$를 얻는다. 따라서 $\mu_1(K) = \mu_2(K)$ for every $K \in \M$.
+\end{textbox}
+
+그리고, 만약 positive linear functional $\Lambda$에 대해 $(a)$가 참이라면 $(b)$가 참임을 증명할 수 있다.
+
+\subheading{proof}
+
+\begin{textbox}
+  Let $K$: cpt in $X$. By Uryshon's lemma, $\exists f$ such that $K \prec f \prec X$. \\
+  (a)에 의해, $\Lambda f = \int_X f d\mu$. Since $f \prec X$, $f(X) \subset [0, 1]$, and 
+  since $\Lambda$ is a positive linear functional, $\Lambda f \in [0, \infty)$. \\
+  $\therefore \Lambda f < \infty$ \\
+  $\therefore \mu (K) = \int_X \chi_K d\mu \le \int_X f d\mu = \Lambda f < \infty$.
+\end{textbox}
+
+\paragraph{Construction of $\mu$ and $\M$}
+
+이 Lemma의 증명은 일단 $\M$랑 $\mu$를 열심히 정의한 다음, 이게 조건을 만족하는 $\sigma$-algebra이고 measure이다
+라는 사실을 밝히는 식으로 진행된다. 그래서, 아래와 같이 $\mu$와 $\M$을 정의해보자. \\ \\ 
+우선 $\mu$를 정의하자. 아직 $\mu$는 measure이 아니다.
+\begin{textbox}
+  For every open set $V$ in $X$, define
+  \begin{equation}
+    \mu(V) = \sup \{ \Lambda f : f \prec V \}.
+  \end{equation}
+\end{textbox}
+일단 open set에 대해서 $\mu(V)$를 정의한다. $f \prec V$의 $\Lambda$ 값을 이용해 $V$를 안에서부터 채우며 
+$V$의 크기를 근사하려는 정의로 이해할 수 있다. 나중에 $\Lambda$가 적분의 역할을 하게 될 (a)번의 아이디어를 
+빌리면 직관적으로 이해하는데 도움이 된다. \\ \\
+Uryshon's lemma에 의해 locally compact Hausdorff space에서 $f \prec V$인 $f$는 반드시 존재한다. 
+($\because \emptyset$ is compact) 그래서 최소한 $\{ \Lambda f : f \prec V \}$가 공집합은 아니므로, 
+위와 같이 정의하면 잘 정의됨을 알 수 있다. \\ \\
+만약 $V_1 \subset V_2$이면, $\mu(V_1) \le \mu(V_2)$이다.
+왜냐하면 $V_1 \subset V_2$이면, $f$가 $f \prec V_1$이면 $f \prec V_2$도 만족하게 되므로, $\mu(V_1)$에서 
+$\sup$ 후보들은 $\mu(V_2)$에서도 후보가 된다. 즉, $\mu(V_2)$가 $\sup$을 취할 후보를 더 많이 데리고
+있으므로, $\mu(V_1) \le \mu(V_2)$가 된다. 그러니까 위와 같이 정의한 $\mu$는 open set에 대해 monotone 성질을
+가지고 있다고 말할 수 있다. \\ \\
+그리고 $E \subset X$인 모든 $E$에 대하여, $\mu(E)$를 다음과 같이 정의한다. \\
+\begin{equation}
+  \mu(E) = \inf \{ \mu(V): E \subset V, V \text{ open} \}
+\end{equation} \\
+이 정의도 잘 정의된다. 왜냐하면 모든 $E \subset X$에 대해, 최소한 전체집합 $X$는 $E\subset X$, $X$ open 이기 때문이다. \\ \\
+이 때 이 정의는 open set $V$에 대해서는 앞서 정의했던 것과 일치한다. open set $V$에 대해, 
+$V \subset V$이고, $V \subset W$인 $W$에 대해 $\mu (V) \le \mu (W)$임을 앞서 확인했으므로 $\inf$의 결과는 
+그대로 $\mu(V)$가 나오게 된다. \\ \\
+이렇게 정의한 $\mu$는 measure가 아니다. 이 $\mu$는 추후에 정의할 $\sigma$-algebra $\M$에 대해서만 countable 
+additivity가 성립하게 된다. 즉, 이 $\mu$의 domain을 $\M$으로 제한했을 때, 비로소 measure가 된다.\\ \\
+$A \subset B$이면, 앞서 open에서와 유사한 논리로 $\mu(A) \le \mu(B)$임을 증명할 수 있다. 즉, $\mu$는 monotone이다.\\ \\
+그리고 $\Lambda$도 monotone이다. $f \le g$이면 $\Lambda g = \Lambda f + \Lambda (g - f)$이고 $g - f \ge 0$에서 
+$\Lambda$의 positive 성질에 의해 $\Lambda (g - f) \ge 0$이고 따라서 $\Lambda f \le \Lambda g$. \\
+$\therefore \Lambda f \le \Lambda g$ if $f \le g$. \\ \\
+
+이번엔 $\M$에 대해 정의하자.
+\begin{textbox}
+  Let $\M_F$ be the class of all $E \subset X$ which satisfy two conditions: $\mu(E) < \infty$, and 
+  \begin{equation}
+    \mu(E) = \sup \{ \mu(K) : K \subset E, K \text{ compact} \}.
+  \end{equation}
+  Finally, let $\M$ be the class of all $E \subset X$ such that $E \cap K \in \M_F$ for every compact $K$.
+\end{textbox}
+
+뭔지 모르겠어도, 일단 $\M_F$가 앞서 Theorem의 (d)번에서 언급한, $\sup$을 이용해 아래에서부터 $\mu$를 근사할 수 있는 
+집합들을 모아둔 것으로 이해할 수 있다. \\ \\
+
+참고로 어떤 집합 $E \subset X$에 대해, $\mu(E)=0$이면 $E \in \M_F$ and $E \in \M$이다.
+
+\subheading{proof}
+
+\begin{textbox}
+  We have to check if $E$ satisfies (3). Since $\mu$ is monotone, $\mu(K) \le \mu(E) = 0$ for all $K \subset E$. 
+  $\Rightarrow$ $\mu(K) = 0$ for all $K \subset E$ $\Rightarrow$ 
+  $\sup \{ \mu(K) : K \subset E, K \text{ compact} \} = 0 = \mu(E)$. \\
+  $\therefore E \in \M_F$. \\
+  For all compact set $K$, $\mu(K \cap E) = 0$ since $E \cap K \subset E$ and $\mu(E) = 0$. 
+  Since all $E \subset X$ such that $\mu(E) = 0$ is in $\M_F$, $K \cap E \in \M_F$ for all compact set $K$. \\
+  $\therefore$ $E \in \M$.
+\end{textbox}
+
+이제 본격적으로 증명을 시작해보자. 총 10단계로 나누어 증명을 진행할 예정이다.
+
+\paragraph{STEP I}
+
+\begin{textbox}
+  If $E_1, E_2, E_3, \dots$ are arbitrary subsets of $X$, then
+  \begin{equation}
+    \mu \( \bigcup _{i=1} ^\infty E_i \) \le \sum_{i=1} ^\infty \mu (E_i).
+  \end{equation}
+\end{textbox}
+
+임의의 집합들이 있을 때, 합쳐놓고 $\mu$를 계산한 것보다 따로 계산한 뒤에 합한게 더 크다는 뜻이다. 만약 $\mu$가 
+measure이라면, 이는 직관적으로 이해가 가능하다. 두 집합을 일부가 겹치도록 배치한 다음, 각각의 크기를 잰 뒤 합한 것보다
+집합을 합쳐놓은 다음 크기를 잰 것이 더 작아질 것이다.
+
+\subheading{proof}
+
+우선 두 open set에 대해서 성립하는지를 살펴보자. 즉, $V_1$, $V_2$가 open일 때
+\begin{equation}
+  \mu(V_1 \cup V_2) \le \mu(V_1) + \mu(V_2).
+\end{equation}
+인지 확인해보자. \\ \\
+$V_1 \cup V_2$도 open이므로, $g \prec V_1 \cup V_2$인 함수 $g$가 존재한다. 이 때, $\prec$의 정의에 의해
+$g$의 support는 compact이다. Theorem 2.13에 의해, $h_1 \prec V_1$이고 $h_2 \prec V_2$이면서 
+$h_1(x) + h_2(x) = 1$ for all $x$ in the support of $g$인 $h_1$, $h_2$를 찾을 수 있다. 그러면
+$h_i g \prec V_i$ for $i=1, 2$이다. 왜냐하면 $h_i \prec V_i$에서 $h_i$는 $V_i$를 나가기 전에 0이 되고
+$h_i(x)=0$이면  $h_i(x) g(x) = 0$이니까. \\ \\
+이 때 우리가 앞서 open set $V$에 대해 $\mu$를 (1)번 식과 같이 정의했었다. 그래서, 다음이 성립한다.
+\begin{equation}
+  \Lambda g = \Lambda (h_1 g) + \Lambda (h_2 g) \le \mu (V_1) + \mu (V_2).
+\end{equation}
+(Note that $\mu(V) \ge \Lambda f$ for all $f \prec V$, since (1)). \\
+모든 $g \prec V_1 \cap V_2$인 $g$에 대해 (6)번 식이 성립하므로, $\sup \{ \Lambda g : g \prec V_1 \cup V_2 \}$ 
+또한 $\mu (V_1) + \mu (V_2)$보다 작거나 같다. \\ \\
+$\therefore \mu(V_1 \cup V_2) = \sup \{ \Lambda g : g \prec V_1 \cup V_2 \} \le \mu (V_1) + \mu (V_2)$. \\ \\
+이제 원래 증명하고자 했던 것을 다시 보자. 만약 $E_i$ 중에 $\mu (E_i) = \infty$인 것이 있었다면, 앞서 증명했던 
+$\mu$의 monotone 성질 때문에 (4)번 식의 좌면이 $\infty$가 된다. 우변 또한 $\mu(E_i) \ge 0$이므로, 그 중 하나가 
+$\infty$라면 합한 결과도 $\infty$가 된다. 즉, $\mu (E_i) = \infty$ for some $i$이면 (4)번 식이 성립한다. \\ \\
+그래서, 모든 $i$에 대해 $\mu (E_i) < \infty$를 가정하자. 임의의 $\ep > 0$에 대해, (2)번 식으로부터 다음을 알 수 있다.
+\begin{equation*}
+  \exists V_i \supset E_i \text{ such that } \mu(E_i) \le \mu(V_i) < \mu(E_i) + 2^{-i} \ep.
+\end{equation*}
+for all $i = 1, 2, 3, \cdots$. \\ \\
+$\displaystyle V = \bigcup _{i=1} ^\infty V_i$로 정의하자. $V_i$들이 open이므로, $V$ 또한 open이다. 그래서 $f \prec V$인 $f$를 잡을 수 있다.
+$f \in C_c(X)$ 이므로 $f$의 support는 compact이고, $\displaystyle f \prec V = \bigcup _{i=1} ^\infty V_i$ 에서 $V_i$들은 $f$의 support의
+open cover이다. 그래서 이 중 finite open subcover를 찾을 수 있다. 즉, $f \prec V_1 \cup \cdots \cup V_n$ 
+for some $n$. \\
+(5)번에 의해, \begin{align*}
+  \Lambda f \le \mu(V_1 \cup \cdots \cup V_n) &\le \mu(V_1) + \cdots + \mu(V_n) \\
+  &\le \sum_{i=1}^\infty \[ \mu(E_i) + 2^{-i}\ep \] = \sum_{i=1}^\infty \mu(E_i) + \ep.
+\end{align*} \\
+((5)번 식은 최대 countable개에서만 성립한다. 그러므로, $f$를 찾아내는 과정이 필수적이다.) \\ \\
+
+따라서 $\displaystyle \Lambda f \le \sum_{i=1}^\infty \mu(E_i) + \ep$ for all $f \prec V$. \\
+\begin{equation*}
+  \therefore \mu \( \bigcup_{i=1}^\infty E_i \) = \inf \left\{ \mu(W) : \bigcup_{i=1}^\infty E_i \subset W, W \text{ open} \right\}
+\end{equation*}
+and we know that \begin{equation*}
+  \mu (V) = \sup \{ \Lambda f : f \prec V \} \le \sum_{i=1}^\infty \mu(E_i) + \ep
+\end{equation*}
+for some $V$, hence \begin{align*}
+  \mu \( \bigcup_{i=1}^\infty E_i \) & = \inf \left\{ \mu(W) : \bigcup_{i=1}^\infty E_i \subset W, W \text{ open} \right\} \\
+  & \le \mu (V) = \sup \{ \Lambda f : f \prec V \} \le \sum_{i=1}^\infty \mu(E_i) + \ep
+\end{align*}
+\begin{equation*}
+  \therefore \mu \( \bigcup_{i=1}^\infty E_i \) \le \sum_{i=1}^\infty \mu(E_i),
+\end{equation*}
+since $\ep$ was arbitrary. \\ \\
+
+open에 대해 우선 증명한 다음, 일반적인 경우에도 open의 도움을 받아서(그리고 open의 도움을 받기 위해 함수 f를 찾아서) 증명하고 있다.
+
+\paragraph{STEP II}
+
+\begin{textbox}
+  If $K$ is compact, then $K \in \M_F$ and \begin{equation}
+    \mu(K) = \inf \{ \Lambda f : K \prec f \}.
+  \end{equation}
+  This implies assertion (b) of the theorem.
+\end{textbox}
+
+앞서 $\mu$랑 $\M$를 잘 정의해둔 상황에서, compact한 집합의 역할이 무엇인지에 대해 이해하기 위한 단계라고 볼 수 있다. 
+
+\subheading{proof}
+
+우선 $\mu(K) < \infty$이면 $K \in \M_F$이다. 왜냐하면, $K$가 compact하면 $\sup$의 대상에 $\mu(K)$가 포함되고, 
+$\mu$의 monotone한 성질에 의해 $K' \subset K$, $K'$ compact 이면 $\mu(K') \le \mu(K)$. 따라서 
+$\mu(K) = \sup \{ \mu(K') : K' \subset K, K' \text{ compact} \}$가 성립하고, $K \in \M_F$. \\ \\
+
+따라서 $\mu(K) < \infty$를 증명해보자. \\
+임의의 compact한 집합 $K$에 대해, Uryshon's lemma에 의해 $K \prec f$인 $f$를 하나 찾을 수 있다. 
+그리고 $0 < \alpha < 1$인 $\alpha$에 대해, $V_\alpha = \{ x : f(x) > \alpha \}$라 하면 
+$x \in K$에서 $f(x) = 1$이므로 $K \subset V_\alpha$이다. \\
+$g \prec V_\alpha$인 $g$에 대해(Uryshon's lemma에 의해 이러한 $g$가 반드시 하나는 존재한다) 
+$\alpha g \le f$이다. ($x \in V_\alpha$ 에서는 $\alpha g(x) \le \alpha < f(x)$이고, 나머지에서는 $g(x) = 0$.)
+그리고 $\Lambda$의 monotone 성질에 의해 $\alpha \Lambda g \le \Lambda f$, $\Lambda g \le \alpha^{-1} \Lambda f$ 
+for every $g \prec V_\alpha$.
+따라서 \begin{equation*}
+  \mu(K) \le \mu(V_\alpha) = \sup \{ \Lambda g : g \prec V_\alpha \} \le \alpha^{-1} \Lambda f.
+\end{equation*}
+$\alpha^{-1} \Lambda f \le \sup \{ \alpha^{-1} \Lambda f : \alpha \in (0, 1) \} = \Lambda f$에서
+\begin{equation}
+  \mu(K) \le \Lambda f.
+\end{equation}
+따라서 $f \prec K$에서 $f(X) \subset [0, 1]$이고 $\Lambda f \in [0, \infty)$, 즉 $\mu(K) < \infty$임을 알 수 있다. 
+그리고 이를 통해 지금까지 설계한 $\mu$가 Theorem의 (b)번을 만족한다는 사실도 알 수 있다. \\ \\
+임의의 $\ep > 0$에 대해, (2)번 식에 의해 $\mu(K) \le \mu(V) < \mu(K) + \ep$인 $V$가 존재한다. By Uryshon's lemma, 
+$\exists f$ such that $K \prec f \prec V$. Thus \begin{equation*}
+  \Lambda f \le \mu (V) < \mu (K) + \ep.
+\end{equation*}
+(8)번 식에서, $\mu(K)$는 $\{ \Lambda f : K \prec f \}$의 lower bound임을 알 수 있다. 그리고 위 식에 의해, 
+$\mu(K)$보다 조금이라도 큰 값에 대해서, 그 값보다 작은 $\Lambda f$가 존재하므로, 해당 값은 
+$\{ \Lambda f : K \prec f \}$의 lower bound가 될 수 없다. 따라서, $\inf$의 정의에 의해 (7)번 식이 성립함을 알 수 있다. \\ \\
+STEP II의 결과로, 우리는 다음을 알 수 있다. 임의의 compact set $K$에 대해, 
+\begin{equation*}
+  \mu(K) \le \Lambda f
+\end{equation*}
+for all $K \prec f$. 그리고 앞서 (1)번 식에 의해 다음이 성립함을 확인한 바 있다.
+\begin{equation*}
+  \mu(V) \ge \Lambda f
+\end{equation*}
+for all $V \prec f$. open set에 대해서, 우리는 $\mu(V)$를 $V$를 위에서부터 감싸는 $f$를 통해 근사했었다. 그래서 $\Lambda f$는 
+$\mu(V)$보다 크다. 반대로, compact set에 대해 우리는 $\mu(K)$를 $K$를 아래에서부터 채우는 $f$를 통해 근사한다. 그래서 $\Lambda f$는
+$\mu(K)$보다 작다. 결과적으로 $\Lambda$가 적분 역할을 하게 될 (a)번의 직관을 빌리면, 이와 같은 결과를 쉽게 받아들일 수 있다.
+
+\paragraph{STEP III}
+
+\begin{textbox}
+  Every open set satisfies (3). Hence $\M_F$ contains every open set $V$ with $\mu(V) < \infty$.
+\end{textbox}
+
+\subheading{proof}
+
+어떤 open set $V$가 있다고 하자. $\mu(V) = \sup \{ \Lambda f : f \prec V \}$에서 
+임의의 $\ep > 0$에 대해 $\alpha = \mu(V) - \ep$라 하면 $\exists f$ such that $\alpha < \Lambda f \le \mu(V)$. \\
+$f$의 support를 $K$라 하면 $K \subset V$이고, $f \in C_c(X)$이므로 $K$는 compact이다. \\ \\
+
+$K \subset W$인 모든 open set $W$에 대해, $f \prec W$이고 $\Lambda f \le \mu(W)$이다. 
+(Since $\Lambda f \le \mu(E)$ for all $E$ such that $f \prec E$.) 이 때 
+$\mu (K) = \inf \{ \mu(W) : K \subset W, W \text{ open} \}$인데 $\Lambda f$가 
+$\{ \mu(W) : K \subset W, W \text{ open} \}$의 lower bound이므로 $\Lambda f \le \mu (K)$. 따라서 $\alpha < \Lambda f \le \mu (K)$\\ \\
+
+따라서 임의의 open set $V$에 대해, $\exists$ compact set $K$ such that $K \subset V$, $\alpha < \mu (K)$. \\
+$\Rightarrow \alpha < \mu (K) \le \sup \{ \mu (K) : K \subset V, K \text{ compact} \}$. \\
+$\Rightarrow \mu(V) - \ep = \alpha < \sup \{ \mu (K) : K \subset V, K \text{ compact} \}$ for all $\ep > 0$. \\
+$\Rightarrow \mu(V) \le \sup \{ \mu (K) : K \subset V, K \text{ compact} \}$ \\ \\
+
+$K \subset V$라 하면, $\mu$의 monotone 성질에 의해 $\mu(V) \ge \mu(K)$이고, 
+$\mu(V) \ge \sup \{ \mu (K) : K \subset V, K \text{ compact} \}$임을 쉽게 알 수 있다. \\ \\
+따라서, $\Rightarrow \mu(V) = \sup \{ \mu (K) : K \subset V, K \text{ compact} \}$.
+
+\paragraph{STEP IV}
+
+\begin{textbox}
+  Suppose $\displaystyle E = \bigcup _{i=1}^\infty E_i$, where $E_1, E_2, E_3, \dots$ are 
+  pairwise disjoint members of $\M_F$. Then
+  \begin{equation}
+    \mu(E) = \sum_{i=1}^\infty \mu(E_i).
+  \end{equation}
+  If, in addition, $\mu (E) < \infty$, then also $E \in \M_F$.
+\end{textbox}
+
+앞서 임의의 $E_i \subset X$들에 대해서는 부등식이 성립함을 증명했었는데, $E_i \in \M_F$이면 
+pairwise disjoint일 때 등호가 성립한다는 사실까지 보이려고 한다.
+
+\subheading{proof}
+
+우선 disjoint compact sets $K_1, K_2$에 대해서 성립하는지를 확인해 보자.
+
+\begin{textbox}
+  We first show that
+  \begin{equation}
+    \mu(K_1 \cup K_2) = \mu(K_1) + \mu(K_2)
+  \end{equation}
+  if $K_1$ and $K_2$ are disjoint compact sets.
+\end{textbox}
+
+locally compact Hausdorff space에서, compact이면 closed이다. 즉, $(K_2)^c$는 open이다. 그리고 
+$K_1$과 $K_2$는 disjoint 이므로 $K_1 \subset (K_2)^c$. 그래서 Uryshon's lemma에 의해 
+$K_1 \prec f \prec (K_2)^c$인 $f$를 찾을 수 있다. 즉, $f \in C_c(X)$ such that $f(x) = 1$ on 
+$K_1$, $f(x) = 0$ on $K_2$, $0 \le f \le 1$인 $f$를 찾을 수 있다. \\ \\
+$K_1 \cup K_2$는 compact이다. 따라서 STEP 2에 의해 $\mu(K_1 \cup K_2) = \inf \{ \Lambda f : K \prec f \}$
+이고, $\ep > 0$에 대해 $\Lambda g < \mu(K_1 \cup K_2) + \ep$, $K_1 \cup K_2 \prec g$인 $g$가 존재한다. 
+$f(x)g(x) = 1$ on $K_1$이고 $(1-f(x))g(x) = 1$ on $K_2$이다. 따라서 $K_1 \prec fg \Rightarrow \mu(K_1) \le 
+\Lambda fg$이고 $K_2 \prec (1-f)g \Rightarrow \mu(K_2) \le \Lambda (1-f)g$이므로
+\begin{equation*}
+  \mu(K_1) + \mu(K_2) \le \Lambda(fg) + \Lambda(1-f)g = \Lambda g < \mu(K_1 \cup K2) + \ep.
+\end{equation*}
+모든 $\ep>0$에 대해 성립하므로, $\mu(K_1) + \mu(K_2) \le \mu(K_1 \cup K2)$. 따라서 두 compact set에 대해서는 
+Theorem이 성립함을 보였다. \\ \\
+이제, pairwise disjoint members of $\M_F$에 대해서도 성립하는지를 확인해보자. 만약 $\mu(E_i)$ 중에 하나라도 
+$\infty$인 것이 있다면, (9)번 식의 좌변은 $\mu$의 monotone 성질에 의해 $\infty$, 우변은 $\mu(E_i) \ge 0$이므로 
+$\infty$가 된다. 그러므로 (9)번 식은 자명하게 성립한다. 그래서, 모든 $\mu(E_i) < \infty$인 경우에 대해 살펴보자. \\ \\
+$\ep > 0$에 대해, $E_i \in \M_F$이므로, compact sets $H_i \subset E_i$ with
+\begin{equation}
+  \mu (H_i) > \mu (E_i) - 2 ^{-i} \ep
+\end{equation} for $i = 1, 2, 3, \dots$인 $H_i$들이 존재한다. $K_n = H_1 \cup \cdots \cup H_n$으로 정의하면, 
+$K_n \subset E$이므로
+\begin{equation}
+  \mu (E) \ge \mu (K_n) = \sum_{i=1}^n \mu (H_i) > \sum_{i=1}^n \[ \mu (E_i) - 2 ^{-i} \ep \] > \sum_{i=1}^n \mu (E_i) - \ep
+\end{equation}
+위 식이 임의의 $\ep>0$과 모든 $n$에 대해 성립하므로, $\mu(E) \ge \sum_{i=1}^\infty \mu (E_i)$가 성립한다. 
+그리고 STEP I에 의해, $\mu(E) \le \sum_{i=1}^\infty \mu (E_i)$. 따라서 $\mu(E) = \sum_{i=1}^\infty \mu (E_i)$. 
+(9)번 식이 성립함을 증명할 수 있다. \\ \\
+다음과 같이 쓸 수도 있다. \begin{align*}
+  & \sum_{i=1}^n \mu(E_i) \to \mu(E) \text{ as } n \to \infty \\
+  & \Rightarrow \exists N \text{ such that } \big| \sum_{i=1}^n \mu(E_i) - \mu(E) \big| < \ep \text{ for all }n \ge N.
+\end{align*}
+$\mu(E_i) \ge 0$에서, $\sum_{i=1}^n \mu(E_i)$가 증가하면서 수렴하므로
+\begin{equation}
+  \mu(E) < \sum_{i=1}^n \mu(E_i) + \ep
+\end{equation}
+인 $N$이 존재한다. 그리고 (12)번 식에 의해 $\mu(K_N) > \sum_{i=1}^N \mu(E_i) - \ep$, (13)번 식에 의해 
+$\sum_{i=1}^N \mu(E_i) - \ep \ge \mu(E) - 2\ep$이 성립하여, 임의의 $\ep > 0$에 대해 $\mu(E) - 2\ep \le \mu(K_N)$인 
+$K_N$을 찾을 수 있다. \\ \\ 
+이제, $\mu(E) = \sum \{ \mu (K): K \subset E, K \text{ compact} \}$임을 증명해보자. 우선, $K \subset E$이므로, 
+$\mu(E)$는 반드시 $\{ \mu(K) : K \subset E, K \text{ compact} \}$의 upper bound이다. 그런데, 임의의 $\ep > 0$에 대해 
+$\mu(E) - 2\ep \le \mu(K_N)$인 $K_N$을 찾을 수 있었으므로, $\mu(E)$보다 조금이라도 작으면 
+$\{ \mu (K): K \subset E, K \text{ compact} \}$의 upper bound가 될 수 없다. 즉, $\mu(E)$는 
+$\{ \mu (K): K \subset E, K \text{ compact} \}$의 $\sup$이다. \\ \\ 
+
+나머지 증명은 다음에 이어서 진행하겠다.
+
+\end{document}

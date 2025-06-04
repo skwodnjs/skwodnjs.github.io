@@ -1,0 +1,138 @@
+% ---------- This is the blog post preset. -----------
+
+\documentclass[11pt,reqno]{amsart}
+
+% PACKAGE --------------------------------------------
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{enumerate}
+\usepackage[notcite,notref]{showkeys}
+\usepackage[usenames]{color}
+\usepackage{url} 
+\usepackage{kotex}
+
+\usepackage{graphicx}
+
+% PAGE SETTING ---------------------------------------
+
+\textheight 22.5  true cm
+\textwidth 15 true cm
+\voffset -1.0 true cm
+\hoffset -1.0 true cm
+\marginparwidth= 2 true cm
+\renewcommand{\baselinestretch}{1.2}
+
+% blog post setting
+\usepackage{titlesec}
+\setlength{\parindent}{0pt}
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{}{0pt}{}
+\titleformat{\subsection}[block]{\normalfont\large\bfseries}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+\titleformat{\paragraph}[block]{\normalfont}{}{0pt}{}
+\titlespacing*{\paragraph}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+% blog post setting end
+
+% COSTOM COMMAND -------------------------------------
+
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\renewcommand{\[}{\left[}
+\renewcommand{\]}{\right]}
+
+\newcommand{\inp}[2]{\langle #1,#2 \rangle}
+
+\newcommand{\diag}{{\rm diag}}
+\newcommand{\supp}{\text{supp }}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rp}{\mathbb{R}_+}
+\newcommand{\Rpp}{\mathbb{R}_{++}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\newcommand{\ep}{\epsilon}
+\newcommand{\pa}{\partial}
+
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcH}{\mathcal{H}}
+\newcommand{\mcT}{\mathcal{T}}
+\newcommand{\mcV}{\mathcal{V}}
+\newcommand{\mcG}{\mathcal{G}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\mcW}{\mathcal{W}}
+
+\newcommand{\st}{ \; \big| \; }
+
+% blog post setting
+\usepackage{tcolorbox}
+\newenvironment{textbox}
+  {\begin{tcolorbox}[
+    colback=gray!10, 
+    colframe=gray!50, 
+    boxrule=0.5pt,
+    fontupper=\normalfont
+  ]}
+  {\end{tcolorbox}}
+\newcommand{\subheading}[1]{\vspace{1em}\noindent\large\bfseries \textlangle{} #1 \textrangle{} \par\vspace{0.5em}}
+% blog post setting end
+
+% DOCUMENT -------------------------------------------
+
+\begin{document}
+
+\title[]{실해석학 스터디 1주차}
+\author{Jeawon Na}
+\date{2025. 5. 13.}
+%\address{}
+%\email{naa3000@skku.edu}
+
+\maketitle
+
+\vspace{0.5em}
+
+교재: Walter Rudin - Real and Complex Analysis-McGraw-Hill Education (1986) \\
+범위: CHAPER ONE, "ABSTRACT INTEGRATION": Set-Theoretic Notatinos and Terminology, The Concept of Measurability, Simple Functions, Elementary Properties of Measures, Arithmetic in [0, $\infty$]
+
+\section{Set-Theoretic Notations and Terminology}
+
+\subsection{1.1}
+
+1.1의 내용은 집합에 대한 기본적인 내용을 소개하고 있다. 여기 나온 내용에 대해서 간략하게 언급만 해 보자.
+
+\begin{textbox}
+  집합이란 member의 구분이 있으면 된다. 어떤 요소가 찾아왔을 때, 그 친구가 member인지 아닌지만 구분해 줄 수 있다면 그것이 집합이다. 그래서, member들을 나열해서 집합을 표현할 수도 있고, member인지 아닌지를 판단할 수 있는 기준을 명시해서 집합을 표현할 수도 있다. \\ \\
+  두 집합에 대해, 합집합과 교집합, 차집합, 포함관계 등을 간단하게 정의할 수 있다. \\ \\
+  cartesian product와 extended real number system에 대한 언급을 하고 있다. \\ \\
+  두 집합 $A, B$에 대해, 함수 $f:A \to B$를 정의할 수 있다. 그리고 함수 $f$에 대해, inverse image 또는 preimage라 부르는 $f^{-1}(E)$에 대해 정의할 수 있다. 그리고 domain, range에 대한 설명과 onto, one-to-one에 대한 설명을 하고 있다. one-to-one 인 경우에 한하여, $f^{-1}$는 $f$의 range에서 domain으로 가는 함수이다. \\ \\
+  $f$의 range가 실수이면 real function, 복소수이면 complex function이라 한다. 이 경우 $f \ge 0$과 같은 표현을 사용할 수 있다.
+\end{textbox}
+
+참고로 다음이 성립한다.
+
+\begin{textbox}
+  $f^{-1}(A \cup B) = f^{-1} (A) \cup f^{-1} (B)$ and $f^{-1}(A \cap B) = f^{-1} (A) \cap f^{-1} (B)$. \\ \\
+  
+  Also, $f^{-1}(A^c) = ( f^{-1} (A))^c$. \\ \\
+  
+  Collorary: $f^{-1}(A - B) = f^{-1} (A) - f^{-1} (B)$
+\end{textbox}
+
+\subheading{proof}
+
+\begin{textbox}
+  1. $a \in f^{-1}(A \cup B)$ $\iff$ $f(a) \in A \cup B$ $\iff$ $f(a) \in A$ or $f(a) \in B$ $\iff$ $a \in f^{-1}(A)$ or $a \in f^{-1}(B)$ $\iff$ $a \in f^{-1}(A) \cup f^{-1}(B)$. \\
+  2. $a \in f^{-1}(A \cap B)$ $\iff$ $f(a) \in A \cap B$ $\iff$ $f(a) \in A$ and $f(a) \in B$ $\iff$ $a \in f^{-1}(A)$ and $a \in f^{-1}(B)$ $\iff$ $a \in f^{-1}(A) \cap f^{-1}(B)$. \\
+  3. $a \in f^{-1}(A^c)$ $\iff$ $f(a) \in A^c$ $\iff$ $f(a) \notin A$ $\iff$ $a \notin f^{-1}(A)$ $\iff$ $a \in (f^{-1}(A))^c$. \\
+  4. $f^{-1}(A - B) $ $= f^{-1}(A \cap B^c) $ $= f^{-1}(A) \cap f^{-1} (B^c) $ $= f^{-1}(A) \cap (f^{-1} (B))^c $ $ = f^{-1} (A) - f^{-1} (B)$.
+\end{textbox}
+
+\newpage
+
+\dots
+
+\end{document}

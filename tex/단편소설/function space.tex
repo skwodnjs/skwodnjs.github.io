@@ -1,0 +1,111 @@
+% ---------- This is the blog post preset. -----------
+
+\documentclass[11pt,reqno]{amsart}
+
+% PACKAGE --------------------------------------------
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{enumerate}
+\usepackage[notcite,notref]{showkeys}
+\usepackage[usenames]{color}
+\usepackage{url} 
+\usepackage{kotex}
+
+\usepackage{graphicx}
+
+% PAGE SETTING ---------------------------------------
+
+\textheight 22.5  true cm
+\textwidth 15 true cm
+\voffset -1.0 true cm
+\hoffset -1.0 true cm
+\marginparwidth= 2 true cm
+\renewcommand{\baselinestretch}{1.2}
+
+% blog post setting
+\usepackage{titlesec}
+\setlength{\parindent}{0pt}
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{}{0pt}{}
+\titleformat{\subsection}[block]{\normalfont\large\bfseries}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+\titleformat{\paragraph}[block]{\normalfont}{}{0pt}{}
+\titlespacing*{\paragraph}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+% blog post setting end
+
+% COSTOM COMMAND -------------------------------------
+
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\renewcommand{\[}{\left[}
+\renewcommand{\]}{\right]}
+
+\newcommand{\inp}[2]{\langle #1,#2 \rangle}
+
+\newcommand{\diag}{{\rm diag}}
+\newcommand{\supp}{\text{supp }}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rp}{\mathbb{R}_+}
+\newcommand{\Rpp}{\mathbb{R}_{++}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\newcommand{\ep}{\epsilon}
+\newcommand{\pa}{\partial}
+
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcH}{\mathcal{H}}
+\newcommand{\mcT}{\mathcal{T}}
+\newcommand{\mcV}{\mathcal{V}}
+\newcommand{\mcG}{\mathcal{G}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\mcW}{\mathcal{W}}
+
+\newcommand{\st}{ \; \big| \; }
+
+% blog post setting
+\usepackage{tcolorbox}
+\newenvironment{textbox}
+  {\begin{tcolorbox}[
+    colback=gray!10, 
+    colframe=gray!50, 
+    boxrule=0.5pt,
+    fontupper=\normalfont
+  ]}
+  {\end{tcolorbox}}
+\newcommand{\subheading}[1]{\vspace{1em}\noindent\large\bfseries \textlangle{} #1 \textrangle{} \par\vspace{0.5em}}
+% blog post setting end
+
+% DOCUMENT -------------------------------------------
+
+\begin{document}
+
+\title[]{function space \& differentiable}
+\author{Jeawon Na}
+\date{2025. 6. 6.}
+%\address{}
+%\email{naa3000@skku.edu}
+
+\maketitle
+
+\section{}
+
+\subsection{}
+
+1. A차원에서 b차원으로 가는 함수에 대해, 한 번 미분 가능하다 만약, 모든 점에서 야코비안이 존재하고 연속이라면.
+2. 어떤 점에서 두 번 미분 가능하다라는 말은, 그 점에서 미분한 결과가 다시 미분 가능하다라는 말이다. 이 때, 
+어떤 점에서 미분한 결과는 야코비안으로 나타나는데, 총 a times b 개의 성분이 존재한다고 생각할 수 있다. 
+그래서 이 성분들을 편미분한, 총 a times a times b 개의 (이계)편미분이 생긴다. 이렇게 생겨난 편미분들이 모두 어떤 
+점에서 연속이면, 그 점에서 미분 가능하다고 할 수 있다. 이건 3번, 4번, ... 계속 할 수 있다. 이 때 k번 미분한 결과는 
+$a^k$ times b 개의 element로 이루어져 있다고 할 수 있다.
+3. 어떤 점이서 미분 가능하면, 그 점에서 편미분들이 존재하지만 연속인지 아닌지는 모른다. 어떤 점에서 편미분들이 
+존재하고 연속이면, 그 점에서 미분 가능이 보장된다. Ck 공간은 k번 미분가능하고 k계 편미분들이 연속인 함수들의 
+공간을 의미한다. K번 미분 가능한 함수들은 편미분들이 존재하는건 보장하지만 연속은 보장하지 않는다. 그래서 그냥 
+미분 가능한거보다 좁은 공간이다.
+
+\end{document}

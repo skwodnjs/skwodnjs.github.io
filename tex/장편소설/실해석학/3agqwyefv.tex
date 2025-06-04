@@ -1,0 +1,145 @@
+% ---------- This is the blog post preset. -----------
+
+\documentclass[11pt,reqno]{amsart}
+
+% PACKAGE --------------------------------------------
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{enumerate}
+\usepackage[notcite,notref]{showkeys}
+\usepackage[usenames]{color}
+\usepackage{url} 
+\usepackage{kotex}
+
+\usepackage{graphicx}
+
+% PAGE SETTING ---------------------------------------
+
+\textheight 22.5  true cm
+\textwidth 15 true cm
+\voffset -1.0 true cm
+\hoffset -1.0 true cm
+\marginparwidth= 2 true cm
+\renewcommand{\baselinestretch}{1.2}
+
+% blog post setting
+\usepackage{titlesec}
+\setlength{\parindent}{0pt}
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{}{0pt}{}
+\titleformat{\subsection}[block]{\normalfont\large\bfseries}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+\titleformat{\paragraph}[block]{\normalfont}{}{0pt}{}
+\titlespacing*{\paragraph}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+\setcounter{equation}{9}
+% blog post setting end
+
+% COSTOM COMMAND -------------------------------------
+
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\renewcommand{\[}{\left[}
+\renewcommand{\]}{\right]}
+
+\newcommand{\inp}[2]{\langle #1,#2 \rangle}
+
+\newcommand{\diag}{{\rm diag}}
+\newcommand{\supp}{\text{supp }}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rp}{\mathbb{R}_+}
+\newcommand{\Rpp}{\mathbb{R}_{++}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\newcommand{\ep}{\epsilon}
+\newcommand{\pa}{\partial}
+
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcH}{\mathcal{H}}
+\newcommand{\mcT}{\mathcal{T}}
+\newcommand{\mcV}{\mathcal{V}}
+\newcommand{\mcG}{\mathcal{G}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\mcW}{\mathcal{W}}
+
+\newcommand{\st}{ \; \big| \; }
+
+% blog post setting
+\usepackage{tcolorbox}
+\newenvironment{textbox}
+  {\begin{tcolorbox}[
+    colback=gray!10, 
+    colframe=gray!50, 
+    boxrule=0.5pt,
+    fontupper=\normalfont
+  ]}
+  {\end{tcolorbox}}
+\newcommand{\subheading}[1]{\vspace{1em}{\noindent\large\bfseries \textlangle{} #1 \textrangle{} \par}\vspace{1em}}
+% blog post setting end
+
+% COSTOM COMMAND -------------------------------------
+
+\newcommand{\M}{\mathfrak{M}}
+
+% DOCUMENT -------------------------------------------
+
+\begin{document}
+
+\title[]{실해석학 스터디 5주차}
+\author{Jeawon Na}
+\date{2025. 6. 3.}
+%\address{}
+%\email{naa3000@skku.edu}
+
+\maketitle
+
+\vspace{0.5em}
+
+교재: Walter Rudin - Real and Complex Analysis-McGraw-Hill Education (1986) \\
+범위: CHAPER TWO, "POSITIVE BOREL MEASURES": The Riesz Representation Theorem
+
+\section{The Riesz Representation Theorem}
+
+\subsection{2.14}
+
+\begin{textbox}
+  Let $X$ be a locally compact Hausdorff space, and let $\Lambda$ be a positive linear functional on $C_c(X)$. \\
+  Then there exists a $\sigma$-algebra $\M$ in $X$ which contains all Borel sets in $X$, 
+  and there exists a unique positive measure $\mu$ on $\M$ which represents $\Lambda$ in the sense that \\ \\
+  (a) $\Lambda f = \int_X f d \mu$ for every $f \in C_c(X)$, and which has the following additional properties: \\
+  (b) $\mu(K) < \infty$ for every compact set $K \subset X$. \\
+  (c) For every $E \in \M$, we have 
+  \begin{equation*}
+    \mu(E) = \inf \{ \mu(V) : E \subset V, \, V \text{ open} \}.
+  \end{equation*} \\
+  (d) The relation
+  \begin{equation*}
+    \mu(E) = \sup \{ \mu(K) : K \subset E, \, K \text{ compact} \}
+  \end{equation*}
+  holds for every open set $E$, and for every $E \in \M$ with $\mu(E) < \infty$. \\
+  (e) If $E \in \M$, $A \subset E$, and $\mu(E) = 0$, then $A \in \M$.
+\end{textbox}
+
+지난 시간에 STEP I부터 III까지를 증명했었다.\\ \\
+STEP I은 임의의 집합들에 대해, 합집합을 먼저 한 다음에 $\mu$에 넣은 것보다 먼저 $\mu$에다가 넣고 
+합집합을 한 것이 더 크다는 내용의 Theorem이었다. 아직 $\mu$가 measure는 아니지만, measure의 
+관점에서 생각해 보면, 임의의 집합의 크기를 측정한 결과를 합쳤을 때 겹치는 부분이 중복 측정되기 때문에 
+먼저 합집합한 뒤에 크기를 측정한 것보다 커질 거라는 사실을 직관적으로 생각해볼 수 있다. \\ \\
+STEP 2는 compact set의 특징에 대해 알아보았던 Theorem이었다. compact하면 $\M_F$에 포함되고, 
+$\Lambda f$에 의해 $\inf$로도 근사할 수 있다는 내용이었다. 그리고 $\mu(K)$가 finite하다는 사실도 
+자연스럽게 증명할 수 있었다. \\ \\
+STEP III은 open set에 대한 내용이었다. open set이면 compact set에 의해 $\inf$으로 $\mu$의 
+값을 근사할 수 있다는 내용이었다. 그래서 finite한 $\mu$ 값을 가진 open set은 $\M_F$에 포함된다는 
+사실을 확인했다. \\ \\
+
+이제, 지난 증명에 이어서 진행해보자.
+
+
+
+\end{document}
+
