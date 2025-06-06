@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chess Game</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+        }
+
+        .chess-wrapper {
+            display: grid;
+            grid-template-columns: 30px repeat(8, 60px) auto;
+            grid-template-rows: repeat(8, 60px) 30px;
+        }
+
+        .square {
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .square img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+        }
+
+        .light {
+            background-color: #f0d9b5;
+        }
+
+        .dark {
+            background-color: #b58863;
+        }
+
+        .label {
+            font-size: 14px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            user-select: none;
+        }
+
+        .label-row {
+            grid-column: 1;
+        }
+
+        .label-col {
+            grid-row: 9;
+        }
+
+        .info {
+            grid-column: 10;
+            grid-row: 1 / span 8;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding-left: 20px;
+        }
+
+        #position {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 6px 12px;
+            cursor: pointer;
+            background-color: #555;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            width: 100px;
+        }
+
+        .score {
+            grid-column: 10;
+            grid-row: 1;
+            align-self: start;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding-left: 30px;
+            padding-top: 4px;
+        }
+
+        .spacer {
+            height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chess-wrapper" id="board">
+        <div class="score" id="score">score : 0</div>
+        <div class="info">
+            <div id="position">-</div>
+            <button id="startBtn">시작하기</button>
+            <button id="stopBtn">끝내기</button>
+            <div class="spacer"></div>
+            <button id="upBtn">▲</button>
+            <div id="timeDisplay">3초</div>
+            <button id="downBtn">▼</button>
+        </div>
+    </div>
+
+    <script>
+        const board = document.getElementById('board');
+        const position = document.getElementById('position');
+        const scoreEl = document.getElementById('score');
+        const timeDisplay = document.getElementById('timeDisplay');
+        const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+        const ranks = [8, 7, 6, 5, 4, 3, 2, 1];
+        const rowLabels = [], colLabels = [], squares = [];
+        let flipped = false;
+        let currentTarget = '-';
+        let score = 0;
+        let intervalId = null;
+        let changeCount = 0;
+        let timeSec = 3;
+
+        const initialPosition = {
+            0: ['br', 'bn', 'bb', 'bq', 'bk', 'bb', 'bn', 'br'],
+            1: Array(8).fill('bp'),
+            6: Array(8).fill('wp'),
+            7: ['wr', 'wn', 'wb', 'wq', 'wk', 'wb', 'wn', 'wr']
+        };
+
+        for (let row = 0; row < 8; row++) {
+            const rowLabel = document.createElement('div');
+            rowLabel.textContent = ranks[row];
+            rowLabel.classList.add('label', 'label-row');
+            rowLabel.style.gridRow = row + 1;
+            board.appendChild(rowLabel);
+            rowLabels.push(rowLabel);
+
+            for (let col = 0; col < 8; col++) {
+                const square = document.createElement('div');
+                square.classList.add('square', (row + col) % 2 === 0 ? 'light' : 'dark');
+                square.style.gridRow = row + 1;
+                square.style.gridColumn = col + 2;
+                square.dataset.row = row;
+                square.dataset.col = col;
+
+                square.onclick = () => {
+                    const r = parseInt(square.dataset.row);
+                    const c = parseInt(square.dataset.col);
+                    const file = flipped ? files[7 - c] : files[c];
+                    const rank = flipped ? ranks[7 - r] : ranks[r];
+                    const clicked = file.toUpperCase() + rank;
+
+                    if (clicked === currentTarget) {
+                        score += 10;
+                        scoreEl.textContent = `score : ${score}`;
+                        resetTimerAndSetTarget();
+                    } else {
+                        score -= 10;
+                        scoreEl.textContent = `score : ${score}`;
+                    }
+                };
+
+                squares.push(square);
+                board.appendChild(square);
+            }
+        }
+
+        for (let col = 0; col < 8; col++) {
+            const colLabel = document.createElement('div');
+            colLabel.textContent = files[col];
+            colLabel.classList.add('label', 'label-col');
+            colLabel.style.gridColumn = col + 2;
+            board.appendChild(colLabel);
+            colLabels.push(colLabel);
+        }
+
+        function updateBoard() {
+            const newRanks = flipped ? [...ranks].reverse() : ranks;
+            const newFiles = flipped ? [...files].reverse() : files;
+            rowLabels.forEach((el, i) => el.textContent = newRanks[i]);
+            colLabels.forEach((el, i) => el.textContent = newFiles[i]);
+            squares.forEach(square => {
+                square.innerHTML = '';
+                const r = parseInt(square.dataset.row);
+                const c = parseInt(square.dataset.col);
+                const boardRow = flipped ? 7 - r : r;
+                const boardCol = flipped ? 7 - c : c;
+                const piece = initialPosition[boardRow]?.[boardCol];
+                if (piece) {
+                    const img = document.createElement('img');
+                    img.src = `pieces/${piece}.png`;
+                    img.alt = piece;
+                    square.appendChild(img);
+                }
+            });
+        }
+
+        function flipBoard() {
+            flipped = !flipped;
+            updateBoard();
+        }
+
+        function setNextTarget(counting = true) {
+            const randomFile = files[Math.floor(Math.random() * 8)].toUpperCase();
+            const randomRank = ranks[Math.floor(Math.random() * 8)];
+            currentTarget = randomFile + randomRank;
+            position.textContent = currentTarget;
+            if (counting) {
+                changeCount++;
+                if (changeCount % 5 === 0) flipBoard();
+            }
+        }
+
+        function resetTimerAndSetTarget() {
+            clearInterval(intervalId);
+            setNextTarget();
+            intervalId = setInterval(setNextTarget, timeSec * 1000);
+        }
+
+        document.getElementById('startBtn').onclick = () => {
+            flipped = false;
+            score = 0;
+            scoreEl.textContent = 'score : 0';
+            changeCount = 0;
+            updateBoard();
+            position.textContent = '-';
+            setNextTarget(false);
+            intervalId = setInterval(setNextTarget, timeSec * 1000);
+        };
+
+        document.getElementById('stopBtn').onclick = () => {
+            clearInterval(intervalId);
+            intervalId = null;
+        };
+
+        document.getElementById('upBtn').onclick = () => {
+            if (timeSec < 10) timeSec++;
+            timeDisplay.textContent = `${timeSec}초`;
+        };
+
+        document.getElementById('downBtn').onclick = () => {
+            if (timeSec > 1) timeSec--;
+            timeDisplay.textContent = `${timeSec}초`;
+        };
+
+        updateBoard();
+    </script>
+</body>
+
+</html>
