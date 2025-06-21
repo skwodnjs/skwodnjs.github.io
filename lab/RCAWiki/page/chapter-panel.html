@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Chapter Panel</title>
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="h-style.css">
+  <style>
+    ul {
+      padding: 0;
+    }
+
+    li {
+      margin: 10px 0;
+      padding: 0;
+      list-style: none;
+      position: relative;
+      padding-left: 20px;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    li::before {
+      content: '▶';
+      position: absolute;
+      left: 0;
+      font-size: 11px;
+      top: 2.4px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Real and Complex Analysis</h1>
+  <p>Walter Rudin, McGraw-Hill International Education</p>
+  <ul>
+    <li onclick="openChapter('CH 1')">CH 1. ABSTRACT INTEGRATION</li>
+    <li onclick="openChapter('CH 2')">CH 2. POSITIVE BOREL MEASURES</li>
+    <li onclick="openChapter('CH 3')">CH 3. LP-SPACES</li>
+    <li onclick="openChapter('CH 4')">CH 4. ELEMENTARY HILBERT SPACE THEORY</li>
+    <li onclick="openChapter('CH 5')">CH 5. EXAMPLES OF BANACH SPACE TECHNIQUES</li>
+    <li onclick="openChapter('CH 6')">CH 6. COMPLEX MEASURES</li>
+    <li onclick="openChapter('CH 7')">CH 7. DIFFERENTIATION</li>
+    <li onclick="openChapter('CH 8')">CH 8. INTEGRATION ON PRODUCT SPACES</li>
+    <li onclick="openChapter('CH 9')">CH 9. FOURIER TRANSFORMS</li>
+    <li onclick="openChapter('CH 10')">CH 10. ELEMENTARY PROPERTIES OF HOLOMORPHIC FUNCTIONS</li>
+    <li onclick="openChapter('CH 11')">CH 11. HARMONIC FUNCTIONS</li>
+    <li onclick="openChapter('CH 12')">CH 12. THE MAXIMUM MODULUS PRINCIPLE</li>
+    <li onclick="openChapter('CH 13')">CH 13. APPROXIMATIONS BY RATIONAL FUNCTIONS</li>
+    <li onclick="openChapter('CH 14')">CH 14. CONFORMAL MAPPING</li>
+    <li onclick="openChapter('CH 15')">CH 15. ZEROS OF HOLOMORPHIC FUNCTIONS</li>
+    <li onclick="openChapter('CH 16')">CH 16. ANALYTIC CONTINUATION</li>
+    <li onclick="openChapter('CH 17')">CH 17. Hp SPACES</li>
+    <li onclick="openChapter('CH 18')">CH 18. ELEMENTARY THEORY OF BANACH ALGEBRAS</li>
+    <li onclick="openChapter('CH 19')">CH 19. HOLOMORPHIC FOURIER TRANSFORMS</li>
+    <li onclick="openChapter('CH 20')">CH 20. UNIFORM APPROXIMATION BY POLYNOMIALS</li>
+  </ul>
+
+  <script>
+    function openChapter(chKey) {
+      parent.postMessage({ action: "chapterSelected", key: chKey }, "*");
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Section Panel</title>
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="h-style.css">
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+  <style>
+    .section-title {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      margin: 12px 0;
+    }
+
+    .arrow {
+      display: inline-block;
+      margin-right: 10px;
+      transition: transform 0.1s ease;
+      font-size: 11px;
+    }
+
+    .collapsed .arrow {
+      transform: rotate(-90deg);
+    }
+
+    ul {
+      margin-top: 0;
+      margin-left: 20px;
+      padding-left: 0;
+      display: none;
+      list-style: none;
+      white-space: nowrap;
+    }
+
+    ul.visible {
+      display: block;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    li .clickable {
+      cursor: pointer;
+      display: inline;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 id="chapter-title"></h1>
+
+  <script>
+    window.addEventListener("message", function (event) {
+      if (event.data?.action === "loadChapter") {
+        const chKey = event.data.key;
+        loadSection(chKey);
+      }
+    });
+
+    async function loadSection(chapterKey) {
+      const response = await fetch("https://raw.githubusercontent.com/skwodnjs/skwodnjs.github.io/main/lab/RCAWiki/page/section.yaml");
+      const yamlText = await response.text();
+      const data = jsyaml.load(yamlText);
+
+      const fullKey = Object.keys(data).find(key => key.startsWith(chapterKey));
+
+      const titleElem = document.getElementById("chapter-title");
+      while (titleElem.nextSibling) {
+        titleElem.parentNode.removeChild(titleElem.nextSibling);
+      }
+
+      if (!fullKey) {
+        return;
+      }
+
+      const chapterData = data[fullKey];
+      document.getElementById("chapter-title").textContent = fullKey;
+
+      if (!chapterData) {
+        return;
+      }
+
+      for (const [subtitle, items] of Object.entries(chapterData)) {
+        const titleDiv = document.createElement("div");
+        titleDiv.className = "section-title";
+        titleDiv.onclick = () => toggleList(titleDiv);
+        titleDiv.innerHTML = `<span class="arrow">▼</span>${subtitle}`;
+
+        const ul = document.createElement("ul");
+        items.forEach(item => {
+          const li = document.createElement("li");
+          li.innerHTML = `<span class="clickable">${item}</span>`;
+          ul.appendChild(li);
+        });
+
+        document.body.appendChild(titleDiv);
+        document.body.appendChild(ul);
+      }
+    }
+
+    function toggleList(titleElement) {
+      const ul = titleElement.nextElementSibling;
+      const arrow = titleElement.querySelector('.arrow');
+
+      ul.classList.toggle('visible');
+      titleElement.classList.toggle('collapsed');
+    }
+
+    loadSection("CH 1");
+  </script>
+
+</body>
+
+</html>
