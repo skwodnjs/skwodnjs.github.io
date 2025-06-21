@@ -1,0 +1,124 @@
+% ---------- This is the blog post preset. -----------
+
+\documentclass[11pt,reqno]{amsart}
+
+% PACKAGE --------------------------------------------
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{enumerate}
+\usepackage[notcite,notref]{showkeys}
+\usepackage[usenames]{color}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{kotex}
+
+\usepackage{graphicx}
+
+% PAGE SETTING ---------------------------------------
+
+\textheight 22.5  true cm
+\textwidth 15 true cm
+\voffset -1.0 true cm
+\hoffset -1.0 true cm
+\marginparwidth= 2 true cm
+\renewcommand{\baselinestretch}{1.2}
+
+% blog post setting
+\usepackage{titlesec}
+\setlength{\parindent}{0pt}
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{}{0pt}{}
+\titleformat{\subsection}[block]{\normalfont\large\bfseries}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+\titleformat{\paragraph}[block]{\normalfont}{}{0pt}{}
+\titlespacing*{\paragraph}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+% blog post setting end
+
+% COSTOM COMMAND -------------------------------------
+
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\renewcommand{\[}{\left[}
+\renewcommand{\]}{\right]}
+
+\newcommand{\inp}[2]{\langle #1,#2 \rangle}
+
+\newcommand{\diag}{{\rm diag}}
+\newcommand{\supp}{\text{supp }}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rp}{\mathbb{R}_+}
+\newcommand{\Rpp}{\mathbb{R}_{++}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\newcommand{\ep}{\epsilon}
+\newcommand{\pa}{\partial}
+
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcH}{\mathcal{H}}
+\newcommand{\mcT}{\mathcal{T}}
+\newcommand{\mcV}{\mathcal{V}}
+\newcommand{\mcG}{\mathcal{G}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\mcW}{\mathcal{W}}
+
+\newcommand{\st}{ \; \big| \; }
+
+% blog post setting
+\usepackage{tcolorbox}
+\newenvironment{textbox}
+  {\begin{tcolorbox}[
+    colback=gray!10, 
+    colframe=gray!50, 
+    boxrule=0.5pt,
+    fontupper=\normalfont
+  ]}
+  {\end{tcolorbox}}
+\newcommand{\subheading}[1]{\vspace{1em}{\noindent\large\bfseries \textlangle{} #1 \textrangle{} \par}\vspace{1em}}
+% blog post setting end
+
+% COSTOM COMMAND -------------------------------------
+
+\newcommand{\M}{\mathfrak{M}}
+
+% DOCUMENT -------------------------------------------
+
+\begin{document}
+
+\title[]{실해석학 스터디 2주차}
+\author{Jeawon Na}
+\date{2025. 5. 20.}
+%\address{}
+%\email{naa3000@skku.edu}
+
+\maketitle
+
+\vspace{0.5em}
+
+교재: Walter Rudin - Real and Complex Analysis-McGraw-Hill Education (1986) \\
+범위: CHAPER ONE, "ABSTRACT INTEGRATION": Integration of POsitive Functions, The Role Played by Sets of Measure Zero
+
+\section{Integration of POsitive Functions}
+
+이번 section에서 $\mu$는 어떤 measurable space $X$ 위에 정의된 positive measure를 의미하는 것으로 하자.
+
+\subsection{1.30 Definition}
+
+\begin{textbox}
+  We define $L^1(\mu)$ to be the collection of all complex measurable functions $f$ on $X$ for which 
+  \begin{equation*}
+    \int_X |f| \, d \mu < \infty .
+  \end{equation*}
+\end{textbox} 
+
+일단 \href{https://google.com}{Theorem 1.9(b)}에 의해, $f$가 measurable이면 $|f|$도 measurable이다. 따라서, 위 
+적분의 형태를 문제없이 사용할 수 있다.
+
+
+
+\end{document}

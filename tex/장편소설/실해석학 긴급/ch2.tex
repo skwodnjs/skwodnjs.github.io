@@ -1,0 +1,524 @@
+% ---------- This is the blog post preset. -----------
+
+\documentclass[11pt,reqno]{amsart}
+
+% PACKAGE --------------------------------------------
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{enumerate}
+\usepackage[notcite,notref]{showkeys}
+\usepackage[usenames]{color}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{kotex}
+
+\usepackage{graphicx}
+
+% PAGE SETTING ---------------------------------------
+
+\textheight 22.5  true cm
+\textwidth 15 true cm
+\voffset -1.0 true cm
+\hoffset -1.0 true cm
+\marginparwidth= 2 true cm
+\renewcommand{\baselinestretch}{1.2}
+
+% blog post setting
+\usepackage{titlesec}
+\setlength{\parindent}{0pt}
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{}{0pt}{}
+\titleformat{\subsection}[block]{\normalfont\large\bfseries}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+\titleformat{\paragraph}[block]{\normalfont}{}{0pt}{}
+\titlespacing*{\paragraph}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+% blog post setting end
+
+% COSTOM COMMAND -------------------------------------
+
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\renewcommand{\[}{\left[}
+\renewcommand{\]}{\right]}
+
+\newcommand{\inp}[2]{\langle #1,#2 \rangle}
+
+\newcommand{\diag}{{\rm diag}}
+\newcommand{\supp}{\text{supp }}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rp}{\mathbb{R}_+}
+\newcommand{\Rpp}{\mathbb{R}_{++}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\newcommand{\ep}{\epsilon}
+\newcommand{\pa}{\partial}
+
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcH}{\mathcal{H}}
+\newcommand{\mcT}{\mathcal{T}}
+\newcommand{\mcV}{\mathcal{V}}
+\newcommand{\mcG}{\mathcal{G}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\mcW}{\mathcal{W}}
+
+\newcommand{\st}{ \; \big| \; }
+
+% blog post setting
+\usepackage{tcolorbox}
+\newenvironment{textbox}
+  {\begin{tcolorbox}[
+    colback=gray!10, 
+    colframe=gray!50, 
+    boxrule=0.5pt,
+    fontupper=\normalfont
+  ]}
+  {\end{tcolorbox}}
+\newcommand{\subheading}[1]{\vspace{1em}{\noindent\large\bfseries \textlangle{} #1 \textrangle{} \par}\vspace{1em}}
+% blog post setting end
+
+% COSTOM COMMAND -------------------------------------
+
+\newcommand{\M}{\mathfrak{M}}
+
+% DOCUMENT -------------------------------------------
+
+\begin{document}
+
+\title[]{실해석학 2단원 벼락치기}
+\author{Jeawon Na}
+\date{2025. 6. 15.}
+%\address{}
+%\email{naa3000@skku.edu}
+
+\maketitle
+
+\vspace{0.5em}
+
+교재: Walter Rudin - Real and Complex Analysis-McGraw-Hill Education (1986) \\
+범위: CHAPER TWO,
+
+\section{Vector Spaces}
+
+\subsection{2.1 Definition}
+
+Vector Space에 대해 정의함: addition과 scalar multiplication이 잘 정의된 space.
+
+\subsection{2.2 Integration as a Linear Funtional}
+
+Linear functional: scalar 을 return 하는 linear mapping. \\
+$f \in C$ 에서, $\Lambda : C_c (X) \to C$가 $\Lambda f \ge 0$ if $f \ge 0$ 이면 positive linear functional이라 한다. \\
+이때 $f \in C$이므로, $f < \infty$이다.
+
+\section{Topological Preliminaries}
+
+\subsection{2.3 Definition}
+
+Topology의 기본 개념을 정의함.
+
+\subsection{2.4 Theorem}
+
+Suppose $K$ is compact and $F$ is closed, in a topological space $X$. If $F \subset K$, then $F$ is compact.
+
+\paragraph{Corollary}
+
+If $A \subset B$ and if $B$ has compact closure, so does $A$.
+
+\subsection{2.5 Theorem}
+
+Suppose $X$ is a Hausdorff space, $K \subset X$, $K$ is compact, and $p \in K^c$. Then there are open sets $U$ and $W$
+such that $p \in U$, $K \subset W$, and $U \cap W = \emptyset$.
+
+Hausdorff space는 두 point를 겹치지 않는 open set으로 분리시킬 수 있는 space로 정의되는데, compact와 점을 분리해낼 수 있다는 성질이
+있다.
+
+\paragraph{Corollary}
+
+(a) Compact subsets of Hausdorff spaces are closed.
+(b) If $F$ is closed and $K$ is compact in a Hausdorff space, then $F \cap K$ is compact.
+
+Theorem 2.4에서는 closed set $F$가 $K$에 포함되어 있어야 했는데, $X$가 Hausdorff 라면, $K$가 $F$에 들어갈 필요가 없다.
+$K$는 (a)에 의해 closed 이니까 $F \cap K$도 closed이고 Theorem 2.4에 의해 compact 안에 있는 closed는 compact이므로 (b)가 성립한다.
+
+\subsection{2.6 Theorem}
+
+If $\{ K_\alpha \}$ is a collection of compact subsets of a Hausdorff space and if $\bigcap _\alpha K _\alpha = \emptyset$, 
+then some finite subcolleciton of $\{ K_\alpha \} $ also has empty intersection.
+
+compact subset들의 교집합이 공집합이면 범인은 finite 개다.
+
+\subsection{2.7 Theorem}
+
+Suppose $U$ is open in a locally compact Hausdorff space $X$, $K \subset U$, and $K$ is compact. Then there is an open set $V$ 
+with compact closure such that
+\begin{equation}
+  K \subset V \subset \bar{V} \subset U.
+\end{equation}
+
+locally compact Hausdorff space이면, open 과 compact 사이에 $V$가 들어갈 충분한 공간이 있다는 정리. 모든 점에 대해 compact closure를 가지는
+neighborhood를 찾을 수가 있고, Hausdorff 덕분에 neighborhood 각각을 $U$ 안으로 밀어 넣을 수 있다. ($U^c$의 모든 점과 $K$를 떼어놓는 open set을
+이용해서.)
+
+\subsection{2.8 Definition}
+
+Let $f$ be a real (or extended-real) function on a fopological space. If 
+\begin{equation}
+  \{ x : f (x) > \alpha \}
+\end{equation}
+is open for every real $\alpha$, $f$ is said to be lower semicontinuous. If 
+\begin{equation}
+  \{ x : f (x) < \alpha \}
+\end{equation}
+is open for every real $\alpha$, $f$ is said to be upper semicontinuous.
+
+(a) Characteristic functions of open sets are lower semicontinuous.
+(b) Characteristic functions of closed sets are upper semicontinuous.
+
+$f$가 continuous이면 $f^{-1} (V)$ is open for every $V \subset Y$ 인데, 이는 $f^{-1} ((\alpha, \beta))$ is open for every real $\alpha, 
+\beta$랑 같은 뜻이고, $\{ x : \alpha< f (x) < \beta \}$랑 같은 뜻이다. 이렇게 놓고 보면, upper semicontinuous랑 lower semicontinuous는 
+자연스러운 정의로 보인다.
+
+생각해보면 Characteristic funciton은 0 또는 1의 값을 가지므로, upper semicontinuous 이려면 0일 때 open이어야 됨. 즉, closed sets의 characteristic
+functions는 upper semicontinuous. 반대로 lower semicontinuous 이려면 1일 때 open이어야 됨. $(\alpha, \infty]$의 preimage가 open이어야 하니까. 
+그래서 (a) 성립.
+
+(c) The supremum of any collection of lower semicontinuous funcitons is lower semicontinuous. 
+The infimum of any collection of upper semicontinuous functions is upeer semicontinuous.
+
+\subsection{2.9 Definition}
+
+The support of a complex function $f$ on a topological space $X$ is the closure of the set 
+\begin{equation}
+  \{ x : f (x) \neq 0 \}.
+\end{equation}
+
+The collection of all continuous complex fucntions on $X$ whose support is compact is denoted by $C_c(X)$.
+
+\subsection{2.10 Theorem}
+
+Let $X$ and $Y$ be topological spaces, and let $f : X \to Y$ be continuous. If $K$ is a compact subset of $X$, then $f (K)$ is compact.
+
+\paragraph{Corollary}
+
+The range of any $f \in C_c(X)$ is a compact subset of the complex plane.
+
+\subsection{2.11 Notation}
+
+In this chapter the following conventions will be used. The notation
+\begin{equation}
+  K \prec f
+\end{equation}
+will mean that $K$ is a compact subset of $X$, that $f \in C_c(X)$, that $0 \le f(x) \le 1$ for all $x \in X$, and that $f(x) = 1$ for all $x \in K$.
+The notation 
+\begin{equation}
+  f \prec V
+\end{equation}
+will mean that $V$ is open, that $f \in C_c(X)$, $0 \le f \le 1$, and that the support of $f$ lies in $V$. The notation
+\begin{equation}
+  K \prec f \prec V
+\end{equation}
+will be used to indicate that both (-) and (-) holds.
+
+\subsection{2.12 Urysohn's Lemma}
+
+Suppose $X$ is locally compact Hausdorff space, $V$ is open in $X$, $K \subset V$, and $K$ is compact. Then there exists an $f \in C_c(X)$, such that 
+\begin{equation}
+  K \prec f \prec V.
+\end{equation}
+
+\subsection{2.13 Theorem}
+
+Suppose $V_1, \dots, V_n$ are open subsets of a locally compact Hausdorff space $X$, $K$ is compact, and
+\begin{equation}
+  K \subset V_1 \cup \cdots \cup V_n.
+\end{equation}
+Then there exist functions $h_i \prec V_i (i = 1, \dots, n)$ such that 
+\begin{equation}
+  h_1 (x) + \cdots + h_n (x) = 1 \qquad (x \in K).
+\end{equation}
+
+$h = h_1 + \cdots + h_n$이라 하면, $0 \le h \le 1$이고, $h \in C_c(X)$이고, (왜냐면 $C_c(X)$는 vector space, 더하기에 대해 닫혀있음), $h(x) = 1$ for every 
+$x \in K$이까 $K \prec h$라 할 수 있겠다. (맞을걸?)
+
+\section{The Riesz Representation Theorem}
+
+\subsection{2.14 Theorem}
+
+Let $X$ be a locally compact Hausdorff space, and let $\Lambda$ be a positive linear funcitonal on $C_c (X)$. Then there exists a $\sigma-algebra \M$
+in $X$ which contains all Borel sets in $X$, and there exists a unique positive measure $\mu$ on $\M$ which represents $\Lambda$ in the sense that
+(a) $\Lambda f = \int_X f d \mu$ for every $f \in C_c(X)$, and which has the following additional properties:
+(b) $\mu (K) < \infty$ for every compact set $K \subset X$.
+(c) For every $E \in \M$, we have \begin{equation}
+  \mu(E) = \inf \{ \mu (V): E \subset V, V \text{ open} \}.
+\end{equation}
+(d) The relation \begin{equation}
+  \mu(E) = \sup \{ \mu (K) : K \subset E, K \text{ compact} \}
+\end{equation}
+holds for every open set $E$, and for every $E \in \M$ with $\mu (E) < \infty$.
+(e) If $E \in \M$, $A \subset E$, and $\mu(E) = 0$, then $A \in \M$.
+
+어떤 positive linear functional 이 주어졌을 때, 이걸 가지고 unique한 positive measure를 하나 찾아낼 수 있다는 의미이고, 그 positive measure는 여러 좋은 성질들을 
+가지고 있음. 근데 모든 positive measure가 이런 좋은 성질들을 만족하는건 아님.
+
+positive linear functional이 주어졌을 때, (a) ~ (e)의 모든 조건을 만족하는 positive measure는 unique하다는걸 우선은 알 수 있다. 
+이걸 먼저 증명하고 나면, 존재성에 대한 증명만 하면 된다.
+
+\paragraph{Construction of $\mu$ and $\M$}
+
+For every open set $V$ in $X$, definte 
+\begin{equation}
+  \mu (V) = \sup \{ \Lambda f : f \prec V \}.
+\end{equation}
+
+For every $E \subset X$, 
+\begin{equation}
+  \mu (E) = \inf \{ \mu (V) : E \subset V, V \text{ open} \}.
+\end{equation}
+
+Let $\M_F$ be the class of all $E \subset X$ which satisfy two conditinos: $\mu(E) < \infty$, and 
+\begin{equation}
+  \mu (E) = \sup \{ \mu (K) : K \subset E, K \text{ compact} \}.
+\end{equation}
+Finally, let $\M$ be the class of all $E \subset X$ such that $E \cap K \in \M_F$ for every compact $K$.
+
+Riesz 표현 정리의 증명은 이렇게 설계한 $\mu$와 $\M$이 (a) ~ (e)를 만족하는 measure인지 확인하는 것으로 진행된다.
+참고로, $\M_F$는 $\M$ 중에서 $\mu(E) < \infty$인 집합들의 collection과 같다. 즉, 이렇게 설계하면 $\mu(E) < \infty$인
+$E$는 조건 $\mu (E) = \sup \{ \mu (K) : K \subset E, K \text{ compact} \}$을 만족한다는 것이다. 증명과정에서 확인할 
+수 있다.
+
+uniqueness에 대한 증명을 했다면, 이렇게 설계한 $\mu$ 밖에 없다 라고 이야기할 수 있겠다.
+
+\paragraph{STEP I}
+
+If $E_1, E_2, E_3, \dots$ are arbitrary subsets of $X$, then
+\begin{equation}
+  \mu \( \bigcup_{i =1} ^\infty \) \le \sum_{i=1}^\infty \mu(E_i).
+\end{equation}
+
+아직 $\mu$가 measure는 아니지만, 위 식은 measure가 만족해야 할 성질 중 하나이다. 겹치는 부분이 있을 수도 있는 집합들에 대해서,
+집합들을 합쳐놓고 그 크기를 측정하면 각각의 크기를 측정한 뒤에 합한 것보다 작아질 수 있다. 만약, disjoint한 집합들에 대해서 반대방향의
+부등식이 성립한다면, countably additive가 성립한다고 할 수 있겠다.
+
+\paragraph{STEP II}
+
+If $K$ is compact, then $K \in \M_F$ and
+\begin{equation}
+  \mu(K) = \inf \{ \Lambda f : K \prec f \}.
+\end{equation}
+This implies assertion (b) of the theorem.
+
+일단 compact set $K$는 $\M_F$에 속한다. 근데 일단 $\M_F$에 속하려면 첫 번째 조건으로 $\mu (K) < \infty$이어야 하므로, 이걸 
+증명한다는 것은 theorem (b) 부분을 보이는 것과 같다. 그리고 위 식에서, $K$ 위에서 모두 1의 값을 가지는 함수 $f$들의 infimum으로 
+$\mu(K)$를 계산할 수 있다는 것은 함수 $f$를 통해 위에서부터 누르는 것으로 $\mu(K)$를 계산해낼 수 있다는 것을 의미한다.
+
+지금은 compact set $K$가 $\M_F$에 속한다는 것을 보였는데, 다음에는 open set $V$가 $\M_F$에 속하는지를 살펴본다.
+
+\paragraph{STEP III}
+
+Every open set satisfies (3). Hence $\M_F$ conmtains every open set $V$ with $\mu(V) < \infty$.
+
+(3)번 식은 (지금 tex에서는 하나도 맞지 않겠지만) $\M_F$의 두 번째 조건이다.
+
+\paragraph{STEP IV}
+
+Suppose $E = \bigcup _{i=1}^\infty E _i$, where $E_1, E_2, E_3, \dots$ are pairwise disjoint members of $\M_F$. Then
+\begin{equation}
+  \mu(E) = \sum _{i=1}^\infty \mu (E_i).
+\end{equation}
+If, in addition, $\mu (E) < \infty$, then also $E \in \M_F$.
+
+$\M_F$에 대해서 countably additivity가 (어느정도) 성립함을 보인다. 왜 '어느정도'냐면 무한대가 되어버리면 $\M_F$에 속하지 않으니까
+닫혀있지가 않다. 이건 나중에 $\M$으로 확장시키면서 해결할 수 있다.
+
+\paragraph{STEP V}
+
+If $E \in \M_F$ and $\ep > 0$, there is a compact $K$ and an open $V$ such that $K \subset E \subset V$ and $\mu(V - K) < \ep$.
+
+일종의 보조정리 느낌.
+
+\paragraph{STEP VI}
+
+If $A \in \M_F$ and $B \in \M_F$, then $A - B$, $A \cup B$, $A \cap B$ belong to $\M_F$.
+
+일종의 보조정리 느낌. $\M_F$를 $\M$으로 확장하기 위한 준비과정.
+
+\paragraph{STEP VII}
+
+$\M$ is a $\sigma$-algebra in $X$ which contains all Borel sets.
+
+\paragraph{STEP VIII}
+
+$\M_F$ constains of precisely those sets $E \in \M$ for shich $\mu(E) < \infty$.
+
+\paragraph{STEP IX}
+
+$\mu$ is a measure on $\M$.
+
+\paragraph{STEP X}
+
+For every $f \in C_c (X)$, $\Lambda f = \int _X f d\mu$.
+
+\section{Regularity Properties of Borel Measures}
+
+\subsection{2.15 Definition}
+
+A measure $\mu$ defined on the $\sigma$-algebra of all Borel sets in a locally compact Hausdorff space $X$ is called a Borell measure
+on $X$. If $\mu$ is positive, a Borel set $E \subset X$ is outer regular or inner regular, respectively, if $E$ has property (c) or (d)
+of Theorem 2.14. If every Borel set in $X$ is both outer and inner regular, $\mu$ is called regular.
+
+일반적인 Borel measure는 open set $V$에 의해 outer로 measure를 구할 수 없다. 근데 Theorem 2.14에 의해서, positive linear functional 에 의해 
+만들어진 $\mu$는 모든 Borel set을 $outer regular$로 만든다. 그리고 이 $\mu$는 최소한 finite measure를 갖는 $E \subset X$에 대해서는 inner 
+regular 이지만, finite가 아닌 measure에 대해서는 inner regular이 아닐 수도 있다. exercise 17에 그 아닌 예시가 나와있다. 만약에, finite가 아닌
+measure에 대해서도 inner regular이 된다면, 그 때 $\mu$는 regular이라고 부른다.
+
+\subsection{2.16 Definition}
+
+A set $E$ in a topological space is called $\sigma$-compact if $E$ is a countable union of compact sets.
+
+$\sigma$가 countable을 의미한다. $\Sigma$가 countable sum을 의미하는거처럼.
+
+A set $E$ in a measrue space (with measure $\mu$) is said to have $\sigma$-finite measure if $E$ is a countable union of sets $E_i$ with 
+$\mu(E_i) < \infty$.
+
+Theorem 2.14에서 construct 한 $\mu$에 대해서, 모든 $\sigma$-compact set은 $\sigma$-finite measure를 가진다. 왜냐면 모든 compact set은 finite 
+measure을 가지니까. 또한 이때, $E \in \M$ and $E$ has $\sigma$-finite measure이면, $E$ is inner regular이다 (왜?).
+
+\subsection{2.17 Theorem}
+
+Suppose $X$ is a locally compact, $\sigma$-compact Hausdorff space. If $\M$ and $\mu$ are as described in the statement of Theorem 
+2.14, then $\M$ and $\mu$ have the following properties:
+(a) If $E \in \M$ and $\ep > 0$, there is a closed set $F$ and an open set $V$ such that $F \subset E \subset V$ and $\mu(V - F) < \ep$.
+(b) $\mu$ is a regular Borel measure on $X$.
+(c) If $E \in \M$, there are sets $A$ and $B$ such that $A$ is an $F_\sigma$, $B$ is a $G_\delta$, $A \subset E \subset B$, and $\mu(B - A) = 0$.
+
+Theorem 2.14에서 $X$가 $\sigma$-compact 하다는 조건만 추가되면, 위와 같은 특징이 추가된다는 뜻이다.
+원래 $\M_F$에 속하는 $E$에 대해서, compact한 $K$와 open $V$를 찾을 수 있었다. 근데 (a)에 의하면, $\M$에 속하는 $E$에 대해서도, 찾을 수 있기는 한데 
+compact까지는 아니고 대신 closed인 $F$를 찾을 수 있다는 뜻이다. $\mu (E) < \infty$이면 그중에서도 compact한, 더 좋은 집합을 찾을 수 있긴 한데, (a)는 
+$\mu (E) < \infty$가 아니어도 closed 인 $F$를 찾을 수 있게 해준다.
+(b)는 원래 open set이거나 finite measure를 가지는 set에 대해서만 성립하는 특징이었는데, 이젠 모든 Borel set에 대해서 inner regular도 만족하게 된다.
+$F_\sigma$는 countable union of closed sets이고, $G_\delta$는 countable intersection of open sets이다. (c)는 $E$를 사이에 두는 엄청 가까운(?) 
+$A$와 $B$를 찾아낼 수 있다는 뜻이다.
+
+\subsection{2.18 Theorem}
+
+Let $X$ be a locally compact Hausdorff space in which every open set is $\sigma$-compact. Let $\lambda$ be any positive Borel measure on $X$ 
+such that $\lambda (K) < \infty$ for every compact set $K$. Then $\lambda$ is regular.
+
+이번에는 모든 open set이 $\sigma$-compact인 조건이 추가된다. 앞선 조건은 전체 $X$가 $\sigma$-compact일 때 추가되는 조건을 소개했고, 지금은 각 open set들이 
+$sigma$-compact일 때 추가되는 조건에 대해 소개한다. 참고로, $\R^n$은 전체가 $\sigma$-compact이면서 각 open set들도 $\sigma$-compact이다.
+
+\section{Lebesgue Measure}
+
+\subsection{2.19 Euclidean Spaces}
+
+Euclidean $k$-dimensional space $\R^k$ 에 대한 정의, vector space이면서 norm 이 정의되고 metric도 자연스럽게 정의되는 metric space.
+
+If $E \subset \R^k$ and $x \in \R^k$, the translate of $E$ by $x$ is the set 
+\begin{equation}
+  E + x = \{ y + x : y \in E \}.
+\end{equation}
+
+A set of the form 
+\begin{equation}
+  W = \{ x : \alpha _i < \xi_i < \beta _i , 1 \le i \le k \},
+\end{equation}
+or any set obtained by replacing any or all of the $<$ signs in (4) by $\le$, is called a $k$-cell; its volumne is defined to be
+\begin{equation}
+  \rm vol (W) = \prod_{i=1}^k (\beta_i - \alpha_i)
+\end{equation}
+
+If $a \in \R^k$ and $\delta > 0$, we shall call the set 
+\begin{equation}
+  Q(a; \delta) = \{ x : \alpha_i \le \xi_i < \alpha_i + \delta, 1 \le i < k \}
+\end{equation}
+the $\delta$-box with corner at $a$. Here $a = (\alpha_1, \dots, \alpha_k)$.
+
+For $n = 1, 2, 3, \dots,$ we let $P_n$ be the set of all $x \in \R^k$ whose coordinates are integral multiples of $2^{-n}$, 
+and we let $\Omega_n$ be the collection of all $2^{-n}$ boxes with corners at points of $P_n$. We shall need the following four properties of 
+$\{ \Omega_n \}$. The first therr are obvious by inspection.
+
+$\{ \Omega_n \}$ 은 $2^{-n}$ 간격으로 격자를 다 쪼개놓은 공간이라 생각하면 된다. $P_n$이 그 격자이고, $\Omega_n$들이 그 boxes라고 생각하면 된다.
+
+(a) If $n$ is fixed, each $x \in \R^k$ lies in one and only one member of $\Omega_n$.
+(b) If $Q' \in \Omega_n$, $Q'' \in \Omega_r$, and $r < n$, then either $Q' \subset Q''$ or $q' \cap Q'' = \emptyset$.
+(c) If $Q \in \Omega_r$, then $rm vol(Q) = 2^{-rk}$; and if $n > r$, the set $P_n$ has exactly $2 ^ {(n-r)k}$ points in $Q$.
+(d) Every nonempty open set in $\R^k$ is a countable union of disjoint boxes belonging to $\Omega_1 \cup \Omega_2 \cup \Omega_3 \cup \cdots$.
+
+(a), (b), (c)는 box를 그려보면 금방 알 수 있다. (d)는 box들을 basis로 생각할 수 있다는 느낌으로 볼 수 있겠다.
+
+\subsection{2.20 Theorem}
+
+There exists a positive complete measure $m$ defined on a $\sigma$-algebra $\M$ in $\R^k$, with the following properties:
+(a) $m(W) = \rm vol(W)$ for every $k$-cell $W$.
+(b) $\M$ contains all Borel sets in $\R^k$; more precisely, $E \in \M$ if and only if there are sets $A$ and $B \in \R^k$ such that 
+$A \subset E \subset B$, $A$ is an $F_\sigma$, $B$ is a $G_\delta$, and $m (B - A) = 0$. Also, $M$ is regular.
+(c) $m$ is translation-invariant, i.e., 
+\begin{equation}
+  m(E + x) = m(E)
+\end{equation}
+for every $E \in \M$ and every $x \in \R^k$.
+(d) If $\mu$ is any positive translation-invariant Borel measure on $\R^k$ such that $\mu(K) < \infty$ for every compact set $K$, 
+then there is a constant $c$ such that $\mu (E) = c m (E)$ for all Borel sets $E \subset \R^k$.
+(e) To every linear transformation $T$ of $\R^k$ into $\R^k$ corresponds a real number $\Delta (T)$ such that 
+\begin{equation}
+  m(T(E)) = \Delta (T) m (E) 
+\end{equation}
+for every $E \in \M$. In particular, $m(T(E)) = m(E)$ when $T$ is a rotation.
+
+$\R^k$ 위에, 적당한 (그리고 굉장히 직관적인) $\M$과 $m$을 정의할 수 있다는 뜻이다. (b)에서, $X$가 $\sigma$-compact 하다면 리즈 표현 정리에 의해
+positive linear functional로 만든 measure가 해당 사실을 만족한다는 것을 증명한 정기 있다. 아마도, 이 Theorem을 정의할 때, 적당한 positive linaer
+functional 을 주고, 그걸로 measure를 정의하면 되지 않을까 생각해볼 수 있다.
+
+(d)는, translation-invariant한 또 다른 measure $\mu$가 있다면, 그것과의 관계에 대한 설명이다.
+(e)는, 치환적분과 비슷한 느낌일 것 같다.
+
+The members of $\M$을 Lebesgue measurable sets in $\R^k$, $m$을 Lebesgue measure on $\R^k$라 한다.
+
+\subsection{2.21 Remarks}
+
+만약 $m$ 이 Lebesgue measure on $\R^k$이면, 관례적으로 $L^1 (m)$ 대신 $L^1 (\R^k)$이라 쓰기도 한다. 등등... 이따 함 읽어보는게 좋을듯?
+
+\subsection{2.22 Theorem}
+
+If $A \subset \R^1$ and every subset of $A$ is Lebesgue measurable then $m(A) = 0$.
+
+\paragraph{Corollary}
+
+Every set of positive measure has nonmeasurable subsets.
+
+\subsection{2.23 Determinants}
+
+The scale factors $\Delta(T)$ that occur in Theorem 2.20(e) can be interpreted algebraically by means of determinants.
+
+\section{Continuity Properties of Measurable Functions}
+
+\subsection{2.24 Lusin's Theorem}
+
+Suppose $f$ is a complex measurable function on $X$, $\mu(A) < \infty$, $f(x) = 0$ if $x \notin A$, and $\ep > 0$. Then there exists a $g \in C_c(X)$
+such that \begin{equation}
+  \mu(\{x : f(x) \neq g(x) \}) < \ep.
+\end{equation}
+Furthermore, we may arrange it so that \begin{equation}
+  \sup_{x \in X} |g(x)| \le \sup_{x \in X} |f(x)|.
+\end{equation}
+
+\paragraph{Corollary}
+
+Assume that the hypotheses of Lusin's theorem are satisfied and that $|f| \le 1$. Then there is a sequence $\{g_n\}$ such that 
+$g_n \in C_c(X)$, $|g_n| \le 1$, and \begin{equation}
+  f(x) = \lim _{n \to \infty} g_n (x) \qquad \text{a.e.}
+\end{equation}
+
+\subsection{2.25 The Vitali-Caratheodory Theorem}
+
+Suppose $f \in L^(\mu)$, $f$ is real-valued, and $\ep > 0$. Then there exist functions $u$ and $v$ on $X$ such that $u \le f \le v$,
+$u$ is upper semicontinuous and bounded above, $v$ is lower semicontinuous and bounded below, and \begin{equation}
+  \int_X (v - u) d\mu < \ep.
+\end{equation}
+
+\end{document}

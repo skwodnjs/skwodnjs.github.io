@@ -1,0 +1,167 @@
+% ---------- This is the blog post preset. -----------
+
+\documentclass[11pt,reqno]{article}
+
+% PACKAGE --------------------------------------------
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{enumerate}
+\usepackage[notcite,notref]{showkeys}
+\usepackage[usenames]{color}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{kotex}
+
+\usepackage{graphicx}
+
+% PAGE SETTING ---------------------------------------
+
+\textheight 22.5  true cm
+\textwidth 15 true cm
+\voffset -1.0 true cm
+\hoffset -1.0 true cm
+\marginparwidth= 2 true cm
+\renewcommand{\baselinestretch}{1.2}
+
+% blog post setting
+\usepackage{titlesec}
+\setlength{\parindent}{0pt}
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{}{0pt}{}
+\titleformat{\subsection}[block]{\normalfont\large\bfseries}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+\titleformat{\subsubsection}[block]{\normalfont}{}{0pt}{}
+\titlespacing*{\subsubsection}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+% blog post setting end
+
+% COSTOM COMMAND -------------------------------------
+
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\renewcommand{\[}{\left[}
+\renewcommand{\]}{\right]}
+
+\newcommand{\inp}[2]{\langle #1,#2 \rangle}
+
+\newcommand{\diag}{{\rm diag}}
+\newcommand{\supp}{\text{supp }}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rp}{\mathbb{R}_+}
+\newcommand{\Rpp}{\mathbb{R}_{++}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\newcommand{\ep}{\epsilon}
+\newcommand{\pa}{\partial}
+
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcH}{\mathcal{H}}
+\newcommand{\mcT}{\mathcal{T}}
+\newcommand{\mcV}{\mathcal{V}}
+\newcommand{\mcG}{\mathcal{G}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\mcW}{\mathcal{W}}
+
+\newcommand{\st}{ \; \big| \; }
+
+% blog post setting
+\usepackage{tcolorbox}
+\newenvironment{note}
+  {\begin{tcolorbox}[
+    colback=white, 
+    colframe=gray!50, 
+    boxrule=0.5pt,
+    fontupper=\normalfont
+  ]}
+  {\end{tcolorbox}}
+\newcommand{\subheading}[1]{\vspace{1em}{\noindent\large\bfseries \textlangle{} #1 \textrangle{} \par}\vspace{1em}}
+\newcommand{\gap}{\vspace{5em}}
+% blog post setting end
+
+% COSTOM COMMAND -------------------------------------
+
+\newcommand{\M}{\mathfrak{M}}
+
+% DOCUMENT -------------------------------------------
+
+\begin{document}
+
+\title{3.3 Theorem (Jensen's Inequality)}
+\author{Jeawon Na}
+\date{}
+
+\maketitle
+
+\section{3.3 Theorem (Jensen's Inequality)}
+
+Let $\mu$ be a positive measure on a $\sigma$-algebra $\M$ in a set $\Omega$, so that $\mu(\Omega) = 1$. If $f$ is
+a real function in $L^1 (\mu)$, if $a < f(x) < b$ for all $x \in \Omega$, and if $\varphi$ is convex on $(a, b)$, then
+\begin{equation}
+  \varphi \( \int_\Omega f d\mu \) \le \int_\Omega (\phi \circ f) d\mu.
+\end{equation}
+
+\gap
+
+convex function $\varphi: (a, b) \to \R$이 있을 때, $\mu$와 $f$는 구간 $(a, b)$의 가중평균을 나타낸다고 볼 수 있다. 
+$\frac{1}{\mu(\Omega)} \int_\Omega f d\mu$는 $\Omega$ 위에서 $f$의 평균인데, $\mu (\Omega) = 1$이기 때문이다. 
+특히 $f$가 simple function일 때에는, 어떤 $c \in (a, b)$의 가중치를 $f^{-1}({c})$로 볼 수 있다.
+
+\gap
+
+\subsection{증명요약}
+
+$t = \int_\Omega f d\mu$로 놓고, convex 식을 정리하면 된다. 이때, $a < s < b$인 모든 $s$에 대해 성립하는 식을 하나 만들어놓고, 
+$s = f(x)$를 대입한 뒤 $\mu$로 적분하면 식이 정리된다.
+
+\gap
+
+\subsection{proof}
+
+Let $t = \int_\Omega f d\mu$. Then $a < t < b$[1\label{note:1}].
+Since $\varphi$ is convex,
+\begin{equation} \label{eq:convex}
+  \frac{\varphi (t) - \varphi (s)}{t-s} \le \frac{\varphi (u) - \varphi (t)}{u-t}
+\end{equation}
+whenever $a < s < t < u < b$. ($a, t, b$는 fixed point).
+Let $\beta = \sup_{s, a<s<t} \frac{\varphi (t) - \varphi (s)}{t-s}$. Then,
+\begin{equation} \label{eq:convex1}
+  \beta \ge \frac{\varphi (t) - \varphi (s)}{t-s} \Rightarrow \beta (t - s) \ge \varphi (t) - \varphi (s)
+\end{equation} for any $s$ with $a<s<t$, by the definition of supremum, and
+\begin{equation} \label{eq:convex2}
+  \beta \le \frac{\varphi (u) - \varphi (t)}{u-t} \Rightarrow \beta (u - t) \le \varphi (u) - \varphi (t) \Rightarrow \beta (t - u) \ge \varphi (t) - \varphi (u)
+\end{equation} for any $u$ with $t < u < b$, by (\ref{eq:convex}).
+By (\ref{eq:convex1}) and (\ref{eq:convex2}), $\beta (t - s) \ge \varphi (t) - \varphi (s)$ for all $s$ such that $a < s < b$.
+$a < f(x) < b$ for all $x \in \Omega$이므로, put $s = f(x)$.
+\begin{align} \label{eq:phi f}
+  \beta (t - f(x)) \ge \varphi (t) - \varphi (f(x)) \\
+  \varphi (f(x)) \ge \varphi (t) - \beta (t - f(x))
+\end{align}
+Since $\varphi$ is continuous, $\varphi \circ f$ is measurable.
+Integrate both sides of (\ref{eq:phi f}) with respect to $\mu$ gives
+\begin{align}
+  \int_\Omega \varphi \circ f d\mu &\ge \int_\Omega \varphi(t) d\mu - \beta \(\int_\Omega t d\mu - \int_\Omega f d\mu\) \\
+  &= \varphi(t) \cdot \mu(\Omega) - \beta( t \cdot \mu(\Omega) - t) = \int_\Omega \varphi(t) d\mu - \beta(t - t) \label{note:2} \\
+  &= \varphi(t) = \varphi \(\int_\Omega f d\mu\).
+\end{align}
+
+\begin{note}
+  note \ref{note:1}
+
+  $f(x) < g(x)$ for all $x \in X$일 때, $0 < g(x) - f(x)$ for all $x \in X$.
+  시발뭐야
+  $\therefore \int_X f d\mu < \int_X g d\mu$ if $f < g$ and $\mu(X) > 0$.
+
+\end{note}
+
+\begin{note}
+  note \ref{note:2}
+
+  $x$에 대해 적분하는거임. 그리고 $t$는 상수임. 그러니까 상수함수(simple function)로 보고 적분하면 됨.
+\end{note}
+
+\end{document}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>클래스 설명</title>
+  <link rel="stylesheet" href="fonts.css">
+  <style>
+    a.link-ref {
+      text-decoration: none;
+      color: #007acc;
+      cursor: pointer;
+    }
+
+    a.link-ref:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h2 id="class2">Class: UserModel</h2>
+  <p>
+    This class represents a user in the system.
+    <a class="link-ref" onclick="openExtraPanel()">[1]</a>
+  </p>
+
+  <script>
+    function openExtraPanel() {
+      parent.postMessage({ action: 'openPanel' }, '*');
+    }
+  </script>
+</body>
+</html>

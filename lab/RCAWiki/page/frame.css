@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.left {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid #ccc;
+}
+
+.left-top {
+    height: 35%;
+    border-bottom: 2px solid #ccc;
+}
+
+.left-bottom {
+    height: 65%;
+}
+
+.right-wrapper {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.right {
+    flex: 1;
+    position: relative;
+}
+
+.bottom-panel {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease;
+}
+
+.bottom-panel.open {
+    height: 40%;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}

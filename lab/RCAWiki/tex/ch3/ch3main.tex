@@ -1,0 +1,155 @@
+% ---------- This is the blog post preset. -----------
+
+\documentclass[11pt,reqno]{article}
+
+% PACKAGE --------------------------------------------
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{enumerate}
+\usepackage[notcite,notref]{showkeys}
+\usepackage[usenames]{color}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{kotex}
+
+\usepackage{graphicx}
+
+% PAGE SETTING ---------------------------------------
+
+\textheight 22.5  true cm
+\textwidth 15 true cm
+\voffset -1.0 true cm
+\hoffset -1.0 true cm
+\marginparwidth= 2 true cm
+\renewcommand{\baselinestretch}{1.2}
+
+% blog post setting
+\usepackage{titlesec}
+\setlength{\parindent}{0pt}
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{}{0pt}{}
+\titleformat{\subsection}[block]{\normalfont\large\bfseries}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+\titleformat{\subsubsection}[block]{\normalfont}{}{0pt}{}
+\titlespacing*{\subsubsection}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+% blog post setting end
+
+% COSTOM COMMAND -------------------------------------
+
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\renewcommand{\[}{\left[}
+\renewcommand{\]}{\right]}
+
+\newcommand{\inp}[2]{\langle #1,#2 \rangle}
+
+\newcommand{\diag}{{\rm diag}}
+\newcommand{\supp}{\text{supp }}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rp}{\mathbb{R}_+}
+\newcommand{\Rpp}{\mathbb{R}_{++}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\newcommand{\ep}{\epsilon}
+\newcommand{\pa}{\partial}
+
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcH}{\mathcal{H}}
+\newcommand{\mcT}{\mathcal{T}}
+\newcommand{\mcV}{\mathcal{V}}
+\newcommand{\mcG}{\mathcal{G}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\mcW}{\mathcal{W}}
+
+\newcommand{\st}{ \; \big| \; }
+
+% blog post setting
+\usepackage{tcolorbox}
+\newenvironment{textbox}
+  {\begin{tcolorbox}[
+    colback=gray!10, 
+    colframe=gray!50, 
+    boxrule=0.5pt,
+    fontupper=\normalfont
+  ]}
+  {\end{tcolorbox}}
+\newcommand{\subheading}[1]{\vspace{1em}{\noindent\large\bfseries \textlangle{} #1 \textrangle{} \par}\vspace{1em}}
+% blog post setting end
+
+% COSTOM COMMAND -------------------------------------
+
+\newcommand{\M}{\mathfrak{M}}
+
+% DOCUMENT -------------------------------------------
+
+\begin{document}
+
+\title{CHAPTER THREE : $L^p$- SPACES}
+\author{Jeawon Na}
+\date{}
+
+\maketitle
+
+Walter Rudin - Real and Complex Analysis-McGraw-Hill Education (1986)
+
+\section{Convex Functions and Inequalities}
+
+\subsection{3.1 Definition}
+
+A real function $\phi$ defined on a segment $(a, b)$, where $-\infty \le a < b \le \infty$, is called \textit{convex}
+if the inequality
+\begin{equation}
+  \phi ((1-\lambda) x + \lambda y) \le (1 - \lambda) \phi(x) + \lambda \phi(y)
+\end{equation}
+holds whenever $a < x < b$, $a < y < b$, and $0 \le \lambda \le 1$.
+
+\subsection{3.2 Theorem}
+
+If $\varphi$ is convex on $(a, b)$ then $\varphi$ is continuous on $(a, b)$.
+
+$\varphi$가 open set 위에서 convex일 때에만 continuous가 보장된다. 예를 들면, $\varphi(x) = 0$ for $x \in (0, 1)$ and 
+$\varphi(x) = 1$ for $x = 1$인 함수 $\varphi$는 $(0, 1]$에서 convex이지만 continuous는 아니다.
+
+\subsection{3.3 Theorem (Jensen's Inequality)}
+
+Let $\mu$ be a positive measure on a $\sigma$-algebra $\M$ in a set $\Omega$, so that $\mu(\Omega) = 1$. If $f$ is
+a real function in $L^1 (\mu)$, if $a < f(x) < b$ for all $x \in \Omega$, and if $\varphi$ is convex on $(a, b)$, then
+\begin{equation}
+  \varphi \( \int_\Omega f d\mu \) \le \int_\Omega (\phi \circ f) d\mu.
+\end{equation}
+
+\subsection{3.4 Definition}
+
+If $p$ and $q$ are positive real numbers such that $p + q = pq$, or equivalently 
+\begin{equation} \label{eq:conjugate exponents}
+  \frac{1}{p} + \frac{1}{q} = 1,
+\end{equation}
+then we call $p$ and $q$ a pair of \textit{conjugate exponents}. It is clear that (\ref{eq:conjugate exponents})
+implies $1 < p < \infty$ and $1 < q < \infty$. An important special case is $p = q = 2$. 
+
+As $p \to 1$, (\ref{eq:conjugate exponents}) forces $q \to \infty$. Consequently 1 and $\infty$ are also regarded as a pair of 
+conjugate exponents. Many analysis denote th exponents conjugate to $p$ by $p'$, often without saying so explicitly.
+
+\subsection{3.5 Theorem}
+
+Let $p$ and $q$ be conjugate exponents, $1 < p < \infty$. Let $X$ be a measure space, with measure $mu$. Let $f$ and $g$ be 
+measurable functions on $X$, with range in $[0, \infty]$. Then
+\begin{equation} \label{Holder's}
+  \int_X fg d \mu \le \left\{ \int_X f^p \right\}^{1/p} \left\{ \int_X g^q \right\}^{1/q}
+\end{equation}
+and
+\begin{equation} \label{Minkowski's}
+  \left\{ \int_X (f + g)^p d \mu \right\}^{1/p} \le \left\{ \int_X f^p \right\}^{1/p} +  \left\{ \int_X g^p \right\}^{1/p}
+\end{equation}.
+The inequality (\ref{Holder's}) is Holder's; (\ref{Minkowski's}) is Minkowski's. If $p=q=2$, (\ref{Holder's}) is known as
+the Schwarz inequality.
+
+
+
+\end{document}

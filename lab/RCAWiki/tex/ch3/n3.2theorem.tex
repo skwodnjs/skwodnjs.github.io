@@ -1,0 +1,121 @@
+% ---------- This is the blog post preset. -----------
+
+\documentclass[11pt,reqno]{article}
+
+% PACKAGE --------------------------------------------
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{enumerate}
+\usepackage[notcite,notref]{showkeys}
+\usepackage[usenames]{color}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{kotex}
+
+\usepackage{graphicx}
+
+% PAGE SETTING ---------------------------------------
+
+\textheight 22.5  true cm
+\textwidth 15 true cm
+\voffset -1.0 true cm
+\hoffset -1.0 true cm
+\marginparwidth= 2 true cm
+\renewcommand{\baselinestretch}{1.2}
+
+% blog post setting
+\usepackage{titlesec}
+\setlength{\parindent}{0pt}
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{}{0pt}{}
+\titleformat{\subsection}[block]{\normalfont\large\bfseries}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+\titleformat{\subsubsection}[block]{\normalfont}{}{0pt}{}
+\titlespacing*{\subsubsection}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+% blog post setting end
+
+% COSTOM COMMAND -------------------------------------
+
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\renewcommand{\[}{\left[}
+\renewcommand{\]}{\right]}
+
+\newcommand{\inp}[2]{\langle #1,#2 \rangle}
+
+\newcommand{\diag}{{\rm diag}}
+\newcommand{\supp}{\text{supp }}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rp}{\mathbb{R}_+}
+\newcommand{\Rpp}{\mathbb{R}_{++}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\newcommand{\ep}{\epsilon}
+\newcommand{\pa}{\partial}
+
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcH}{\mathcal{H}}
+\newcommand{\mcT}{\mathcal{T}}
+\newcommand{\mcV}{\mathcal{V}}
+\newcommand{\mcG}{\mathcal{G}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\mcW}{\mathcal{W}}
+
+\newcommand{\st}{ \; \big| \; }
+
+% blog post setting
+\usepackage{tcolorbox}
+\newenvironment{note}
+  {\begin{tcolorbox}[
+    colback=white, 
+    colframe=gray!50, 
+    boxrule=0.5pt,
+    fontupper=\normalfont
+  ]}
+  {\end{tcolorbox}}
+\newcommand{\subheading}[1]{\vspace{1em}{\noindent\large\bfseries \textlangle{} #1 \textrangle{} \par}\vspace{1em}}
+\newcommand{\gap}{\vspace{5em}}
+% blog post setting end
+
+% COSTOM COMMAND -------------------------------------
+
+\newcommand{\M}{\mathfrak{M}}
+
+% DOCUMENT -------------------------------------------
+
+\begin{document}
+
+\title{3.2 Theorem}
+\author{Jeawon Na}
+\date{}
+
+\maketitle
+
+\section{3.2 Theorem}
+
+If $\varphi$ is convex on $(a, b)$ then $\varphi$ is continuous on $(a, b)$.
+
+\gap
+
+\subsection{proof}
+
+Let $x, y \in (a, b)$. Then $\exists \alpha$ such that $y < \alpha < b$.
+Since $\varphi$ is convex, 
+\begin{equation}
+  \frac{\varphi (y) - \varphi (x)}{y-x} \le \frac{\varphi (b) - \varphi(\alpha)}{b-\alpha}.
+\end{equation}
+Let $M = \frac{\varphi (b) - \varphi(\alpha)}{b-\alpha}$. Then
+\begin{equation}
+  |\varphi (y) - \varphi (x)| \le M | y - x |
+\end{equation}
+For all $\ep > 0$, we can choose $\delta > 0$ less then $\ep / M$, and 
+$|y - x| < \delta < \frac{\ep}{M}$ implies $|\varphi(y) - \varphi(x)|<M \delta < \ep$.
+Note that $M$ depends on $x$ and $y$.
+
+\end{document}

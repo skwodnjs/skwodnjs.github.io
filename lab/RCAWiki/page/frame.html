@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>3-Unit Layout (PC)</title>
+    <link rel="stylesheet" href="frame.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 좌측 20% -->
+        <div class="left">
+            <div class="left-top">
+                <iframe src="chapter-frame.html" name="chapterFrame"></iframe>
+            </div>
+            <div class="left-bottom">
+                <iframe src="section-frame.html" name="sectionFrame"></iframe>
+            </div>
+        </div>
+
+        <!-- 우측 80% -->
+        <div class="right-wrapper">
+            <div class="right">
+                <iframe src="overview-summary.html" name="classFrame"></iframe>
+            </div>
+            <div class="bottom-panel" id="bottomPanel">
+                <iframe src="comment-panel.html" name="commentPanel"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.openPanel = function () {
+            document.getElementById('bottomPanel').classList.add('open');
+        };
+
+        window.closePanel = function () {
+            document.getElementById('bottomPanel').classList.remove('open');
+        };
+
+        window.addEventListener('message', function (event) {
+            if (event.data?.action === 'openPanel') openPanel();
+            if (event.data?.action === 'closePanel') closePanel();
+        });
+    </script>
+</body>
+
+</html>

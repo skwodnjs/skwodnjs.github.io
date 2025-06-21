@@ -1,0 +1,160 @@
+% ---------- This is the blog post preset. -----------
+
+\documentclass[11pt,reqno]{article}
+
+% PACKAGE --------------------------------------------
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{enumerate}
+\usepackage[notcite,notref]{showkeys}
+\usepackage[usenames]{color}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{kotex}
+
+\usepackage{graphicx}
+
+% PAGE SETTING ---------------------------------------
+
+\textheight 22.5  true cm
+\textwidth 15 true cm
+\voffset -1.0 true cm
+\hoffset -1.0 true cm
+\marginparwidth= 2 true cm
+\renewcommand{\baselinestretch}{1.2}
+
+% blog post setting
+\usepackage{titlesec}
+\setlength{\parindent}{0pt}
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{}{0pt}{}
+\titleformat{\subsection}[block]{\normalfont\large\bfseries}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+\titleformat{\subsubsection}[block]{\normalfont}{}{0pt}{}
+\titlespacing*{\subsubsection}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+% blog post setting end
+
+% COSTOM COMMAND -------------------------------------
+
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\renewcommand{\[}{\left[}
+\renewcommand{\]}{\right]}
+
+\newcommand{\inp}[2]{\langle #1,#2 \rangle}
+
+\newcommand{\diag}{{\rm diag}}
+\newcommand{\supp}{\text{supp }}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rp}{\mathbb{R}_+}
+\newcommand{\Rpp}{\mathbb{R}_{++}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\newcommand{\ep}{\epsilon}
+\newcommand{\pa}{\partial}
+
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcH}{\mathcal{H}}
+\newcommand{\mcT}{\mathcal{T}}
+\newcommand{\mcV}{\mathcal{V}}
+\newcommand{\mcG}{\mathcal{G}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\mcW}{\mathcal{W}}
+
+\newcommand{\st}{ \; \big| \; }
+
+% blog post setting
+\usepackage{tcolorbox}
+\newenvironment{note}
+  {\begin{tcolorbox}[
+    colback=white, 
+    colframe=gray!50, 
+    boxrule=0.5pt,
+    fontupper=\normalfont
+  ]}
+  {\end{tcolorbox}}
+\newcommand{\subheading}[1]{\vspace{1em}{\noindent\large\bfseries \textlangle{} #1 \textrangle{} \par}\vspace{1em}}
+\newcommand{\gap}{\vspace{5em}}
+% blog post setting end
+
+% COSTOM COMMAND -------------------------------------
+
+\newcommand{\M}{\mathfrak{M}}
+
+% DOCUMENT -------------------------------------------
+
+\begin{document}
+
+\title{3.1 Definition}
+\author{Jeawon Na}
+\date{}
+
+\maketitle
+
+\section{3.1 Definition}
+
+A real function $\varphi$ defined on a segment $(a, b)$, where $-\infty \le a < b \le \infty$, is called \textit{convex}
+if the inequality
+\begin{equation} \label{eq:convex}
+  \varphi ((1-\lambda) x + \lambda y) \le (1 - \lambda) \varphi(x) + \lambda \varphi(y)
+\end{equation}
+holds whenever $a < x < b$, $a < y < b$, and $0 \le \lambda \le 1$.
+
+\gap
+
+식 (\ref{eq:convex})은 다음 식과 동치이다.
+\begin{equation}
+  \frac{\varphi(t) - \varphi(s)}{t - s} \le \frac{\varphi(u) - \varphi(t)}{u - t}
+\end{equation}
+whenever $a < s < t < u < b$. [1\label{note:1}]
+
+\gap
+
+같은 방식으로, 다음 식과도 동치이다.
+\begin{equation}
+  \frac{\varphi(t) - \varphi(s)}{t - s} \le \frac{\varphi(u) - \varphi(s)}{u - s}
+\end{equation}
+whenever $a < s < t < u < b$.
+
+\gap
+
+같은 방식으로, 다음 식과도 동치이다.
+\begin{equation}
+  \frac{\varphi(u) - \varphi(s)}{u - s} \le \frac{\varphi(u) - \varphi(t)}{u - t}
+\end{equation}
+whenever $a < s < t < u < b$.
+
+\gap
+
+만약 $\phi$가 $(a, b)$에서 미분 가능한 함수였다면, mean value theorem에 의해, 식 (\ref{eq:convex})은 다음과도 동치이다.
+\begin{equation}
+  \phi'(s) \le \phi'(t)
+\end{equation}
+whenever $a < s < t < b$. 즉, 미분한 함수가 증가함수이면 convex이다.
+
+\begin{note}
+  note \ref{note:1}
+
+  Let $t = (1-\lambda) s + \lambda u$. Then
+  \begin{equation}
+    \lambda = \frac{t-s}{u-s}, \quad 1 - \lambda = \frac{u-t}{u-s}.
+  \end{equation}
+  식 (\ref{eq:convex})에 대입하면
+  \begin{align}
+    \varphi (t) & \le \frac{u-t}{u-s} \varphi (s) + \frac{t-s}{u-s} \varphi (u), \\
+    (u - s) \varphi (t) & \le (u - t) \varphi (s) + (t - s) \varphi (u), \\
+    (u - t + t - s) \varphi (t) & \le (u - t) \varphi (s) + (t - s) \varphi (u), \\
+    (u - t)(\varphi (t) - \varphi (s)) & \le (t - s) (\varphi (u) - \varphi (t)), \\
+    \therefore \frac{\varphi(t) - \varphi(s)}{t - s} & \le \frac{\varphi(u) - \varphi(t)}{u - t}
+  \end{align}
+  
+  역방향도 그대로 성립. 동치임을 알 수 있음.
+\end{note}
+
+\end{document}
