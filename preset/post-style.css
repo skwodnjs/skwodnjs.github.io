@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --header-height: 320px;
+    --profile-size: 0;
+    --content-margin: 20px;
+    --left-padding: min(4%, 32px);
+
+    --content-bg-color: rgba(255, 255, 255, 0.75);
+    --shadow: 2px 6px 8px rgba(0,0,0,0.1);
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    background-color: rgba(240, 248, 255);
+}
+
+.site-header {
+    margin: var(--content-margin) var(--content-margin) 0;
+    box-shadow: var(--shadow);
+}
+
+.home-button {
+    width: 34px;
+    height: 34px;
+
+    position: absolute;
+    right: var(--content-margin);
+    top: var(--content-margin);
+
+    background-image: url("../assets/home.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    cursor: pointer;
+}
+
+.header-pre {
+    min-height: var(--header-height);
+    position: relative;
+}
+
+.header-background {
+    width: 100%;
+    height: var(--header-height);
+    background-color: rgba(140, 180, 220, 0.8);
+}
+
+.header-title {
+    margin: 12px 0;
+    
+    position: absolute;
+    left: var(--left-padding);
+    bottom: 0;
+
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    font-size: 32px;
+    color: rgb(240, 248, 255);
+}
+
+.header-menu {
+    width: 100%;
+    height: 48px;
+    padding: 0 0 0 var(--left-padding);
+    box-sizing: border-box;
+
+    background: var(--content-bg-color);
+    display: flex;
+    align-items: center;
+}
+
+.category {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 6px 0;
+    margin-right: 12px;
+
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    font-size: 20px;
+    color: #333;
+}
+
+.link {
+    cursor: pointer;
+    user-select: none;
+
+    transition: transform 0.15s ease;
+}
+
+.link:hover {
+  transform: translateY(-3px);
+}
+
+.link:active {
+  transform: translateY(0);
+}
+
+.page {
+    margin: var(--content-margin);
+    padding: 0 clamp(
+        0px,
+        calc((100vw - 360px) * 20 / (1920 - 360)),
+        20px
+    );
+}
+
+.date {
+    margin-left: 14px;
+
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+
+    font-size: 21px;
+    color: #333;
+}
+
+main {
+  font-family: "Gothic A1", sans-serif;
+  font-style: normal;
+  color: #111;
+
+  width: 100%;
+}
+
+main h1 {
+    margin: 60px 0 0 0;
+    font-weight: 600;
+    font-size: 28px;
+}
+
+main h2 {
+    margin: 40px 0 0 0;
+    font-weight: 500;
+    font-size: 23px;
+}
+
+main h3 {
+    margin: 24px 0 0 0;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+main p {
+    font-weight: 300;
+    font-size: 16px;
+    margin: 10px 0 0 0;
+    line-height: 1.6;
+}
+
+main p strong {
+    font-weight: 500;
+}
+
+main img {
+    margin: 20px 0;
+    display: block;
+    border: #fff 5px solid;
+    border-radius: 5px;
+    box-shadow: var(--shadow);
+    max-width: 100%;
+}
+
+.img-row {
+    padding: 0 20px;
+    margin: 0 -20px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    align-items: center;
+}
+
+.img-row img {
+    flex-shrink: 0;
+    object-fit: contain;
+    height: fit-content;
+}
