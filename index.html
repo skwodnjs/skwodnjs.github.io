@@ -77,6 +77,25 @@
             </a>
         </main>
     </div>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p class="footer-title">JWN's blog</p>
+
+            <p class="footer-desc">
+                Mathematics · Minecraft Modding · Mod Server
+            </p>
+
+            <div class="footer-links">
+                <a href="./index.html">Home</a>
+                <a href="https://blog.naver.com/naa3000" target="_blank" rel="noopener noreferrer">Naver</a>
+                <a href="https://github.com/skwodnjs" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+
+            <p class="footer-copy">
+                © 2026 JWN. All rights reserved.
+            </p>
+        </div>
+    </footer>
     <script>
         document.querySelectorAll('.category').forEach(el => {
             el.addEventListener('click', () => {
@@ -99,7 +118,7 @@
                 profile.style.display = 'none';
                 divider.style.display = 'none';
                 current_category.style.display = '';
-                current_category.textContent = tag;   // ← 여기
+                current_category.textContent = tag;
             } else {
                 profile.style.display = '';
                 divider.style.display = '';
