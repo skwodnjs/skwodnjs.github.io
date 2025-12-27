@@ -182,11 +182,23 @@ html, body {
     }
 }
 
-.post-category {
-    margin-bottom: 12px;
+.post-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 
+    margin-bottom: 12px;
     font-size: 15px;
     color: #333;
+}
+
+.post-div {
+    font-size: 0.9em;
+}
+
+.post-date {
+    font-size: 0.9em;
+    color: #555;
 }
 
 .preview {
