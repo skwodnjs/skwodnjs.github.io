@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --header-height: 320px;
+    --profile-size: min(180px, 35%);
+    --content-margin: min(20px, 5%);
+
+    --content-bg-color: rgba(255, 255, 255, 0.75);
+    --shadow: 2px 6px 8px rgba(0,0,0,0.1);
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    background-color: rgba(240, 248, 255);
+}
+
+.site-header {
+    margin: var(--content-margin) var(--content-margin) 0;
+    box-shadow: var(--shadow);
+}
+
+.header-pre {
+    min-height: var(--header-height);
+    position: relative;
+}
+
+.header-background {
+    width: 100%;
+    height: var(--header-height);
+    background-color: rgba(140, 180, 220, 0.8);
+}
+
+.profile-image {
+    width: var(--profile-size);
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+
+    object-position: 75% center;
+
+    position: absolute;
+    left: min(8%, 40px);
+    bottom: 72px;
+
+    border: 6px solid rgb(255, 255, 255);
+    box-shadow: var(--shadow);
+}
+
+.header-title {
+    margin: 0;
+    
+    position: absolute;
+    left: min(8%, 40px);
+    bottom: 12px;
+
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    font-size: 32px;
+    color: rgb(240, 248, 255);
+}
+
+.header-menu {
+    width: 100%;
+    height: 48px;
+    padding: 0 0 0 min(8%, 40px);
+    box-sizing: border-box;
+
+    background: var(--content-bg-color);
+    display: flex;
+    align-items: center;
+}
+
+.category {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 6px 0;
+    margin-right: 12px;
+
+
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    font-size: 20px;
+    color: #333;
+
+    cursor: pointer;
+    user-select: none;
+
+    transition: transform 0.15s ease;
+}
+
+.category:hover {
+  transform: translateY(-3px);
+}
+
+.category:active {
+  transform: translateY(0);
+}
+
+.page {
+    margin: var(--content-margin);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.profile {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 24px;
+
+    background-color: var(--content-bg-color);
+    box-shadow: var(--shadow);
+
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    font-size: 20px;
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(140, 180, 220, 0.4);
+}
+
+.current-category {
+    margin-left: 20px;
+    margin-bottom: 20px;
+
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    font-size: 24px;
+}
+
+.post-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.post {
+    font-family: "Gothic A1", sans-serif;
+    font-style: normal;
+
+    margin-bottom: 30px;
+    padding: 16px 22px;
+
+    background-color: var(--content-bg-color);
+    box-shadow: var(--shadow);
+
+    cursor: pointer;
+}
+
+.post-title {
+    margin-bottom: 10px;
+
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    
+    font-size: 28px;
+}
+
+@media (max-width: 768px) {
+    .post-title {
+        white-space: nowrap;
+        overflow-x: auto;
+    }
+    .post-title::-webkit-scrollbar {
+        display: none;
+    }
+    .post-title {
+        scrollbar-width: none;
+    }
+}
+
+.post-category {
+    margin-bottom: 12px;
+
+    font-size: 15px;
+    color: #333;
+}
+
+.preview {
+    font-size: 15px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    line-height: 1.5;
+}
+
+@media (min-width: 769px) {
+    .page {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .divider {
+        display: none;
+    }
+
+    .profile {
+        width: min(520px, 40%);
+        flex: 0 0 auto;
+    }
+
+    main {
+        flex: 1 1 0;
+        min-width: 0;
+    }
+
+    .profile-image {
+        bottom: -28px;
+    }
+
+    .header-title {
+        left: calc(min(8%, 40px) + var(--profile-size) + min(6%, 30px));
+    }
+
+    .header-menu {
+        padding: 0 0 0 calc(min(8%, 40px) + var(--profile-size) + min(6%, 30px))
+    }
+}
