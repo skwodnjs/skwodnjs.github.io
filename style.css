@@ -1,34 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root {
-    --header-height: 320px;
     --profile-size: min(180px, 35%);
-    --content-margin: min(20px, 5%);
-
-    --content-bg-color: rgba(255, 255, 255, 0.75);
     --shadow: 2px 6px 8px rgba(0,0,0,0.1);
+
+    /* color */
+    --black: #292929;
+    --background-color: rgb(240, 248, 255); 
+    --sky-blue: rgb(180, 215, 248);
+    --white-blue: rgb(219, 229, 255);
 }
 
-html, body {
+html {
     padding: 0;
     margin: 0;
-    background-color: rgba(240, 248, 255);
+}
+
+body {
+    margin: 0;
+    padding: min(20px, 5%);
+    background-color: var(--background-color);
+    color: var(--black);
 }
 
 .site-header {
-    margin: var(--content-margin) var(--content-margin) 0;
+    margin: 0;
     box-shadow: var(--shadow);
 }
 
-.header-pre {
-    min-height: var(--header-height);
+.header-main {
+    min-height: 320px;
     position: relative;
 }
 
 .header-background {
     width: 100%;
-    height: var(--header-height);
-    background-color: rgba(140, 180, 220, 0.8);
+    height: 320px;
+    background-color: var(--sky-blue);
 }
 
 .profile-image {
@@ -36,13 +44,11 @@ html, body {
     aspect-ratio: 1 / 1;
     object-fit: cover;
 
-    object-position: 75% center;
-
     position: absolute;
     left: min(8%, 40px);
-    bottom: 72px;
+    bottom: -28px;
 
-    border: 6px solid rgb(255, 255, 255);
+    border: 6px solid #fff;
     box-shadow: var(--shadow);
 }
 
@@ -50,7 +56,7 @@ html, body {
     margin: 0;
     
     position: absolute;
-    left: min(8%, 40px);
+    left: calc(min(8%, 40px) + var(--profile-size) + min(6%, 30px));
     bottom: 12px;
 
     font-family: "Gamja Flower", sans-serif;
@@ -58,35 +64,32 @@ html, body {
     font-style: normal;
 
     font-size: 32px;
-    color: rgb(240, 248, 255);
+    color: var(--background-color);
 }
 
 .header-menu {
     width: 100%;
     height: 48px;
-    padding: 0 0 0 min(8%, 40px);
+    padding: 0 0 0 calc(min(8%, 40px) + var(--profile-size) + min(6%, 30px));    
     box-sizing: border-box;
 
-    background: var(--content-bg-color);
+    background: rgba(255, 255, 255, 0.75);
     display: flex;
     align-items: center;
 }
 
 .category {
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
 
     padding: 6px 0;
     margin-right: 12px;
-
 
     font-family: "Gamja Flower", sans-serif;
     font-weight: 400;
     font-style: normal;
 
     font-size: 20px;
-    color: #333;
+    color: var(--black);
 
     cursor: pointer;
     user-select: none;
@@ -103,18 +106,19 @@ html, body {
 }
 
 .page {
-    margin: var(--content-margin);
+    flex-direction: row;
     display: flex;
-    flex-direction: column;
+    align-items: flex-start;
+    margin: 20px 0;
     gap: 30px;
 }
 
 .profile {
-    width: 100%;
+    width: min(520px, 40%);
     box-sizing: border-box;
     padding: 24px;
 
-    background-color: var(--content-bg-color);
+    background-color: rgba(255, 255, 255, 0.75);
     box-shadow: var(--shadow);
 
     font-family: "Gamja Flower", sans-serif;
@@ -126,8 +130,9 @@ html, body {
 
 .divider {
     width: 100%;
-    height: 1px;
-    background: rgba(140, 180, 220, 0.4);
+    height: 1.2px;
+    background: var(--white-blue);
+    display: none;
 }
 
 .current-category {
@@ -153,7 +158,7 @@ html, body {
     margin-bottom: 30px;
     padding: 16px 22px;
 
-    background-color: var(--content-bg-color);
+    background-color: rgba(255, 255, 255, 0.75);
     box-shadow: var(--shadow);
 
     cursor: pointer;
@@ -167,19 +172,6 @@ html, body {
     font-style: normal;
     
     font-size: 28px;
-}
-
-@media (max-width: 768px) {
-    .post-title {
-        white-space: nowrap;
-        overflow-x: auto;
-    }
-    .post-title::-webkit-scrollbar {
-        display: none;
-    }
-    .post-title {
-        scrollbar-width: none;
-    }
 }
 
 .post-meta {
@@ -258,35 +250,42 @@ html, body {
     color: #999;
 }
 
-@media (min-width: 769px) {
-    .page {
-        flex-direction: row;
-        align-items: flex-start;
-    }
-
-    .divider {
-        display: none;
-    }
-
-    .profile {
-        width: min(520px, 40%);
-        flex: 0 0 auto;
-    }
-
-    main {
-        flex: 1 1 0;
-        min-width: 0;
-    }
-
+@media (max-width: 767px) {
     .profile-image {
-        bottom: -28px;
+        bottom: 72px;
     }
-
+    
     .header-title {
-        left: calc(min(8%, 40px) + var(--profile-size) + min(6%, 30px));
+        left: min(8%, 40px);
     }
 
     .header-menu {
-        padding: 0 0 0 calc(min(8%, 40px) + var(--profile-size) + min(6%, 30px))
+        padding: 0 0 0 min(8%, 40px);
+    }
+
+    .page {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .profile {
+        width: 100%;
+    }
+
+    .divider {
+        display: block;
+    }
+
+    .post-title {
+        white-space: nowrap;
+        overflow-x: auto;
+    }
+
+    .post-title::-webkit-scrollbar {
+        display: none;
+    }
+
+    .post-title {
+        scrollbar-width: none;
     }
 }
