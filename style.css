@@ -53,11 +53,11 @@ body {
 }
 
 .header-title {
-    margin: 0;
+    margin: 12px 0;
     
     position: absolute;
     left: calc(min(8%, 40px) + var(--profile-size) + min(6%, 30px));
-    bottom: 12px;
+    bottom: 0;
 
     font-family: "Gamja Flower", sans-serif;
     font-weight: 400;
@@ -78,7 +78,7 @@ body {
     align-items: center;
 }
 
-.category {
+.menu {
     display: inline-flex;
 
     padding: 6px 0;
@@ -89,7 +89,6 @@ body {
     font-style: normal;
 
     font-size: 20px;
-    color: var(--black);
 
     cursor: pointer;
     user-select: none;
@@ -97,11 +96,11 @@ body {
     transition: transform 0.15s ease;
 }
 
-.category:hover {
+.menu:hover {
   transform: translateY(-3px);
 }
 
-.category:active {
+.menu:active {
   transform: translateY(0);
 }
 

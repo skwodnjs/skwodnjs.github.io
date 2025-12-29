@@ -1,23 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root {
-    --header-height: 320px;
     --profile-size: 0;
-    --content-margin: 20px;
-    --left-padding: min(4%, 32px);
-
-    --content-bg-color: rgba(255, 255, 255, 0.75);
     --shadow: 2px 6px 8px rgba(0,0,0,0.1);
+
+    /* color */
+    --black: #292929;
+    --background-color: rgb(240, 248, 255); 
+    --sky-blue: rgb(180, 215, 248);
+    --white-blue: rgb(219, 229, 255);
 }
 
-html, body {
+html {
     padding: 0;
     margin: 0;
-    background-color: rgba(240, 248, 255);
+}
+
+body {
+    margin: 0;
+    padding: min(20px, 5%);
+    background-color: var(--background-color);
+    color: var(--black);
 }
 
 .site-header {
-    margin: var(--content-margin) var(--content-margin) 0;
+    margin: 0;
     box-shadow: var(--shadow);
 }
 
@@ -26,8 +33,8 @@ html, body {
     height: 34px;
 
     position: absolute;
-    right: var(--content-margin);
-    top: var(--content-margin);
+    right: 20px;
+    top: 20px;
 
     background-image: url("../assets/home.png");
     background-size: contain;
@@ -37,22 +44,22 @@ html, body {
     cursor: pointer;
 }
 
-.header-pre {
-    min-height: var(--header-height);
+.header-main {
+    min-height: 320px;
     position: relative;
 }
 
 .header-background {
     width: 100%;
-    height: var(--header-height);
-    background-color: rgba(140, 180, 220, 0.8);
+    height: 320px;
+    background-color: var(--sky-blue);
 }
 
 .header-title {
     margin: 12px 0;
     
     position: absolute;
-    left: var(--left-padding);
+    left: min(4%, 32px);
     bottom: 0;
 
     font-family: "Gamja Flower", sans-serif;
@@ -60,24 +67,22 @@ html, body {
     font-style: normal;
 
     font-size: 32px;
-    color: rgb(240, 248, 255);
+    color: var(--background-color);
 }
 
 .header-menu {
     width: 100%;
     height: 48px;
-    padding: 0 0 0 var(--left-padding);
+    padding: 0 0 0 min(4%, 32px);
     box-sizing: border-box;
 
-    background: var(--content-bg-color);
+    background: rgba(255, 255, 255, 0.75);
     display: flex;
     align-items: center;
 }
 
 .category {
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
 
     padding: 6px 0;
     margin-right: 12px;
@@ -87,7 +92,6 @@ html, body {
     font-style: normal;
 
     font-size: 20px;
-    color: #333;
 }
 
 .link {
@@ -106,17 +110,12 @@ html, body {
 }
 
 .page {
-    margin: var(--content-margin);
-    padding: 0 clamp(
-        0px,
-        calc((100vw - 360px) * 20 / (1920 - 360)),
-        20px
-    );
-    color: #222;
+    margin: 20px;
 }
 
 .date {
-    margin: 0 0 40px 14px;
+    margin-bottom: 40px;
+    margin-left: 14px;
 
     font-family: "Gamja Flower", sans-serif;
     font-weight: 400;
@@ -129,7 +128,6 @@ html, body {
 main {
   font-family: "Gothic A1", sans-serif;
   font-style: normal;
-  color: #111;
 
   width: 100%;
 }
@@ -152,6 +150,12 @@ main h3 {
     font-size: 19px;
 }
 
+main h4 {
+    margin: 16px 0;
+    font-weight: 500;
+    font-size: 15px;
+}
+
 main p {
     font-weight: 300;
     font-size: 15px;
@@ -168,7 +172,6 @@ main li {
     font-size: 16px;
     line-height: 1.6;
 }
-
 
 main code {
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
@@ -196,12 +199,6 @@ main img {
     max-width: 100%;
 }
 
-.inline-title {
-    display: block;
-    font-weight: 500;
-    margin: 12px 0;
-}
-
 .img-row {
     padding: 0 20px;
     margin: 0 -20px;
@@ -215,25 +212,6 @@ main img {
     flex-shrink: 0;
     object-fit: contain;
     height: fit-content;
-}
-
-.mod-jar-download {
-    color: inherit;
-    text-decoration: none;
-
-    max-width: fit-content;
-    margin: 20px 0;
-    display: block;
-
-    transition: transform 0.15s ease;
-}
-
-.mod-jar-download:hover {
-  transform: translateY(-3px);
-}
-
-.mod-jar-download:active {
-  transform: translateY(0);
 }
 
 .site-footer {
