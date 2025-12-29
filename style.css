@@ -65,6 +65,21 @@ body {
 
     font-size: 32px;
     color: var(--background-color);
+
+    transition: transform 0.15s ease;
+}
+
+.header-title:hover {
+  transform: translateY(-3px);
+}
+
+.header-title:active {
+  transform: translateY(0);
+}
+
+.header-title a {
+    text-decoration: none;
+    color: inherit;
 }
 
 .header-menu {
