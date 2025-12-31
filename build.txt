@@ -1,0 +1,3 @@
+python -m http.server 8000
+.\build\.venv\Scripts\Activate.ps1python
+python .\build\bulid_index.py

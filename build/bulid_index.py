@@ -25,6 +25,8 @@ def generate_post_data():
                     "categories": categories,
                     "url": f"./pages/{filename}"
                 })
+                
+                print(date_text, title)
     
     # 최신순 정렬
     post_list.sort(key=lambda x: x['date'], reverse=True)
@@ -32,4 +34,8 @@ def generate_post_data():
     with open('./assets/posts.json', 'w', encoding='utf-8') as f:
         json.dump(post_list, f, ensure_ascii=False, indent=4)
 
+print("BUILD START")
+print("============")
 generate_post_data()
+print("============")
+print("DONE")
