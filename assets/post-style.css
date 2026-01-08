@@ -214,6 +214,55 @@ main img {
     height: fit-content;
 }
 
+
+main table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    line-height: 1.6;
+    background-color: #fbfeff;
+}
+
+main table tr {
+    border: 1px solid #d0d7de;
+}
+
+main table th, main table td {
+    padding: 12px 13px;
+    border: none;
+    vertical-align: bottom;
+}
+
+.jar::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url("../assets/jar.webp");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 8px;
+}
+
+.jar {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: bottom;
+}
+
+.jar-table tr td:nth-child(2) {
+    font-size: 15px;
+    color: #555;
+}
+
+.jar-table tr td:nth-child(3) {
+    text-align: right;
+    color: #777;
+    font-size: 15px;
+}
+
 .site-footer {
     margin-top: 80px;
     padding: 40px 16px;
