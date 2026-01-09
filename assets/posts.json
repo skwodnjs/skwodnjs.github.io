@@ -1,5 +1,27 @@
 [
     {
+        "id": "5",
+        "title": "JWN's End Portal Generator Mod",
+        "date": "2026. 01. 08.",
+        "categories": [
+            "Minecraft",
+            "Mods"
+        ],
+        "url": "./post.html?id=5",
+        "preview": "JWN's End Portal Generator Mod 개요 엔드 포탈을 생성할 수 있는 '엔드 포탈 생성기'를 추가합니다. Github Link https://github.com/skwodnjs/jwns-mod-end-portal-1.21.10 버전 정보 NeoForge 전용 마인크래프트 버전: 1.21.10 (NeoForge 버전 21.10.63 이상) 상세 * 2026. 01. 08. Last Updated End Portal Generator 엔드 포탈 생성기는 흑요석, 다이아몬드, 엔더의 눈, 막대기를 조합하여 얻을 수 있습니다. 총 내구도는 2이고, '내구성' 인첸트의 영향을 받지 않습니다. 엔드 포탈 생성기를 사용하여 엔드 포탈을 생성할 수 있습니다. 엔드 포탈을 생성할 블록에 대고 우클릭하면 해당 블록이 엔드 포탈로 바뀝니다. Custom End Portal 각 플레이어마다 최대 1개의 포탈 쌍을 생성할 수 있습니다. \n오버월드에 포탈을 생성한 다음, 엔더로 이동하여 포탈을 생성하면 하나의 포탈 쌍이 생성됩니다. \n하나의 포탈 쌍을 생성한 이후에는, 해당 차원에 있는 포탈을 부수지 않는 이상 다른 포탈을 추가로 생성할 수 없습니다. 생성한 엔드"
+    },
+    {
+        "id": "6",
+        "title": "JWN's Librarian Reroll Mod",
+        "date": "2026. 01. 08.",
+        "categories": [
+            "Minecraft",
+            "Mods"
+        ],
+        "url": "./post.html?id=6",
+        "preview": "JWN's Librarian Reroll Mod 개요 사서 주민의 거래목록을 쉽게 변경할 수 있는 아이템을 추가합니다. Github Link https://github.com/skwodnjs/jwns-mod-librarian-reroll 버전 정보 NeoForge 전용 마인크래프트 버전: 1.21.10 (NeoForge 버전 21.10.63 이상) 상세 * 2026. 01. 08. Last Updated Librarian 마인크래프트에서, 거래를 한 번도 하지 않은 주민의 작업대를 부수면 해당 주민은 직업을 잃습니다.\n직업을 잃은 주민이 다시 직업을 얻으면, 해당 주민의 거래 목록은 기존의 거래 목록과 다를 수 있습니다.\n이를 이용하여, 독서대를 부수고 설치하기를 반복하는 것만으로 사서 주민의 첫 거래 목록을 원하는 거래 목록이 나올 때까지 변경할 수 있습니다.\n특히 사서는 첫 거래 목록에서 마법이 부여된 책이 등장하기 때문에, 원하는 마법 부여가 나올 때까지 이 작업을 계속할 수 있습니다.\n그런데 이 작업은 시간이 매우 오래 걸립니다. 아래의 아이템은 원하는 마법 부여를 쉽게 뽑을 수 있도록 해 줍니다. Mysterious Paper 종이에 자수정 조각을 "
+    },
+    {
         "id": "1",
         "title": "테스트 서버",
         "date": "2025. 12. 27.",
