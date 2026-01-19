@@ -119,6 +119,10 @@ body {
   transform: translateY(0);
 }
 
+main {
+    width: min(1320px, 100%);
+}
+
 .page {
     flex-direction: row;
     display: flex;
@@ -165,6 +169,7 @@ body {
 .post-link {
     color: inherit;
     text-decoration: none;
+    width: max-content;
 }
 
 .post {

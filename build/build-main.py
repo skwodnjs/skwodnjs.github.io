@@ -12,9 +12,7 @@ def parse_markdown_file(file_path):
     
     if len(parts) >= 3:
         metadata = yaml.safe_load(parts[1])
-        
         body_html = markdown.markdown(parts[2].strip(), extensions=['fenced_code', 'tables'])
-
         soup = BeautifulSoup(body_html, 'html.parser')
         plain_text = soup.get_text(separator=' ', strip=True)
         preview = plain_text[:600]
@@ -25,7 +23,9 @@ def parse_markdown_file(file_path):
 post_list = []
 base_path = "./build/build"
 target_path = "./posts"
+lab_path = "./lab"
 
+# 1. 파일 이동 및 정리 로직
 if not os.path.exists(target_path):
     os.makedirs(target_path)
     
@@ -33,9 +33,7 @@ for filename in os.listdir(base_path):
     if filename.endswith(".md"):
         full_path = os.path.join(base_path, filename)
         meta, preview = parse_markdown_file(full_path)
-
-        if not meta:
-            continue
+        if not meta: continue
 
         post_id = str(meta.get('id', filename.replace('.md', '')))
         new_filename = f"{post_id}.md"
@@ -44,16 +42,14 @@ for filename in os.listdir(base_path):
         if os.path.exists(new_path):
             print(f"⚠️  중복 발생: '{new_filename}'이 이미 존재합니다.")
             continue
-
         shutil.move(full_path, new_path)
 
+# 2. 일반 포스트 수집
 for filename in os.listdir(target_path):
     if filename.endswith(".md"):
         full_path = os.path.join(target_path, filename)
         meta, preview = parse_markdown_file(full_path)
-
-        if not meta:
-            continue
+        if not meta: continue
 
         post_id = str(meta.get('id', filename.replace('.md', '')))
         post_list.append({
@@ -64,11 +60,28 @@ for filename in os.listdir(target_path):
             "url": f"./post.html?id={post_id}",
             "preview": preview
         })
-        print(f"[{post_id}] {meta.get('date', '2000. 00. 00.')} {meta.get('title', '제목 없음')}")
 
+# --- 3. Lab 항목 추가 (요청하신 부분) ---
+lab_json_path = os.path.join(lab_path, 'lab.json')
+if os.path.exists(lab_json_path):
+    with open(lab_json_path, 'r', encoding='utf-8') as f:
+        lab_data = json.load(f)
+        for item in lab_data:
+            post_list.append({
+                "id": -1,  # 요청하신 고정 ID
+                "title": item.get('title', '제목 없음'),
+                "date": item.get('date', '2000. 00. 00.'),
+                "categories": ["Lab"],  # 무조건 Lab 하나
+                "url": item.get('url', '#'),
+                "preview": ""  # 빈 문자열
+            })
+    print(f"🧪 Lab 항목 {len(lab_data)}개 추가 완료.")
+# ---------------------------------------
+
+# 날짜 기준 정렬 및 저장
 post_list.sort(key=lambda x: x['date'], reverse=True)
 
 with open('./assets/posts.json', 'w', encoding='utf-8') as f:
     json.dump(post_list, f, ensure_ascii=False, indent=4)
 
-print(f"\n성공: {len(post_list)}개의 포스트 처리 완료.")
+print(f"\n성공: 총 {len(post_list)}개의 항목 처리 완료.")
