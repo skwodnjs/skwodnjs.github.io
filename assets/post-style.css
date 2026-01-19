@@ -129,8 +129,6 @@ body {
 main {
   font-family: "Gothic A1", sans-serif;
   font-style: normal;
-
-  width: max(1320px, 100%);
 }
 
 main h1 {
