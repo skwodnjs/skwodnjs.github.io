@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="./assets/post-style.css">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="assets/post-style.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {inlineMath: [['$', '$']]}
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <!-- TITLE -->
-    <title>JWN's Blog : : : </title>
+    <title>JWN's Blog : </title>
 </head>
 <body>
     <header class="site-header">
@@ -45,6 +51,6 @@
             </p>
         </div>
     </footer>
-    <script src="./assets/post-link-scripts.js"></script>
+    <script src="assets/post-link-scripts.js"></script>
 </body>
 </html>

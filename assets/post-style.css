@@ -111,6 +111,7 @@ body {
 
 .page {
     margin: 20px;
+    width: min(800px, 100%);
 }
 
 .date {
@@ -128,8 +129,6 @@ body {
 main {
   font-family: "Gothic A1", sans-serif;
   font-style: normal;
-
-  width: 100%;
 }
 
 main h1 {
@@ -171,6 +170,15 @@ main li {
     font-weight: 300;
     font-size: 16px;
     line-height: 1.6;
+    margin: 16px 0;
+}
+
+main ol {
+  padding: 24px;
+}
+
+main ul {
+  padding: 24px;
 }
 
 main code {

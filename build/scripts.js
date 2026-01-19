@@ -60,7 +60,21 @@ async function loadMarkdown() {
 
         // MAIN
         const contentElement = document.querySelector('main'); 
-        contentElement.innerHTML = marked.parse(body);
+        let htmlContent = marked.parse(body);
+
+        htmlContent = htmlContent.replace(/(?<!\$)\$([^$]+)\$(?!\$)/g, (match, p1) => {
+            if (p1.includes('\\textstyle') || p1.includes('\\displaystyle')) {
+                return match; 
+            }
+            return `$\\displaystyle ${p1}$`;
+        });
+
+        contentElement.innerHTML = htmlContent;
+
+        // LaTex
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            MathJax.typesetPromise(); 
+        }
     } catch (error) {
         console.error('ERROR: ', errer);
     }
