@@ -107,9 +107,16 @@ body {
     transition: opacity 0.3s;
 }
 
-/* 초기화 버튼: 붉은 계열 */
-#btn-reset {
-    background-color: #e74c3c;
+/* 불러오기 버튼 색상 (주황계열) */
+#btn-load {
+    background-color: #f39c12;
+    flex: 1;
+    padding: 10px 0;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    color: white;
 }
 
 /* 저장 버튼: 초록 계열 */
@@ -246,4 +253,9 @@ body {
 .black-move {
     flex-grow: 1; /* 남은 공간 전체 차지 */
     text-align: left;
+}
+
+.white-move, .black-move {
+    padding: 2px 4px;
+    border-radius: 3px;
 }
