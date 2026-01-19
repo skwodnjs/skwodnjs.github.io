@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>체스 보드 레이아웃</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="main-wrapper">
+        <div class="chess-section">
+            <div class="board-container">
+                <div class="coords-y">
+                    <div>8</div><div>7</div><div>6</div><div>5</div>
+                    <div>4</div><div>3</div><div>2</div><div>1</div>
+                </div>
+                
+                <div class="board-main">
+                    <div class="chess-board" id="chessBoard"></div>
+                    <div class="coords-x">
+                        <div>a</div><div>b</div><div>c</div><div>d</div>
+                        <div>e</div><div>f</div><div>g</div><div>h</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="btn-prev">이전</button>
+                <button id="btn-next">다음</button>
+            </div>
+        </div>
+
+        <aside class="sidebar">
+            <h2>기보 (Move List)</h2>
+            <div class="move-content">
+            </div>
+            
+            <div class="sidebar-controls">
+                <button id="btn-reset">초기화</button>
+                <button id="btn-save">내보내기</button>
+            </div>
+        </aside>
+    </div>
+    <div id="promotion-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+        <div style="background: white; padding: 20px; border-radius: 10px; text-align: center;">
+            <h3>승격할 기물을 선택하세요</h3>
+            <div id="promotion-options">
+                </div>
+        </div>
+    </div>
+    <div id="pgn-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1001; justify-content: center; align-items: center;">
+        <div style="background: white; padding: 25px; border-radius: 10px; text-align: left; width: 320px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+            <h3 style="margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 10px;">대국 정보 입력</h3>
+            <div style="margin-top: 10px;">
+                <label style="display: block; font-size: 11px; color: #666;">이벤트명 (Event)</label>
+                <input type="text" id="pgn-event" value="Local Game" style="width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;">
+                
+                <label style="display: block; font-size: 11px; color: #666;">장소/사이트 (Site)</label>
+                <input type="text" id="pgn-site" value="My Chess Web" style="width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;">
+                
+                <label style="display: block; font-size: 11px; color: #666;">날짜 (Date - YYYY.MM.DD)</label>
+                <input type="text" id="pgn-date" style="width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;">
+                
+                <label style="display: block; font-size: 11px; color: #666;">백 플레이어 (White)</label>
+                <input type="text" id="pgn-white" value="White Player" style="width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;">
+                
+                <label style="display: block; font-size: 11px; color: #666;">흑 플레이어 (Black)</label>
+                <input type="text" id="pgn-black" value="Black Player" style="width: 100%; padding: 8px; margin-bottom: 15px; box-sizing: border-box;">
+                <label style="display: block; font-size: 11px; color: #666;">결과 (Result)</label>
+                <select id="pgn-result" style="width: 100%; padding: 8px; margin-bottom: 15px; box-sizing: border-box;">
+                    <option value="*">진행 중 (*)</option>
+                    <option value="1-0">백 승 (1-0)</option>
+                    <option value="0-1">흑 승 (0-1)</option>
+                    <option value="1/2-1/2">무승부 (1/2-1/2)</option>
+                </select>
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                <button id="pgn-cancel" style="padding: 8px 15px; cursor: pointer; border: 1px solid #ccc; background: white;">취소</button>
+                <button id="pgn-submit" style="padding: 8px 15px; cursor: pointer; border: none; background: #2ecc71; color: white; font-weight: bold;">파일 내보내기</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="board.js"></script>
+    <script src="button.js"></script>
+</body>
+</html>
