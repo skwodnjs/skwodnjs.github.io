@@ -1,13 +1,13 @@
 window.gameState = {
     isGameOver: false,
     winner: null,
-    currentBoard: null // button.js에서 참조용
+    currentBoard: null
 };
 
 document.addEventListener('DOMContentLoaded', () => {
     const board = document.getElementById('chessBoard');
-    const turnDisplay = document.querySelector('.sidebar h2'); // 기보 제목 옆에 턴 표시
-    const moveContent = document.querySelector('.move-content'); // 기보가 들어갈 곳
+    const turnDisplay = document.querySelector('.sidebar h2');
+    const moveContent = document.querySelector('.move-content');
     const promotionModal = document.getElementById('promotion-modal');
     const promotionOptions = document.getElementById('promotion-options');
     
@@ -18,7 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let pendingPromotion = null;
     let moveCount = 1;
 
-    // 캐슬링 상태
+    // 히스토리 관리 변수
+    let history = []; 
+    let currentHistoryIndex = -1;
+
     let hasMoved = {
         'K_W': false, 'R_W_left': false, 'R_W_right': false,
         'k_B': false, 'r_B_left': false, 'r_B_right': false
@@ -57,95 +60,145 @@ document.addEventListener('DOMContentLoaded', () => {
         return piece === piece.toUpperCase() ? 'W' : 'B';
     }
 
-    // 좌표 변환 (0,0 -> a8)
     function getNotation(row, col) {
         const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
         const ranks = ['8', '7', '6', '5', '4', '3', '2', '1'];
         return files[col] + ranks[row];
     }
 
-    // 기보 추가 함수
-    function updateMoveList(piece, fromR, fromC, toR, toC, isCapture, castling) {
-        // 기보 영역 초기화 (첫 수일 때)
-        if (moveCount === 1 && currentTurn === 'W') {
-            moveContent.innerHTML = '';
+    // 히스토리 저장 함수
+    function saveStateToHistory() {
+        // [중요] 탐색 중에 새로운 수를 두면 이후 데이터 히스토리를 먼저 삭제
+        if (currentHistoryIndex < history.length - 1) {
+            history = history.slice(0, currentHistoryIndex + 1);
         }
 
-        let notation = '';
-        const type = piece.toLowerCase();
-        const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-        const ranks = ['8', '7', '6', '5', '4', '3', '2', '1'];
+        history.push({
+            board: JSON.parse(JSON.stringify(currentBoard)),
+            turn: currentTurn,
+            hasMoved: JSON.parse(JSON.stringify(hasMoved)),
+            enPassant: enPassantTarget,
+            moveCount: moveCount
+        });
+        currentHistoryIndex++;
+    }
 
-        if (castling) {
-            notation = castling === 'king' ? 'O-O' : 'O-O-O';
-        } else if (type === 'p') {
-            // 폰 기보: 잡을 때는 출발 열 표시, 일반 이동은 도착 칸만
-            notation = isCapture ? `${files[fromC]}x${getNotation(toR, toC)}` : getNotation(toR, toC);
+    // 기보 하이라이트 함수
+    function highlightMove(index) {
+        document.querySelectorAll('.white-move, .black-move').forEach(el => {
+            el.style.backgroundColor = 'transparent';
+            el.style.color = 'inherit';
+        });
+        if (index === -1) return;
+        const rows = moveContent.querySelectorAll('.move-row');
+        const rowIndex = Math.floor(index / 2);
+        const isBlack = index % 2 === 1;
+        if (rows[rowIndex]) {
+            const target = isBlack ? rows[rowIndex].querySelector('.black-move') : rows[rowIndex].querySelector('.white-move');
+            if (target) {
+                target.style.backgroundColor = '#000000'; // 요청하신 검정 배경
+                target.style.color = '#ffffff'; // 검정 배경일 때 글자색 흰색
+            }
+        }
+    }
+
+    // 이전/다음 복구 함수
+    window.undoMove = function() {
+        if (currentHistoryIndex <= -1) return;
+        
+        currentHistoryIndex--;
+        if (currentHistoryIndex === -1) {
+            currentBoard = JSON.parse(JSON.stringify(initialLayout));
+            currentTurn = 'W';
+            moveCount = 1;
+            hasMoved = { 'K_W': false, 'R_W_left': false, 'R_W_right': false, 'k_B': false, 'r_B_left': false, 'r_B_right': false };
+            enPassantTarget = null;
+            renderBoard();
+            highlightMove(-1);
         } else {
+            applyState(history[currentHistoryIndex]);
+        }
+    };
+
+    window.redoMove = function() {
+        if (currentHistoryIndex >= history.length - 1) return;
+        currentHistoryIndex++;
+        applyState(history[currentHistoryIndex]);
+    };
+
+    function applyState(state) {
+        currentBoard = JSON.parse(JSON.stringify(state.board));
+        currentTurn = state.turn === 'W' ? 'B' : 'W';
+        hasMoved = JSON.parse(JSON.stringify(state.hasMoved));
+        enPassantTarget = state.enPassant;
+        moveCount = state.moveCount;
+        renderBoard();
+        highlightMove(currentHistoryIndex);
+    }
+
+    // [중요] UI 기보 동기화 함수: 과거 시점에서 수를 두었을 때 UI를 잘라냄
+    function syncNotationUI() {
+        const rows = moveContent.querySelectorAll('.move-row');
+        const expectedRowCount = Math.ceil((currentHistoryIndex + 1) / 2);
+        
+        // 1. 현재 인덱스 이후의 행들을 삭제
+        for (let i = rows.length - 1; i >= expectedRowCount; i--) {
+            rows[i].remove();
+        }
+
+        // 2. 만약 현재 인덱스가 백색 수에서 끝났다면, 해당 행의 흑색 수 칸을 비움
+        const currentRows = moveContent.querySelectorAll('.move-row');
+        if (currentRows.length > 0 && (currentHistoryIndex + 1) % 2 === 1) {
+            const lastRow = currentRows[currentRows.length - 1];
+            lastRow.querySelector('.black-move').textContent = '';
+        }
+    }
+
+    function updateMoveList(piece, fromR, fromC, toR, toC, isCapture, castling) {
+        // 과거 시점이면 UI부터 정리
+        syncNotationUI();
+
+        if (moveCount === 1 && currentTurn === 'W') moveContent.innerHTML = '';
+        
+        let notation = '';
+        const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+
+        if (castling) notation = castling === 'king' ? 'O-O' : 'O-O-O';
+        else if (piece.toLowerCase() === 'p') notation = isCapture ? `${files[fromC]}x${getNotation(toR, toC)}` : getNotation(toR, toC);
+        else {
             const pieceLetter = piece.toUpperCase();
-            const targetPos = getNotation(toR, toC);
-            
-            // --- 모호성 판정 로직 (Disambiguation) ---
             let disambiguation = '';
             const competitors = [];
-
-            // 보드 전체에서 동일한 종류와 색상의 기물을 찾음
             for (let r = 0; r < 8; r++) {
                 for (let c = 0; c < 8; c++) {
                     if (currentBoard[r][c] === piece && (r !== fromR || c !== fromC)) {
-                        // 해당 기물이 목적지로 이동 가능한지 확인 (체크 여부 포함 필터링된 movableSquares 활용이 이상적이나 로직상 getRawMoves 사용)
-                        const rawMoves = getRawMoves(r, c, currentBoard);
-                        if (rawMoves.some(m => m.row === toR && m.col === toC)) {
-                            competitors.push({ r, c });
-                        }
+                        if (getRawMoves(r, c, currentBoard).some(m => m.row === toR && m.col === toC)) competitors.push({ r, c });
                     }
                 }
             }
-
             if (competitors.length > 0) {
-                const sameFile = competitors.some(p => p.c === fromC);
-                const sameRank = competitors.some(p => p.r === fromR);
-
-                if (!sameFile) {
-                    // 1. 열이 다르면 열 문자 추가 (예: Ngf3)
-                    disambiguation = files[fromC];
-                } else if (!sameRank) {
-                    // 2. 열이 같고 행이 다르면 행 숫자 추가 (예: N2f3)
-                    disambiguation = ranks[fromR];
-                } else {
-                    // 3. 드물게 열과 행이 모두 겹치면 둘 다 추가
-                    disambiguation = files[fromC] + ranks[fromR];
-                }
+                const ranks = ['8', '7', '6', '5', '4', '3', '2', '1'];
+                if (!competitors.some(p => p.c === fromC)) disambiguation = files[fromC];
+                else if (!competitors.some(p => p.r === fromR)) disambiguation = ranks[fromR];
+                else disambiguation = files[fromC] + ranks[fromR];
             }
-
-            notation = pieceLetter + disambiguation + (isCapture ? 'x' : '') + targetPos;
+            notation = pieceLetter + disambiguation + (isCapture ? 'x' : '') + getNotation(toR, toC);
         }
 
-        // 턴 종료 전 '체크' 여부 확인하여 '+' 기호 추가 (선택 사항)
-        // if (isCheck(currentTurn === 'W' ? 'B' : 'W', currentBoard)) notation += '+';
-
-        // --- 화면 출력 로직 ---
         if (currentTurn === 'W') {
-        const row = document.createElement('div');
-        row.className = 'move-row';
-        
-        // 구조를 미리 짜둠으로써 흑의 수가 입력되기 전에도 | 위치가 고정됩니다.
-        row.innerHTML = `
-            <span class="move-num">${moveCount}.</span>
-            <span class="white-move">${notation}</span>
-            <span class="black-move"></span>
-        `;
-        moveContent.appendChild(row);
-    } else {
-        const rows = moveContent.querySelectorAll('.move-row');
-        const lastRow = rows[rows.length - 1];
-        // 흑색 수 칸에 텍스트만 쏙 넣습니다.
-        lastRow.querySelector('.black-move').textContent = notation;
-        moveCount++;
-    }
+            const row = document.createElement('div');
+            row.className = 'move-row';
+            row.innerHTML = `<span class="move-num">${moveCount}.</span><span class="white-move">${notation}</span><span class="black-move"></span>`;
+            moveContent.appendChild(row);
+        } else {
+            const rows = moveContent.querySelectorAll('.move-row');
+            rows[rows.length - 1].querySelector('.black-move').textContent = notation;
+            moveCount++;
+        }
     }
 
-    // --- 로직: 위협 체크 및 이동 계산 ---
+    // --- 기물 이동 로직 (기존과 동일) ---
+
     function isSquareAttacked(row, col, attackerColor, boardState) {
         for (let r = 0; r < 8; r++) {
             for (let c = 0; c < 8; c++) {
@@ -170,6 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function getRawMoves(row, col, boardState) {
         let moves = [];
         const piece = boardState[row][col];
+        if (!piece) return moves;
         const color = getPieceColor(piece);
         const type = piece.toLowerCase();
 
@@ -182,21 +236,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!boardState[nr][nc] && enPassantTarget?.row === nr && enPassantTarget?.col === nc) moves.push({row: nr, col: nc, isEnPassant: true});
                 }
             });
-            if (row + dir >= 0 && row + dir < 8 && !boardState[row+dir][col]) {
+            if (row + dir >= 0 && row + dir < 8 && !boardState[row + dir][col]) {
                 moves.push({row: row + dir, col: col});
-                if (((color === 'W' && row === 6) || (color === 'B' && row === 1)) && !boardState[row + 2*dir][col]) moves.push({row: row + 2*dir, col: col});
+                const startRow = (color === 'W' ? 6 : 1);
+                if (row === startRow && !boardState[row + 2 * dir][col]) moves.push({row: row + 2 * dir, col: col});
             }
         } else if (type === 'n') {
             [[-2,-1],[-2,1],[-1,-2],[-1,2],[1,-2],[1,2],[2,-1],[2,1]].forEach(([dr, dc]) => {
-                const nr = row+dr, nc = col+dc;
-                if (nr>=0 && nr<8 && nc>=0 && nc<8 && (!boardState[nr][nc] || getPieceColor(boardState[nr][nc]) !== color)) moves.push({row: nr, col: nc});
+                const nr = row + dr, nc = col + dc;
+                if (nr >= 0 && nr < 8 && nc >= 0 && nc < 8 && (!boardState[nr][nc] || getPieceColor(boardState[nr][nc]) !== color)) moves.push({row: nr, col: nc});
             });
         } else if (type === 'k') {
-            for(let dr=-1; dr<=1; dr++) {
-                for(let dc=-1; dc<=1; dc++) {
-                    if (dr===0 && dc===0) continue;
-                    const nr=row+dr, nc=col+dc;
-                    if (nr>=0 && nr<8 && nc>=0 && nc<8 && (!boardState[nr][nc] || getPieceColor(boardState[nr][nc]) !== color)) moves.push({row: nr, col: nc});
+            for (let dr = -1; dr <= 1; dr++) {
+                for (let dc = -1; dc <= 1; dc++) {
+                    if (dr === 0 && dc === 0) continue;
+                    const nr = row + dr, nc = col + dc;
+                    if (nr >= 0 && nr < 8 && nc >= 0 && nc < 8 && (!boardState[nr][nc] || getPieceColor(boardState[nr][nc]) !== color)) moves.push({row: nr, col: nc});
                 }
             }
         } else {
@@ -204,14 +259,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (type === 'b' || type === 'q') dirs.push([1,1],[1,-1],[-1,1],[-1,-1]);
             if (type === 'r' || type === 'q') dirs.push([1,0],[-1,0],[0,1],[0,-1]);
             dirs.forEach(([dr, dc]) => {
-                let nr=row+dr, nc=col+dc;
-                while(nr>=0 && nr<8 && nc>=0 && nc<8) {
+                let nr = row + dr, nc = col + dc;
+                while (nr >= 0 && nr < 8 && nc >= 0 && nc < 8) {
                     if (!boardState[nr][nc]) moves.push({row: nr, col: nc});
                     else {
                         if (getPieceColor(boardState[nr][nc]) !== color) moves.push({row: nr, col: nc});
                         break;
                     }
-                    nr+=dr; nc+=dc;
+                    nr += dr; nc += dc;
                 }
             });
         }
@@ -246,7 +301,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 실행 제어 ---
     function handleSquareClick(row, col) {
         const move = movableSquares.find(m => m.row === row && m.col === col);
         if (move && selectedSquare) {
@@ -259,7 +313,6 @@ document.addEventListener('DOMContentLoaded', () => {
             executeMove(selectedSquare.row, selectedSquare.col, row, col, move);
             return;
         }
-
         const piece = currentBoard[row][col];
         if (selectedSquare?.row === row && selectedSquare?.col === col) {
             selectedSquare = null; movableSquares = [];
@@ -289,81 +342,64 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function executeMove(fR, fC, tR, tC, move, promoted = null) {
-        const piece = promoted || currentBoard[fR][fC];
+        const movingPiece = promoted || currentBoard[fR][fC];
         const isCapture = currentBoard[tR][tC] !== '' || move.isEnPassant;
 
+        // [추가] UI 동기화 및 기보 업데이트
         updateMoveList(currentBoard[fR][fC], fR, fC, tR, tC, isCapture, move.isCastling);
 
         if (move.isEnPassant) currentBoard[fR][tC] = '';
         if (move.isCastling === 'king') { currentBoard[fR][5] = currentBoard[fR][7]; currentBoard[fR][7] = ''; }
         if (move.isCastling === 'queen') { currentBoard[fR][3] = currentBoard[fR][0]; currentBoard[fR][0] = ''; }
 
-        currentBoard[tR][tC] = piece;
+        currentBoard[tR][tC] = movingPiece;
         currentBoard[fR][fC] = '';
 
-        // 상태 업데이트 (캐슬링 제한용)
-        if (piece === 'K') hasMoved.K_W = true; if (piece === 'k') hasMoved.k_B = true;
+        if (movingPiece === 'K') hasMoved.K_W = true; if (movingPiece === 'k') hasMoved.k_B = true;
         if (fR === 7 && fC === 0) hasMoved.R_W_left = true; if (fR === 7 && fC === 7) hasMoved.R_W_right = true;
         if (fR === 0 && fC === 0) hasMoved.r_B_left = true; if (fR === 0 && fC === 7) hasMoved.r_B_right = true;
 
-        enPassantTarget = (piece.toLowerCase()==='p' && Math.abs(tR-fR)===2) ? {row: (fR+tR)/2, col: fC} : null;
+        enPassantTarget = (movingPiece.toLowerCase()==='p' && Math.abs(tR-fR)===2) ? {row: (fR+tR)/2, col: fC} : null;
 
-        currentBoard[tR][tC] = piece;
-        currentBoard[fR][fC] = '';
+        saveStateToHistory();
 
-        // [추가] 상태 업데이트 후 체크메이트 판정
         const nextTurn = currentTurn === 'W' ? 'B' : 'W';
         if (isCheckmate(nextTurn)) {
             window.gameState.isGameOver = true;
-            window.gameState.winner = currentTurn; // 현재 둔 사람이 승리
+            window.gameState.winner = currentTurn;
             alert(currentTurn === 'W' ? "백색 승리! (체크메이트)" : "흑색 승리! (체크메이트)");
         } else {
             window.gameState.isGameOver = false;
-            window.gameState.winner = null;
         }
 
-        // 전역 보드 상태 업데이트 (내보내기용)
         window.gameState.currentBoard = currentBoard;
-        window.gameState.isCheckmate = isCheckmate; // 함수도 노출
-
         currentTurn = nextTurn;
         selectedSquare = null; movableSquares = [];
         renderBoard();
+        highlightMove(currentHistoryIndex);
     }
 
-    // 체크메이트 여부를 확인하는 함수
     function isCheckmate(color) {
-        // 1. 현재 왕이 체크 상태가 아니면 체크메이트가 아님
         if (!isCheck(color, currentBoard)) return false;
-
-        // 2. 현재 색상의 모든 기물을 뒤져서 탈출 가능한 수(movableSquares)가 하나라도 있는지 확인
         for (let r = 0; r < 8; r++) {
             for (let c = 0; c < 8; c++) {
-                const piece = currentBoard[r][c];
-                if (piece && getPieceColor(piece) === color) {
-                    // 임시로 해당 기물을 선택했을 때 갈 수 있는 곳 계산
+                const p = currentBoard[r][c];
+                if (p && getPieceColor(p) === color) {
                     calculatePossibleMoves(r, c);
-                    if (movableSquares.length > 0) {
-                        return false; // 탈출 방법이 있으므로 체크메이트 아님
-                    }
+                    if (movableSquares.length > 0) return false;
                 }
             }
         }
-        return true; // 갈 곳이 없으므로 체크메이트!
+        return true;
     }
 
     function renderBoard() {
         board.innerHTML = '';
-        
-        // 턴 표시 텍스트 생성 로직
-        turnDisplay.innerHTML = `기보 (Move List)`;
-        
         for (let r = 0; r < 8; r++) {
             for (let c = 0; c < 8; c++) {
                 const sq = document.createElement('div');
                 sq.className = `square ${(r + c) % 2 === 0 ? 'light' : 'dark'}`;
                 if (selectedSquare?.row === r && selectedSquare?.col === c) sq.classList.add('selected');
-
                 const piece = currentBoard[r][c];
                 if (piece) {
                     const img = document.createElement('img');
@@ -371,7 +407,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     img.className = 'piece';
                     sq.appendChild(img);
                 }
-
                 const move = movableSquares.find(m => m.row === r && m.col === c);
                 if (move) {
                     if (piece || move.isEnPassant) sq.classList.add('attackable');
