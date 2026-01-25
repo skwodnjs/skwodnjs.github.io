@@ -401,11 +401,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderBoard() {
         board.innerHTML = '';
-        for (let r = 0; r < 8; r++) {
-            for (let c = 0; c < 8; c++) {
+        turnDisplay.innerHTML = `기보 (Move List)`;
+        
+        // 시점에 따른 인덱스 배열 생성
+        // 정방향: [0,1,2,3,4,5,6,7], 반전: [7,6,5,4,3,2,1,0]
+        const rowRange = window.gameState.isFlipped ? [0, 1, 2, 3, 4, 5, 6, 7] : [0, 1, 2, 3, 4, 5, 6, 7]; 
+        // 실제로는 로직 편의상 0~7을 돌되 출력할 때만 계산을 다르게 합니다.
+        
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                // isFlipped가 true면 흑의 시점 (7-r, 7-c)
+                const r = window.gameState.isFlipped ? 7 - i : i;
+                const c = window.gameState.isFlipped ? 7 - j : j;
+
                 const sq = document.createElement('div');
                 sq.className = `square ${(r + c) % 2 === 0 ? 'light' : 'dark'}`;
                 
+                // ... (기존 선택 및 기물 렌더링 로직은 r, c 변수를 그대로 사용하므로 동일함)
                 if (selectedSquare?.row === r && selectedSquare?.col === c) sq.classList.add('selected');
 
                 const piece = currentBoard[r][c];
@@ -415,30 +427,43 @@ document.addEventListener('DOMContentLoaded', () => {
                     img.className = 'piece';
                     sq.appendChild(img);
                 }
-
-                // [수정 핵심] selectedSquare가 있을 때만 힌트를 보여줍니다.
-                if (selectedSquare) {
-                    const move = movableSquares.find(m => m.row === r && m.col === c);
-                    if (move) {
-                        if (piece || move.isEnPassant) {
-                            // 아군 기물을 공격 대상으로 표시하지 않도록 색상 판별 추가
-                            if (piece && getPieceColor(piece) !== currentTurn) {
-                                sq.classList.add('attackable');
-                            } else if (move.isEnPassant) {
-                                sq.classList.add('attackable');
-                            }
-                        } else {
-                            const hint = document.createElement('div');
-                            hint.className = 'hint';
-                            sq.appendChild(hint);
-                        }
+                
+                // 이동 힌트 표시 등...
+                const move = movableSquares.find(m => m.row === r && m.col === c);
+                if (move) {
+                    if (piece || move.isEnPassant) sq.classList.add('attackable');
+                    else {
+                        const hint = document.createElement('div');
+                        hint.className = 'hint';
+                        sq.appendChild(hint);
                     }
                 }
                 sq.onclick = () => handleSquareClick(r, c);
                 board.appendChild(sq);
             }
         }
+        
+        // [보너스] 좌표 표시(a-h, 1-8)도 시점에 맞게 뒤집고 싶다면 
+        // HTML의 coords-x, coords-y의 innerHTML을 여기서 동적으로 업데이트하면 됩니다.
+        updateCoordinates();
     }
 
+    function updateCoordinates() {
+        const xCoords = document.querySelector('.coords-x');
+        const yCoords = document.querySelector('.coords-y');
+        const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+        const ranks = ['8', '7', '6', '5', '4', '3', '2', '1'];
+
+        if (window.gameState.isFlipped) {
+            xCoords.innerHTML = files.slice().reverse().map(f => `<div>${f}</div>`).join('');
+            yCoords.innerHTML = ranks.slice().reverse().map(r => `<div>${r}</div>`).join('');
+        } else {
+            xCoords.innerHTML = files.map(f => `<div>${f}</div>`).join('');
+            yCoords.innerHTML = ranks.map(r => `<div>${r}</div>`).join('');
+        }
+    }
+
+    // 렌더링 함수를 외부(button.js)에서 호출할 수 있게 전역에 등록
+    window.renderBoard = renderBoard;
     renderBoard();
 });
