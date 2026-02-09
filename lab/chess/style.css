@@ -107,6 +107,10 @@ body {
     transition: opacity 0.3s;
 }
 
+#btn-flip {
+    background-color: #aaaaaa;
+}
+
 /* 불러오기 버튼 색상 (주황계열) */
 #btn-load {
     background-color: #f39c12;

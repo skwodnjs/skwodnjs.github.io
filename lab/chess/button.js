@@ -8,6 +8,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const pgnModal = document.getElementById('pgn-modal');
     const pgnSubmit = document.getElementById('pgn-submit');
     const pgnCancel = document.getElementById('pgn-cancel');
+    const btnFlip = document.getElementById('btn-flip');
+
+    if (btnFlip) {
+        btnFlip.addEventListener('click', () => {
+            // 상태 반전
+            window.gameState.isFlipped = !window.gameState.isFlipped;
+            // 보드 다시 그리기
+            if (typeof window.renderBoard === 'function') {
+                window.renderBoard();
+            }
+        });
+    }
 
     // 이전/다음 버튼 연결
     btnPrev.addEventListener('click', () => {
