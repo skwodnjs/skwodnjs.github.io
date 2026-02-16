@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Asta+Sans:wght@300..800&family=Fira+Code:wght@300..700&family=Nanum+Pen+Script&display=swap');
+
+body, html {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.layout {
+    flex: 1;
+}
+
+* {
+    font-family: "Asta Sans", sans-serif;
+    color: rgb(17, 21, 17);
+}
+
+/* HEADER */
+
+header {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 36px 24px 36px;
+    border-bottom: 1.5px solid #ddd;
+}
+
+#header {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    background: #fff;
+}
+
+#logo a, #menu a {
+    text-decoration: none;
+}
+
+#menu a {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0 6px;
+}
+
+#menu a:hover {
+    border-bottom: 2px solid #40c22f;
+}
+
+#menu {
+    display: flex;
+    gap: 26px;
+}
+
+#logo a {
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.active {
+    border-bottom: 2px solid #40c22f;
+}
+
+@media (max-width: 1024px) {
+  #menu {
+    display: none;
+  }
+}
+
+/* FOOTER */
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 30px 0;
+    border-top: 1.5px solid #ddd;
+}
+
+#footer-title {
+    font-size: 21px;
+    font-weight: 700;
+    color: #555;
+}
+
+#footer-desc {
+    font-size: 13px;
+    font-weight: 400;
+    color: #999;
+}
+
+#footer-copy {
+    font-size: 12px;
+    font-weight: 400;
+    color: #999;
+}

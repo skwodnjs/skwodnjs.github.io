@@ -7,6 +7,14 @@
     <title>JWN's Blog</title>
     <link rel="stylesheet" href="/assets/css/components.css">
     <link rel="stylesheet" href="/assets/css/post.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {inlineMath: [['$', '$']]}
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
 </head>
 <body>
     <div id="header"></div>
@@ -19,13 +27,17 @@
             </div>
         </aside>
         <main class="post">
-            
+            <div id="post-title"></div>
+            <div id="post-category"></div>
+            <div id="post-date"></div>
+            <div id="post-content"></div>
         </main>
     </div>
     
     <div id="footer"></div>
     <script src="/assets/js/include.js"></script>
     <script src="/assets/js/category.js"></script>
+    <script src="/assets/js/post.js"></script>
     <script>loadHeader("category");</script>
 </body>
 </html>

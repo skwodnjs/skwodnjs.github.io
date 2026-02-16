@@ -4,86 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <title>JWN's Blog</title>
+    <title>JWN's Blog (test)</title>
+    <link rel="stylesheet" href="/assets/css/components.css">
 </head>
 <body>
-    <header class="site-header">
-        <div class="header-main">
-            <div class="header-background"></div>
-            <img class="profile-image" src="profile.png" alt="profile image">
-            <h1 class="header-title"><a href="index.html">JWN's Blog</a></h1>
-        </div>
-        <div class="header-menu">
-            <span class="menu" data-category="Mathematics">Mathematics</span>
-            <span class="menu" data-category="Minecraft">Minecraft</span>
-            <span class="menu" data-category="Memo">Memo</span>
-            <span class="menu" data-category="Lab">Lab</span>
-        </div>
-    </header>
-    <div class="page">
-        <aside class="profile">
-            Jaewon Na <br>
-            Contact: naa3000@naver.com
-        </aside>
-        <div class="divider"></div>
+    <div id="header"></div>
+
+    <div class="layout">
         <main>
-            <div class="current-category"></div>
+            <a href="/post/?id=1">post</a>
         </main>
     </div>
-    <footer class="site-footer">
-        <div class="footer-inner">
-            <p class="footer-title">JWN's blog</p>
-
-            <p class="footer-desc">
-                Mathematics · Minecraft Modding · Mod Server
-            </p>
-
-            <div class="footer-links">
-                <a href="./index.html">Home</a>
-                <a href="https://blog.naver.com/naa3000" target="_blank" rel="noopener noreferrer">Naver</a>
-                <a href="https://github.com/skwodnjs" target="_blank" rel="noopener noreferrer">GitHub</a>
-            </div>
-
-            <p class="footer-copy">
-                © 2026 JWN. All rights reserved.
-            </p>
-        </div>
-    </footer>
-    <script>
-        document.querySelectorAll('.category').forEach(el => {
-            el.addEventListener('click', () => {
-                const category = el.dataset.category;
-                location.hash = `category=${category}`;
-                handleCategory();
-            });
-        });
-
-        function handleCategory() {
-            const profile = document.querySelector('.profile');
-            const divider = document.querySelector('.divider');
-            const current_category = document.querySelector('.current-category');
-
-            if (location.hash.startsWith('#category=')) {
-                const tag = decodeURIComponent(
-                    location.hash.replace('#category=', '')
-                );
-
-                profile.style.display = 'none';
-                divider.style.display = 'none';
-                current_category.style.display = '';
-                current_category.textContent = tag;
-            } else {
-                profile.style.display = '';
-                divider.style.display = '';
-                current_category.style.display = 'none';
-                current_category.textContent = '';
-            }
-        }
-
-        window.addEventListener('hashchange', handleCategory);
-        window.addEventListener('load', handleCategory);
-    </script>
-    <script src="script.js"></script>
+    
+    <div id="footer"></div>
+    <script src="/assets/js/include.js"></script>
+    <script>loadHeader("");</script>
 </body>
 </html>

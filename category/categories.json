@@ -1,0 +1,50 @@
+{
+  "Mathematics": {
+    "_meta": {
+      "slug": "mathematics",
+      "count": 0
+    },
+    "Long": {
+      "_meta": {
+        "slug": "long",
+        "count": 0
+      },
+      "Analysis": {
+        "_meta": {
+          "slug": "analysis",
+          "count": 0
+        }
+      },
+      "Linear Algebra": {
+        "_meta": {
+          "slug": "linear-algebra",
+          "count": 0
+        }
+      }
+    },
+    "Short": {
+      "_meta": {
+        "slug": "short",
+        "count": 0
+      }
+    }
+  },
+  "Minecraft": {
+    "_meta": {
+      "slug": "minecraft",
+      "count": 0
+    },
+    "Minecraft Server": {
+      "_meta": {
+        "slug": "minecraft-server",
+        "count": 0
+      }
+    },
+    "Mods": {
+      "_meta": {
+        "slug": "mods",
+        "count": 0
+      }
+    }
+  }
+}

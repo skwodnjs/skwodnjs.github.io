@@ -1,0 +1,15 @@
+save 에서 upload 로 옮기고 upload.py 실행하면 업로드 진행
+
+upload.py
+1. upload 폴더에 있는 각 md 파일마다
+2. 파일의 이름을 랜덤하게 변경
+3. 카테고리 유효성 검사 후 post 폴더로 이동
+4. 이동에 성공하면 해당하는 카테고리의 count 추가
+
+category 의 구조가 변경되면 reset.py 실행
+
+reset.py
+1. post 폴더에 있는 모든 md 폴더마다
+2. 카테고리 유효성 검사
+3. 해당하는 카테고리의 count 추가
+
