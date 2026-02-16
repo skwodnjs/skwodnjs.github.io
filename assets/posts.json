@@ -1,15 +1,5 @@
 [
     {
-        "id": -1,
-        "title": "Chess",
-        "date": "2026. 01. 19.",
-        "categories": [
-            "Lab"
-        ],
-        "url": "./lab/chess/home.html",
-        "preview": ""
-    },
-    {
         "id": "5",
         "title": "JWN's End Portal Generator Mod",
         "date": "2026. 01. 08.",

@@ -23,7 +23,6 @@ def parse_markdown_file(file_path):
 post_list = []
 base_path = "./build/build"
 target_path = "./posts"
-lab_path = "./lab"
 
 # 1. 파일 이동 및 정리 로직
 if not os.path.exists(target_path):
@@ -44,7 +43,7 @@ for filename in os.listdir(base_path):
             continue
         shutil.move(full_path, new_path)
 
-# 2. 일반 포스트 수집
+# 2. 포스트 수집
 for filename in os.listdir(target_path):
     if filename.endswith(".md"):
         full_path = os.path.join(target_path, filename)
@@ -61,21 +60,6 @@ for filename in os.listdir(target_path):
             "preview": preview
         })
 
-# --- 3. Lab 항목 추가 (요청하신 부분) ---
-lab_json_path = os.path.join(lab_path, 'lab.json')
-if os.path.exists(lab_json_path):
-    with open(lab_json_path, 'r', encoding='utf-8') as f:
-        lab_data = json.load(f)
-        for item in lab_data:
-            post_list.append({
-                "id": -1,  # 요청하신 고정 ID
-                "title": item.get('title', '제목 없음'),
-                "date": item.get('date', '2000. 00. 00.'),
-                "categories": ["Lab"],  # 무조건 Lab 하나
-                "url": item.get('url', '#'),
-                "preview": ""  # 빈 문자열
-            })
-    print(f"🧪 Lab 항목 {len(lab_data)}개 추가 완료.")
 # ---------------------------------------
 
 # 날짜 기준 정렬 및 저장

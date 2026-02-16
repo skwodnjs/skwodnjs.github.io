@@ -1,5 +1,1 @@
-.\build\.venv\Scripts\Activate.ps1 or source ./build/.venv/bin/activate
-python -m http.server 8000
-python .\build\bulid-main.py or ./build/.venv/bin/python ./build/build-main.py
-
-http://localhost:8000/build/preview.html
+http://127.0.0.1:5500/build/preview.html
