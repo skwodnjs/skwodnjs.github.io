@@ -260,15 +260,20 @@ main table th, main table td {
     vertical-align: bottom;
 }
 
-.jar-table tr td:nth-child(2) {
+.jar-table tr th {
     font-size: 15px;
-    color: #555;
+    font-weight: 600;
+    color: #3b3b3b;
 }
 
-.jar-table tr td:nth-child(3) {
-    text-align: right;
-    color: #777;
+.jar-table tr td:first-child {
+    text-align: left;
+}
+
+.jar-table tr td {
+    text-align: center;
     font-size: 15px;
+    color: #555;
 }
 
 .site-footer {
