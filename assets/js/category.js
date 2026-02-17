@@ -42,7 +42,7 @@ function createCategoryList(obj, path = "") {
   return ul;
 }
 
-fetch("/category/categories.json")
+fetch("/assets/json/categories.json")
   .then(res => res.json())
   .then(data => {
     const container = document.getElementById("category-list");

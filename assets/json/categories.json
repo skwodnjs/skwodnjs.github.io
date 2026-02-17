@@ -32,18 +32,18 @@
   "Minecraft": {
     "_meta": {
       "slug": "minecraft",
-      "count": 0
+      "count": 6
     },
     "Minecraft Server": {
       "_meta": {
         "slug": "minecraft-server",
-        "count": 0
+        "count": 2
       }
     },
     "Mods": {
       "_meta": {
         "slug": "mods",
-        "count": 0
+        "count": 4
       }
     }
   }
