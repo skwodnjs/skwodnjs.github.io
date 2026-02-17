@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+    <title>JWN's Blog</title>
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/post.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {inlineMath: [['$', '$']]}
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <div id="category-title">Categories</div>
+            <div id="category-list">
+                
+            </div>
+        </aside>
+        <main class="post">
+            <div id="post-title"></div>
+            <div id="post-category"></div>
+            <div id="post-date"></div>
+            <div id="post-content"></div>
+        </main>
+    </div>
+    
+    <div id="footer"></div>
+    <script src="/assets/js/include.js"></script>
+    <script src="/assets/js/category.js"></script>
+    <script src="/assets/js/save.js"></script>
+    <script>loadHeader("category");</script>
+</body>
+</html>
