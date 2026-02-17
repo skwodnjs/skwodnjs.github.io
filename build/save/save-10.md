@@ -3,7 +3,6 @@ title: Topology, Base, Standard Topology
 categories: [Mathematics, Short]
 author: JWN
 date: 2026. 01. 14.
-id: 7
 ---
 
 # Topology
