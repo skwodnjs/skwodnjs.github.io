@@ -99,34 +99,33 @@
 
 #post-content blockquote {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  margin: 16px;
+  margin: 0 12px;
 }
 
 #post-content blockquote::before {
   content: "";
+  display: inline-block;
   width: 28px;
   height: 28px;
-  margin-bottom: 6px;
-
-  background: url("data:image/svg+xml;utf8, <svg xmlns='http://www.w3.org/2000/svg' height='22px' viewBox='0 -960 960 960' width='24px' fill='%23333333'> <path d='m228-240 92-160q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 23-5.5 42.5T458-480L320-240h-92Zm360 0 92-160q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 23-5.5 42.5T818-480L680-240h-92Z'/> </svg>") center / contain no-repeat;
-}
-
-#post-content blockquote::after {
-  content: "";
-  width: 28px;
-  height: 28px;
-  margin-top: 6px;
-  transform: rotate(180deg);
-
-  background: url("data:image/svg+xml;utf8, <svg xmlns='http://www.w3.org/2000/svg' height='22px' viewBox='0 -960 960 960' width='24px' fill='%23333333'> <path d='m228-240 92-160q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 23-5.5 42.5T458-480L320-240h-92Zm360 0 92-160q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 23-5.5 42.5T818-480L680-240h-92Z'/> </svg>") center / contain no-repeat;
+  margin-right: 1px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%23333'><path d='M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z'/></svg>") center / contain no-repeat;
 }
 
 #post-content blockquote p {
+  font-family: "Nanum Pen Script", cursive;
+  font-size: 30px;
   margin: 0;
-  color: #555;
+  color: #333;
 }
+
+hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #d3d6db, transparent);
+  margin: 48px 0;
+}
+
 
 #post-content code:not(pre code) {
   background: rgba(0,0,0,0.06);
@@ -328,3 +327,4 @@
   background: #f6f8fa;
   transition: .15s ease;
 }
+
