@@ -1,0 +1,61 @@
+.title {
+    font-size: 18pt;
+    font-weight: 600;
+    letter-spacing: 5px;
+    white-space: nowrap;
+    
+    margin-bottom: 10px;
+
+    background: linear-gradient(90deg,
+            rgba(122, 114, 214, 0.6) 0%,
+            rgba(95, 188, 211, 0.6) 25%,
+            rgba(214, 138, 156, 0.6) 50%,
+            rgba(95, 188, 211, 0.6) 75%,
+            rgba(122, 114, 214, 0.6) 100%);
+
+    background-size: 200% 100%;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: gradientLoop 8s linear infinite;
+}
+
+@keyframes gradientLoop {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+.message,
+.message:link,
+.message:visited,
+.message:hover,
+.message:active {
+    font-size: 13pt;
+    font-weight: 600;
+    letter-spacing: 8px;
+    white-space: nowrap;
+    
+    margin-bottom: 10px;
+
+    background: linear-gradient(90deg,
+            rgba(122, 114, 214, 0.6) 0%,
+            rgba(95, 188, 211, 0.6) 25%,
+            rgba(214, 138, 156, 0.6) 50%,
+            rgba(95, 188, 211, 0.6) 75%,
+            rgba(122, 114, 214, 0.6) 100%);
+
+    background-size: 200% 100%;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: gradientLoop 8s linear infinite;
+
+    text-decoration: none;
+}

@@ -3,22 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
     <title>JWN's blog</title>
-    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/keyboard.css">
 </head>
-<body>
-    <div id="header"></div>
 
-    <div class="layout">
-        <main>
-            
-        </main>
+<body>
+    <span class="time"></span>
+    <div class="main">
+        <div class="main-contents">
+            <div class="title">HOME</div>
+            <div class="keyboard">
+                <a class="help" href="/help.html">?</a>
+                <div class="row">
+                    <a class="key" href="/test.html" style="cursor: default;">-</a>
+                    <div class="key">=</div>
+                    <div class="key" id="backspace">Backspace</div>
+                </div>
+
+                <div class="row">
+                    <div class="key">[</div>
+                    <div class="key">]</div>
+                    <a class="key link" id="won" href="#">\</a>
+                </div>
+
+                <div class="row">
+                    <div class="key">;</div>
+                    <div class="key">'</div>
+                    <a class="key link" id="enter" href="/statistic.html">Enter</a>
+                </div>
+
+                <div class="row">
+                    <a class="key link" href="https://awlebens.web.app/" target="_blank">,</a>
+                    <a class="key link" href="/profile">.</a>
+                    <a class="key link" href="#">/</a>
+                    <div class="key" id="shift">Shift</div>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <div id="footer"></div>
-    <script src="/assets/js/include.js"></script>
-    <script src="/assets/js/temp-post-list.js"></script>
-    <script>loadHeader("");</script>
+    <script src="/assets/js/components.js"></script>
 </body>
+
 </html>

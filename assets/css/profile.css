@@ -1,0 +1,25 @@
+.profile {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    margin: 18px 0;
+}
+
+.profile-image {
+    width: 105px;
+    height: 140px;
+    background: #f0f0ff;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.profile-desc-container {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0;
+    gap: 10px;
+}
+
+.profile-desc {
+    font-size: 13pt;
+    font-weight: 600;
+}

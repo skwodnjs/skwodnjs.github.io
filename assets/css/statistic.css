@@ -1,0 +1,24 @@
+.statistic {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 32px 0;
+}
+
+.total {
+    font-size: 13pt;
+    font-weight: 600;
+}
+
+.total-number {
+    font-size: 24pt;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.recent {
+    font-size: 11pt;
+    color: #777;
+}
