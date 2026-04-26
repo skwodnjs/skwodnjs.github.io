@@ -4,7 +4,7 @@
     padding: 32px;
     overflow-y: scroll;
     scrollbar-width: thin;
-    scrollbar-color: hsl(220, 27%, 83%) transparent;
+    scrollbar-color: rgba(0, 0, 0, 0.05) transparent;
     box-shadow:
         2px 2px 12px rgba(0, 0, 0, 0.05);
     display: flex;
@@ -22,7 +22,7 @@
     border-radius: 12px;
     font-size: 14pt;
     font-weight: 600;
-    background: #e5e9f4;
+    background: inherit;
     text-decoration: none;
     box-shadow:
         -6px -6px 12px rgba(255, 255, 255, 0.7),

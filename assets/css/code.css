@@ -1,0 +1,136 @@
+code:not(pre code) {
+  background: rgba(0,0,0,0.06);
+  padding: 2px 4px;
+  margin: 0 2px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: "D2Coding", monospace;
+}
+
+pre {
+  position: relative;
+  background: #333;
+  padding: 40px 18px 12px 18px;
+  overflow-x: auto;
+  margin: 24px 0;
+}
+
+pre::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 8px;
+  left: 8px;
+
+  font-size: 12px;
+  color: #aaa;
+  text-transform: uppercase;
+
+  background: rgba(255,255,255,0.08);
+  padding: 0 8px;
+  border-radius: 6px;
+}
+
+pre code {
+  background: #333;
+  line-height: 1.2;
+  display: block;
+  white-space: pre;
+  tab-size: 2;
+}
+
+pre code * {
+  font-family: "D2Coding", monospace;
+  font-size: 15px;
+}
+
+
+.hljs{
+  color:#c9d1d9 !important;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-meta .hljs-keyword,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type,
+.hljs-variable.language_{
+  color:#ff7b72 !important;
+}
+
+.hljs-title,
+.hljs-title.class_,
+.hljs-title.class_.inherited__,
+.hljs-title.function_{
+  color:#d2a8ff !important;
+}
+
+.hljs-attr,
+.hljs-attribute,
+.hljs-literal,
+.hljs-meta,
+.hljs-number,
+.hljs-operator,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-selector-id,
+.hljs-variable{
+  color:#79c0ff !important;
+}
+
+.hljs-meta .hljs-string,
+.hljs-regexp,
+.hljs-string{
+  color:#a5d6ff !important;
+}
+
+.hljs-built_in,
+.hljs-symbol{
+  color:#ffa657 !important;
+}
+
+.hljs-code,
+.hljs-comment,
+.hljs-formula{
+  color:#8b949e !important;
+}
+
+.hljs-name,
+.hljs-quote,
+.hljs-selector-pseudo,
+.hljs-selector-tag{
+  color:#7ee787 !important;
+}
+
+.hljs-subst{
+  color:#c9d1d9 !important;
+}
+
+.hljs-section{
+  color:#1f6feb !important;
+  font-weight:700 !important;
+}
+
+.hljs-bullet{
+  color:#f2cc60 !important;
+}
+
+.hljs-emphasis{
+  color:#c9d1d9 !important;
+  font-style:italic !important;
+}
+
+.hljs-strong{
+  color:#c9d1d9 !important;
+  font-weight:700 !important;
+}
+
+.hljs-addition{
+  color:#aff5b4 !important;
+  background-color:#033a16 !important;
+}
+
+.hljs-deletion{
+  color:#ffdcd7 !important;
+  background-color:#67060c !important;
+}

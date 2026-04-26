@@ -8,6 +8,11 @@
     src: url('/assets/fonts/SDMiSaeng.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: "D2Coding";
+  src: url("/assets/fonts/D2Coding-Ver1.3.2-20180524.ttf") format('truetype');
+}
+
 * {
     box-sizing: border-box;
     font-family: 'Kyobo2019', sans-serif;
@@ -116,7 +121,7 @@ footer {
     align-items: center;
     gap: 15px;
     padding: 30px 0;
-    background: #e5e9f4;
+    background: inherit;
     border-top: 1.5px solid #ddd;
     z-index: 2;
 }

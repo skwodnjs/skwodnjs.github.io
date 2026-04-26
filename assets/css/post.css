@@ -290,7 +290,7 @@ hr {
 }
 
 #post-content thead {
-  background:#f6f8fa;
+  background: rgba(0, 0, 0, 0.1);
 }
 
 #post-content thead th {
@@ -327,4 +327,3 @@ hr {
   background: #f6f8fa;
   transition: .15s ease;
 }
-

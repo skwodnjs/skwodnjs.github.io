@@ -87,6 +87,17 @@
         });
     }
 
+    function addCodeLanguageLabels(container) {
+        container.querySelectorAll("pre code").forEach(code => {
+            const classes = Array.from(code.classList);
+            const langClass = classes.find(c => c.startsWith("language-"));
+            if (!langClass) return;
+
+            const lang = langClass.replace("language-", "");
+            code.parentElement.setAttribute("data-lang", lang);
+        });
+    }
+
     async function loadPost() {
         const id = safeId(getParam("id"));
         if (!id) return;
@@ -117,7 +128,7 @@
                 : content;
 
             fixInternalLinks(postContents);
-
+            addCodeLanguageLabels(postContents);
             if (window.hljs) hljs.highlightAll();
 
             if (window.MathJax) {

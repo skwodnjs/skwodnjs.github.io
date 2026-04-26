@@ -47,7 +47,7 @@
     place-items: center;
     font-size: 14pt;
     font-weight: 600;
-    background: #e5e9f4;
+    background: inherit;
     text-decoration: none;
     box-shadow:
         -6px -6px 12px rgba(255, 255, 255, 0.7),
