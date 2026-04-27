@@ -100,20 +100,38 @@
 
     async function loadPost() {
         const id = safeId(getParam("id"));
-        if (!id) return;
+        if (!id) {
+            location.replace("/pages/404.html");s
+            return;
+        }
 
-        const postTitle = document.querySelector(".post-title");
-        const postCategory = document.querySelector(".post-category");
-        const postAuthor = document.querySelector(".post-auther");
-        const postDate = document.querySelector(".post-date");
-        const postContents = document.querySelector(".post-contents");
+        const post = document.querySelector(".post");
 
         try {
-            const res = await fetch(`/post/${id}.md`, {
+            const res = await fetch(`${id}.md`, {
                 cache: "no-store"
             });
 
-            if (!res.ok) throw new Error("404");
+            if (!res.ok) {
+                location.replace("/pages/404.html");
+                return;
+            }
+
+            post.innerHTML = `
+            <div class="post-title"></div>
+            <div class="post-meta">
+                <div class="post-category"></div>
+                <div class="post-auther"></div>
+                <div class="post-date"></div>
+            </div>
+            <div class="post-contents">
+            </div>`
+
+            const postTitle = document.querySelector(".post-title");
+            const postCategory = document.querySelector(".post-category");
+            const postAuthor = document.querySelector(".post-auther");
+            const postDate = document.querySelector(".post-date");
+            const postContents = document.querySelector(".post-contents");
 
             const raw = await res.text();
             const { meta, content } = parseFrontMatter(raw);
@@ -145,12 +163,7 @@
 
         } catch (e) {
             console.error(e);
-
-            postTitle.textContent = "404 Not Found";
-            postCategory.textContent = "";
-            postAuthor.textContent = "";
-            postDate.textContent = "";
-            postContents.innerHTML = "<p>게시글을 불러올 수 없습니다.</p>";
+            location.replace("/pages/404.html");
         }
     }
 
