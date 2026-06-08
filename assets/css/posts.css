@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #fff;
+    color: #000;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+}
+
+.posts-page {
+    max-width: 920px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 96px 40px 120px;
+}
+
+/* =========================
+   HERO
+   ========================= */
+
+.posts-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.posts-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+
+    margin-bottom: 40px;
+}
+
+.mini-title {
+    font-size: 13px;
+    color: #777;
+    letter-spacing: 0.18em;
+}
+
+.back-link {
+    color: #000;
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.back-link::after {
+    content: " →";
+}
+
+.posts-title {
+    margin: 0;
+
+    font-size: clamp(42px, 7vw, 72px);
+
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+    font-weight: 700;
+}
+
+.posts-desc {
+    max-width: 560px;
+
+    margin: 24px 0 0;
+
+    font-size: 17px;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* =========================
+   POSTS
+   ========================= */
+
+.posts-section {
+    margin-top: 48px;
+}
+
+.posts-grid {
+    border-top: 1px solid #000;
+}
+
+.post-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 32px;
+
+    padding: 36px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.post-meta {
+    min-width: 0;
+}
+
+.post-tag {
+    display: inline;
+
+    text-decoration: none;
+    
+    font-size: 13px;
+    color: #777;
+    letter-spacing: 0.06em;
+}
+
+.post-tag:not(:last-of-type)::after {
+    content: "·";
+    margin: 0 2px;
+    color: #999;
+}
+
+.post-tag:hover {
+    color: #000;
+}
+
+.post-date {
+    margin-top: 10px;
+
+    font-size: 13px;
+    color: #777;
+    letter-spacing: 0.06em;
+}
+
+.post-title {
+    grid-column: 2;
+
+    font-size: clamp(24px, 4vw, 38px);
+    line-height: 1.1;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.post-description {
+    grid-column: 2;
+
+    max-width: 620px;
+
+    margin: -12px 0 0;
+
+    font-size: 17px;
+    line-height: 1.6;
+    color: #555;
+
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.post-item > a {
+    grid-column: 2;
+
+    width: fit-content;
+    margin-top: -8px;
+
+    color: #000;
+    text-decoration: none;
+}
+
+.read-btn {
+    padding: 0;
+
+    border: none;
+    background: none;
+
+    color: #000;
+
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.read-btn::after {
+    content: " →";
+}
+
+/* =========================
+   TOAST
+   ========================= */
+
+.copy-toast {
+    position: fixed;
+
+    left: 50%;
+    bottom: 28px;
+
+    transform: translateX(-50%) translateY(10px);
+
+    padding: 12px 18px;
+
+    border: 1px solid #000;
+
+    background: #fff;
+    color: #000;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+
+    z-index: 9999;
+}
+
+.copy-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 760px) {
+
+    .posts-page {
+        padding: 48px 24px 96px;
+    }
+
+    .posts-meta {
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 18px;
+        margin-bottom: 32px;
+    }
+
+    .posts-title {
+        font-size: clamp(40px, 12vw, 56px);
+    }
+
+    .posts-desc {
+        font-size: 16px;
+    }
+
+    .post-item {
+        display: block;
+        padding: 30px 0;
+    }
+
+    .post-meta {
+        margin-bottom: 14px;
+    }
+
+    .post-date {
+        margin-top: 10px;
+    }
+
+    .post-title {
+        font-size: clamp(24px, 8vw, 36px);
+    }
+
+    .post-description {
+        margin: 14px 0 0;
+        font-size: 16px;
+    }
+
+    .post-item > a {
+        display: inline-block;
+        margin-top: 22px;
+    }
+}

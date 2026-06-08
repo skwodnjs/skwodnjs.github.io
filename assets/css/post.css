@@ -1,0 +1,342 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #fff;
+    color: #000;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+}
+
+.post-page {
+    max-width: 920px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 96px 40px 120px;
+}
+
+.post-container {
+    width: 100%;
+}
+
+/* =========================
+   HEADER
+   ========================= */
+
+.post-header {
+    padding-bottom: 64px;
+    border-bottom: 1px solid #000;
+}
+
+.post-meta {
+    margin-bottom: 36px;
+}
+
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.post-tag,
+.post-date {
+    text-decoration: none;
+    font-size: 13px;
+    color: #777;
+    letter-spacing: 0.1em;
+}
+
+.post-tag:hover {
+    color: #000;
+}
+
+.tag-separator {
+    margin: 0 8px;
+    color: #999;
+}
+
+.post-date {
+    font-size: 13px;
+    color: #777;
+    letter-spacing: 0.1em;
+}
+
+.post-title {
+    max-width: 820px;
+
+    margin: 0;
+
+    font-size: clamp(42px, 7vw, 72px);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    font-weight: 700;
+
+    word-break: keep-all;
+}
+
+/* =========================
+   CONTENT
+   ========================= */
+
+.post-content {
+    max-width: 760px;
+
+    margin: 10px auto 0;
+
+    font-size: 18px;
+    line-height: 1.85;
+    color: #222;
+
+    overflow-x: hidden;
+}
+
+.post-content p {
+    margin-bottom: 20px;
+}
+
+.post-content h1 {
+    font-size: 2.4em;
+    margin-top: 48px;
+    margin-bottom: 18px;
+    font-weight: 700;
+}
+
+.post-content h2 {
+    font-size: 1.9em;
+    margin-top: 32px;
+    margin-bottom: 18px;
+}
+
+.post-content h3 {
+    font-size: 1.7em;
+    margin-top: 30px;
+    margin-bottom: 18px;
+}
+
+.post-content h4 {
+    font-size: 1.4em;
+    margin-top: 27px;
+    margin-bottom: 18px;
+}
+
+.post-content h5 {
+    font-size: 1.2em;
+    margin-top: 22px;
+    margin-bottom: 18px;
+}
+
+.post-content h6 {
+    font-size: 1.1em;
+    margin-top: 18px;
+    margin-bottom: 18px;
+}
+
+.post-content hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #ccc, transparent);
+    margin: 64px 0;
+}
+
+.post-content ul,
+ol {
+    padding-left: 24px;
+}
+
+.post-content li {
+    margin: 4px 0;
+    padding-left: 4px;
+}
+
+.post-content blockquote {
+    text-align: center;
+    margin: 48px 0;
+    padding: 0;
+    border: none;
+
+    font-size: 1.1em;
+    font-style: italic;
+}
+
+.post-content a {
+    color: #5f84f0;
+    text-decoration: none;
+}
+
+.post-content a:hover {
+    color: #7b9cff;
+    text-decoration: underline;
+}
+
+.image-wrapper {
+    overflow-x: auto;
+    margin: 1.5em 0;
+}
+
+.image-wrapper img {
+    display: block;
+
+    max-width: none;
+    height: auto;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    margin: 1.5em 0;
+}
+
+.table-wrapper table {
+    margin: 0;
+}
+
+.post-content table {
+    width: 100%;
+    border-collapse: separate;
+    margin: 24px 0;
+    border: 1px solid #dcdcdc;
+    border-spacing: 0;
+    overflow: hidden;
+    font-size: 0.9em;
+}
+
+.post-content thead {
+    background: #f7f7f7;
+}
+
+.post-content tbody tr:hover {
+    background: #fafafa;
+    transition: .15s ease;
+}
+
+.post-content thead th {
+    padding: 4px;
+    text-align: center;
+    font-weight: 600;
+    border-bottom: 1px solid #dcdcdc;
+    border-right: 1px solid #e6e6e6;
+}
+
+.post-content tbody td {
+    padding: 4px 10px;
+    border-bottom: 1px solid #eeeeee;
+    border-right: 1px solid #eeeeee;
+}
+
+.post-content tbody td:last-child {
+    border-right: none;
+}
+
+.post-content thead th:last-child {
+    border-right: none;
+}
+
+.post-content tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.post-content mjx-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+/* =========================
+   BUTTONS
+   ========================= */
+
+.back-btn {
+    margin-top: 48px;
+    padding: 0;
+
+    border: none;
+    background: none;
+    color: #000;
+
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.back-btn::after {
+    content: " →";
+}
+
+.scroll-bottom-btn {
+    position: fixed;
+    right: 28px;
+    bottom: 28px;
+
+    width: 44px;
+    height: 44px;
+
+    border: 1px solid #000;
+    background: #fff;
+    color: #000;
+
+    font-size: 18px;
+
+    cursor: pointer;
+    z-index: 1000;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+.scroll-bottom-btn:hover {
+    background: #000;
+    color: #fff;
+}
+
+.scroll-bottom-btn.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 760px) {
+    .post-page {
+        padding: 48px 24px 96px;
+    }
+
+    .post-header {
+        padding: 64px 0 48px;
+    }
+
+    .post-title {
+        font-size: clamp(36px, 11vw, 52px);
+    }
+
+    .post-content {
+        margin-top: 48px;
+
+        font-size: 16px;
+        line-height: 1.8;
+    }
+
+    .post-content h1 {
+        font-size: 32px;
+    }
+
+    .post-content h2 {
+        font-size: 28px;
+    }
+
+    .post-content h3 {
+        font-size: 23px;
+    }
+
+    .scroll-bottom-btn {
+        right: 20px;
+        bottom: 20px;
+    }
+}

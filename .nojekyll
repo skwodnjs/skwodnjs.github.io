@@ -1,0 +1,2 @@
+python -m post.build
+python -m post.rebuild

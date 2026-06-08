@@ -1,0 +1,51 @@
+[
+  {
+    "id": "05955899-7177-4eb4-b20b-b9fb05550f2d",
+    "title": "Black-Scholes Equation",
+    "description": "# Derivative 어떤 기초자산 $(S_t)$에 의존하는 파생상품을 생각하자. 기초자산의 가격은 GBM을 따른다고 가정하자. 즉, 다음이 성립한다. $$ dS_t = \\mu S_t dt + \\sigma S_t dW_t $$ 이 파생상품의 가치가 시간과 기초자산의 가격으로 표현된다고 가정하면, 즉 $V_t = V(t, S_t)$의 꼴로 표현할 수 있다고",
+    "date": "2026. 04. 29.",
+    "tags": [
+      "Mathematics",
+      "Financial Mathematics"
+    ]
+  },
+  {
+    "id": "11ae5efc-8df6-4b57-b74b-c5464c8a3240",
+    "title": "PDE & BSDE",
+    "description": "# PDE & BSDE ## Classical Feynman-Kac Theorem Linear PDE의 경우, Feynman-Kac 정리를 통해 PDE의 해를 확률과정의 기댓값으로 표현할 수 있다. ## Quasilinear Parabolic PDEs & BSDE [논문 1](https://link.springer.com/article/10.1007/s00",
+    "date": "2026. 06. 09.",
+    "tags": [
+      "Mathematics",
+      "BSDE"
+    ]
+  },
+  {
+    "id": "3033a852-fbb7-443c-b255-3a48a8e88582",
+    "title": "주식과 옵션, 그리고 Black-Scholes Equation의 등장",
+    "description": "# 경제 화폐라는 개념이 생기기 이전에는, 물물교환을 통해 필요한 물품들을 얻었을 것이다. 이런 방식은 서로 이해관계가 맞아야만 교환이 성사되고, 필요한 물품을 얻어내기까지 시간이 오래 걸릴 수밖에 없다. 그래서 화폐라는 개념이 등장했다. 화폐는 기본적으로 신뢰에 바탕을 두고 있다. 예를 들어, 내가 100원을 가지고 재료들을 사서 엄청나게 맛있는 빵을 만",
+    "date": "2026. 04. 22.",
+    "tags": [
+      "Mathematics",
+      "Financial Mathematics"
+    ]
+  },
+  {
+    "id": "6afd94c0-33c1-48a7-8854-d142ab5c0d35",
+    "title": "Python Setting",
+    "description": "# Python ## 버전 선택 [여기](https://www.python.org/downloads/)에서 필요한 버전을 선택해 다운로드하면 된다. 새 프로젝트를 생성하는 경우 되도록 최신 버전을 추천하지만, 일부 라이브러리가 최신 Python을 지원하지 않을 수 있으니 의존성 확인이 필요하다. `requirements.txt` 등으로 가상환경을 새로 생성",
+    "date": "2026. 02. 21.",
+    "tags": [
+      "Python"
+    ]
+  },
+  {
+    "id": "markdown20render20test",
+    "title": "Markdown Render Test",
+    "description": "# Heading 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labor",
+    "date": "2026. 02. 17.",
+    "tags": [
+      "Test",
+      "Markdown"
+    ]
+  }
+]
