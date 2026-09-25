@@ -61,12 +61,16 @@ footer a:hover {
 }
 
 .page-hero {
+    position: relative;
     padding: 94px 0 88px;
     border-bottom: 1px solid var(--line);
 }
 
 .eyebrow {
-    margin: 0 0 16px;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    margin: 0;
     color: var(--soft);
     font-size: 11px;
     font-weight: 600;
@@ -251,6 +255,10 @@ footer {
 
     .page-hero {
         padding: 58px 0 54px;
+    }
+
+    .eyebrow {
+        top: 34px;
     }
 
     .profile-section,
