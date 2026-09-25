@@ -80,6 +80,7 @@ for _, file in build_files:
         "title": frontmatter.get("title", ""),
         "description": body[:200],
         "date": frontmatter.get("date", ""),
+        "category": frontmatter.get("category", "").strip().lower(),
         "tags": parse_tags(frontmatter.get("tags", "[]")),
     }
 
