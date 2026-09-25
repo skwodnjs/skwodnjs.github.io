@@ -2,72 +2,90 @@ from pathlib import Path
 import json
 import re
 
-articles_dir = Path("post/articles")
-json_path = Path("data/posts.json")
-allowed_categories = {"mathematics", "research"}
+ARTICLES_DIR = Path("post/articles")
+INDEX_PATH = Path("data/posts.json")
+ALLOWED_CATEGORIES = {"mathematics", "research"}
 
 
-def parse_frontmatter_and_body(text):
+def parse_frontmatter(text, path):
+    text = text.lstrip("\ufeff")
     lines = text.splitlines()
 
     if not lines or lines[0].strip() != "---":
         return {}, text
 
     frontmatter = {}
-    end_index = None
 
-    for i in range(1, len(lines)):
-        if lines[i].strip() == "---":
-            end_index = i
-            break
+    for i, line in enumerate(lines[1:], start=1):
+        if line.strip() == "---":
+            body = "\n".join(lines[i + 1:]).strip()
+            return frontmatter, body
 
-        if ":" in lines[i]:
-            key, value = lines[i].split(":", 1)
-            frontmatter[key.strip()] = value.strip()
+        if ":" not in line:
+            continue
 
-    if end_index is None:
-        return {}, text
+        key, value = line.split(":", 1)
+        key, value = key.strip(), value.strip()
 
-    body = "\n".join(lines[end_index + 1:]).strip()
-    return frontmatter, body
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
+            value = value[1:-1]
+
+        frontmatter[key] = value
+
+    raise ValueError(f"{path}: unclosed front matter")
 
 
 def make_description(body, length=200):
-    body = re.sub(r"\s+", " ", body).strip()
-    return body[:length]
+    text = re.sub(r"```[\s\S]*?```", " ", body)
+    text = re.sub(r"\$\$[\s\S]*?\$\$", " ", text)
+    text = re.sub(r"\$[^$\n]+\$", " ", text)
+    text = re.sub(r"!\[([^\]]*)\]\([^)]*\)", r"\1", text)
+    text = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", text)
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = re.sub(r"(?m)^\s{0,3}#{1,6}\s*", "", text)
+    text = re.sub(r"(?m)^\s*>\s?", "", text)
+    text = re.sub(r"(?m)^\s*(?:[-+*]|\d+\.)\s+", "", text)
+    text = re.sub(r"(?m)^\s*[-*_]{3,}\s*$", " ", text)
+    text = re.sub(r"[`*_~]", "", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text[:length]
 
 
-posts = []
+def build_index():
+    posts = []
 
-for file in sorted(articles_dir.glob("*.md"), key=lambda file: file.name):
-    text = file.read_text(encoding="utf-8")
-    frontmatter, body = parse_frontmatter_and_body(text)
+    for path in sorted(ARTICLES_DIR.glob("*.md")):
+        frontmatter, body = parse_frontmatter(path.read_text(encoding="utf-8"), path)
+        category = frontmatter.get("category", "").strip().lower()
 
-    category = frontmatter.get("category", "").strip().lower()
+        if not category:
+            continue
 
-    if not category:
-        continue
+        if category not in ALLOWED_CATEGORIES:
+            raise ValueError(f"{path}: unknown category '{category}'")
 
-    if category not in allowed_categories:
-        raise ValueError(f"{file}: unknown category '{category}'")
+        title = frontmatter.get("title", "").strip()
+        date = frontmatter.get("date", "").strip()
 
-    title = frontmatter.get("title", "").strip()
-    date = frontmatter.get("date", "").strip()
+        if not title or not date:
+            raise ValueError(f"{path}: published posts require title and date")
 
-    if not title or not date:
-        raise ValueError(f"{file}: published posts require title and date")
+        posts.append({
+            "id": path.stem,
+            "title": title,
+            "description": frontmatter.get("description", "").strip() or make_description(body),
+            "date": date,
+            "category": category,
+        })
 
-    posts.append({
-        "id": file.stem,
-        "title": title,
-        "description": make_description(body),
-        "date": date,
-        "category": category,
-    })
+    output = json.dumps(posts, ensure_ascii=False, indent=2) + "\n"
+    INDEX_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    if INDEX_PATH.exists() and INDEX_PATH.read_text(encoding="utf-8") == output:
+        return
+
+    INDEX_PATH.write_text(output, encoding="utf-8")
 
 
-json_path.parent.mkdir(parents=True, exist_ok=True)
-
-with json_path.open("w", encoding="utf-8") as f:
-    json.dump(posts, f, ensure_ascii=False, indent=2)
-    f.write("\n")
+if __name__ == "__main__":
+    build_index()

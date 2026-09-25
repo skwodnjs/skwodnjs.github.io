@@ -4,10 +4,15 @@ on:
   push:
     paths:
       - "post/articles/*.md"
+      - "post/build.py"
   workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: post-index-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -16,6 +21,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
 
       - name: Build post index
         run: python post/build.py
@@ -30,4 +37,4 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/posts.json
           git commit -m "Update post index"
-          git push
+          git push origin "HEAD:${GITHUB_REF_NAME}"
