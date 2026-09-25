@@ -107,6 +107,24 @@ h2 {
     letter-spacing: -0.025em;
 }
 
+.section-title-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.section-title-link::after {
+    content: "→";
+    color: var(--soft);
+    font-size: 14px;
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.section-title-link:hover::after {
+    color: var(--ink);
+    transform: translateX(2px);
+}
+
 .interest-list {
     display: flex;
     flex-wrap: wrap;
@@ -267,26 +285,5 @@ footer {
 
     .timeline-row {
         padding: 14px 0;
-    }
-}
-
-.section-desc {
-    max-width: 580px;
-    margin: 12px 0 0;
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.7;
-}
-
-.exploration-map {
-    width: 100%;
-    height: 360px;
-    margin-top: 22px;
-}
-
-@media (max-width: 600px) {
-    .exploration-map {
-        height: 420px;
-        margin-top: 18px;
     }
 }

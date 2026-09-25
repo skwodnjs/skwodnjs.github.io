@@ -70,6 +70,17 @@
         return null;
     }
 
+    function pageInfo(meta) {
+        const label = document.body.dataset.metaLabel;
+        const href = document.body.dataset.metaHref;
+
+        if (label && href) {
+            return { label, href };
+        }
+
+        return categoryInfo(meta.category);
+    }
+
     function protectMath(md) {
         const mathBlocks = [];
 
@@ -170,9 +181,10 @@
     }
 
     async function loadPost() {
-        const id = safeId(getParam("id"));
+        const source = document.body.dataset.source || "";
+        const id = source ? null : safeId(getParam("id"));
 
-        if (!id) {
+        if (!source && !id) {
             renderNotFound();
             return;
         }
@@ -185,7 +197,8 @@
         if (!postContent) return;
 
         try {
-            const res = await fetch(`/post/articles/${id}.md`, {
+            const url = source || `/post/articles/${id}.md`;
+            const res = await fetch(url, {
                 cache: "no-store"
             });
 
@@ -196,7 +209,7 @@
 
             const raw = await res.text();
             const { meta, content } = parseFrontMatter(raw);
-            const info = categoryInfo(meta.category);
+            const info = pageInfo(meta);
 
             if (postTitle) {
                 postTitle.textContent = meta.title || "Untitled";
