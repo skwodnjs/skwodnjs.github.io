@@ -1,20 +1,34 @@
 [
   {
-    "id": "05955899-7177-4eb4-b20b-b9fb05550f2d",
+    "id": "black-scholes-equation",
     "title": "Black-Scholes Equation",
     "description": "Derivative 어떤 기초자산 (S_t)에 의존하는 파생상품을 생각하자. 기초자산의 가격은 GBM을 따른다고 가정하자. 즉, 다음이 성립한다. dS_t = \\mu S_t dt + \\sigma S_t dW_t 이 파생상품의 가치가 시간과 기초자산의 가격으로 표현된다고 가정하면, 즉 V_t = V(t, S_t)의 꼴로 표현할 수 있다고 가정하면, Ito's",
     "date": "2026. 04. 29.",
     "category": "mathematics"
   },
   {
-    "id": "11ae5efc-8df6-4b57-b74b-c5464c8a3240",
+    "id": "inf_min_sup_max",
+    "title": "infimum과 minimum, supremum과 maximum",
+    "description": "infimum과 minimum, supremum과 maximum Definition 부분순서집합 (P, \\leq)와 부분집합 A \\subset P를 생각하자. 어떤 l \\in P가 모든 a \\in A에 대해 l \\leq a 를 만족하면 l을 A의 lower bound라고 한다. A의 lower bound 중 가장 큰 원소를 infimum이라 하고, \\inf",
+    "date": "2026. 09. 25.",
+    "category": "mathematics"
+  },
+  {
+    "id": "markdown-render-test",
+    "title": "Markdown Render Test",
+    "description": "Heading 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris",
+    "date": "2026. 02. 17.",
+    "category": "mathematics"
+  },
+  {
+    "id": "pde-and-bsde",
     "title": "PDE & BSDE",
     "description": "PDE & BSDE Classical Feynman-Kac Theorem Linear PDE의 경우, Feynman-Kac 정리를 통해 PDE의 해를 확률과정의 기댓값으로 표현할 수 있다. Quasilinear Parabolic PDEs & BSDE 논문 1에서는, 다음과 같은 흐름으로 BSDE와 Quasilinear Parabolic PDEs의 관계에 대",
     "date": "2026. 06. 09.",
     "category": "mathematics"
   },
   {
-    "id": "3033a852-fbb7-443c-b255-3a48a8e88582",
+    "id": "stock-and-option",
     "title": "주식과 옵션, 그리고 Black-Scholes Equation의 등장",
     "description": "경제 화폐라는 개념이 생기기 이전에는, 물물교환을 통해 필요한 물품들을 얻었을 것이다. 이런 방식은 서로 이해관계가 맞아야만 교환이 성사되고, 필요한 물품을 얻어내기까지 시간이 오래 걸릴 수밖에 없다. 그래서 화폐라는 개념이 등장했다. 화폐는 기본적으로 신뢰에 바탕을 두고 있다. 예를 들어, 내가 100원을 가지고 재료들을 사서 엄청나게 맛있는 빵을 만들었",
     "date": "2026. 04. 22.",
