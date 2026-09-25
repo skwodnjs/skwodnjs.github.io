@@ -1,6 +1,5 @@
 ---
 title: Markdown Render Test
-tags: [Test, Markdown]
 author: JWN
 date: 2026. 02. 17.
 ---
