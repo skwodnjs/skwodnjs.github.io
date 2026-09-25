@@ -2,66 +2,62 @@ document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById("exploration-map");
     if (!container || typeof cytoscape === "undefined") return;
 
-    const cy = cytoscape({
+    cytoscape({
         container,
         elements: [
-            { data: { id: "convex", label: "Convex Optimization" }, classes: "core", position: { x: 285, y: 185 } },
-            { data: { id: "duality", label: "Duality-based\nReformulation" }, classes: "core", position: { x: 535, y: 185 } },
+            { data: { id: "convex", label: "Convex Optimization" }, position: { x: 285, y: 185 } },
+            { data: { id: "duality", label: "Duality-based Reformulation" }, position: { x: 535, y: 185 } },
+            { data: { id: "ai", label: "AI / ML" }, position: { x: 285, y: 55 } },
+            { data: { id: "deep-bsde", label: "Deep BSDE" }, position: { x: 95, y: 55 } },
+            { data: { id: "sciml", label: "Scientific ML" }, position: { x: 475, y: 55 } },
+            { data: { id: "drpo", label: "DRPO" }, position: { x: 410, y: 310 } },
 
-            { data: { id: "ai", label: "AI / ML" }, classes: "field", position: { x: 285, y: 55 } },
-            { data: { id: "deep-bsde", label: "Deep BSDE" }, classes: "topic", position: { x: 95, y: 65 } },
-            { data: { id: "sciml", label: "Scientific ML" }, classes: "topic", position: { x: 475, y: 55 } },
-
-            { data: { id: "drpo", label: "DRPO" }, classes: "topic", position: { x: 410, y: 310 } },
-
-            { data: { id: "e-core", source: "convex", target: "duality" } },
-            { data: { id: "e-ai", source: "ai", target: "convex" } },
-            { data: { id: "e-bsde", source: "ai", target: "deep-bsde" } },
-            { data: { id: "e-sciml", source: "ai", target: "sciml" } },
-            { data: { id: "e-drpo-1", source: "convex", target: "drpo" } },
-            { data: { id: "e-drpo-2", source: "duality", target: "drpo" } }
+            { data: { id: "edge-core", source: "convex", target: "duality" } },
+            { data: { id: "edge-ai", source: "ai", target: "convex" } },
+            { data: { id: "edge-bsde", source: "ai", target: "deep-bsde" } },
+            { data: { id: "edge-sciml", source: "ai", target: "sciml" } },
+            { data: { id: "edge-drpo-convex", source: "convex", target: "drpo" } },
+            { data: { id: "edge-drpo-duality", source: "duality", target: "drpo" } }
         ],
         layout: {
             name: "preset",
-            fit: false
+            fit: true,
+            padding: 36
         },
         style: [
             {
                 selector: "node",
                 style: {
                     "background-color": "#fbfaf7",
-                    "border-color": "#c9c5bd",
+                    "border-color": "#c4c0b8",
                     "border-width": 1,
                     "shape": "round-rectangle",
                     "width": "label",
-                    "height": 28,
-                    "padding": 9,
+                    "height": 30,
+                    "padding": 10,
                     "label": "data(label)",
                     "font-family": "Inter, Noto Sans KR, sans-serif",
                     "font-size": 11,
-                    "font-weight": 500,
-                    "color": "#77746f",
+                    "font-weight": "normal",
+                    "color": "#5f5c57",
                     "text-wrap": "wrap",
-                    "text-max-width": 140,
+                    "text-max-width": 165,
                     "text-valign": "center",
                     "text-halign": "center"
                 }
             },
             {
-                selector: ".core",
+                selector: "#convex, #duality",
                 style: {
                     "border-color": "#77746f",
                     "border-width": 1.5,
-                    "height": 34,
-                    "padding": 11,
-                    "font-size": 12.5,
-                    "font-weight": 600,
-                    "color": "#191919",
-                    "text-max-width": 165
+                    "font-size": 12,
+                    "font-weight": "bold",
+                    "color": "#191919"
                 }
             },
             {
-                selector: ".field",
+                selector: "#ai",
                 style: {
                     "border-color": "#9f9b94",
                     "color": "#3f3d3a"
@@ -70,8 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
             {
                 selector: "edge",
                 style: {
-                    "width": 1.2,
-                    "line-color": "#bdb9b1",
+                    "width": 1.25,
+                    "line-color": "#aaa69f",
                     "curve-style": "bezier"
                 }
             }
@@ -81,12 +77,4 @@ document.addEventListener("DOMContentLoaded", () => {
         userPanningEnabled: false,
         userZoomingEnabled: false
     });
-
-    const fit = () => {
-        cy.resize();
-        cy.fit(cy.elements(), window.innerWidth <= 600 ? 24 : 36);
-    };
-
-    requestAnimationFrame(fit);
-    window.addEventListener("resize", fit);
 });
