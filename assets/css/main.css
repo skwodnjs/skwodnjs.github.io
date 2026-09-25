@@ -1,210 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Inter:wght@400;500;600&display=swap');
 
-* {
-    box-sizing: border-box;
+:root {
+    --ink: #181817;
+    --muted: #77736c;
+    --line: #e8e5df;
+    --paper: #fbfaf7;
+    --serif: "Gowun Batang", Georgia, serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-body {
-    margin: 0;
-    background: #fff;
-    color: #000;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
-}
-
-.slide {
-    max-width: 920px;
-    min-height: 100vh;
-    margin: 0 auto;
-    padding: 80px 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.top-line,
-.bottom-line {
-    width: 100%;
-    height: 1px;
-    background: #000;
-}
-
-.top-line {
-    margin-bottom: 56px;
-}
-
-.bottom-line {
-    margin-top: 56px;
-}
-
-/* small - 1 */
-
-.mini-title {
-    margin: 0 0 24px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #777;
-    letter-spacing: 0.18em;
-}
-
-
-h1,
-h2 {
-    margin: 0;
-    font-weight: 700;
-    letter-spacing: -0.05em;
-}
-
-/* big - 1 */
-
-h1 {
-    font-size: clamp(56px, 10vw, 96px);
-}
-
-/* big - 2 */
-
-h2 {
-    font-size: clamp(38px, 7vw, 64px);
-    line-height: 1.05;
-}
-
-.subtitle {
-    margin: 28px 0 0;
-    font-size: 20px;
-    line-height: 1.6;
-    color: #666;
-}
-
-.desc {
-    max-width: 680px;
-    margin: 36px 0 0;
-}
-
-.tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 36px;
-}
-
-.recent-tag {
-    color: #444;
-    padding: 8px 12px;
-    margin: 0;
-    border: 1px solid #444;
-    font-size: 13px;
-    line-height: 1;
-}
-
-.info-list,
-.post-list,
-.stats {
-    margin-top: 38px;
-    border-top: 1px solid #000;
-}
-
-.info-list>div,
-.post-item,
-.stats>div {
-    padding: 24px 0;
-    border-bottom: 1px solid #ddd;
-}
-
-/* small - 2 */
-
-.info-list>div>span,
-.post-tags>span,
-.stats>div>span {
-    display: block;
-    margin-bottom: 10px;
-
-    font-size: 13px;
-    color: #777;
-    letter-spacing: 0.06em;
-}
-
-.post-tags {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-
-    margin-bottom: 10px;
-}
-
-.post-tags span {
-    display: inline;
-}
-
-.post-tags span:not(:last-child)::after {
-    content: "·";
-    margin: 0 8px;
-    color: #777;
-}
-
-/* small - 3 */
-
-.info-list p,
-.post-item p,
-.desc {
-    font-size: 18px;
-    line-height: 1.7;
-    color: #555;
-}
-
-.post-item p {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-}
-
-.post-list h3 {
-    margin: 0;
-}
-
-.post-link {
-    margin: 0 0 17px 0;
-
-    font-size: clamp(24px, 4vw, 38px);
-    line-height: 1.25;
-    font-weight: 700;
-
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-}
-
-.stats strong {
-    display: block;
-
-    margin-top: 12px;
-    font-size: clamp(42px, 7vw, 58px);
-    line-height: 1;
-    letter-spacing: -0.05em;
-}
-
-a {
-    width: fit-content;
-    margin-top: 36px;
-    color: #000;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 600;
-}
-
-@media (max-width: 700px) {
-    .slide {
-        padding: 60px 24px;
-    }
-
-    .subtitle,
-    .desc,
-    .info-list p,
-    .post-item p {
-        font-size: 16px;
-    }
-
-    .recent-tag {
-        font-size: 12px;
-    }
+* { box-sizing: border-box; }
+html { font-size: 16px; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+.site { width: min(100% - 48px, 760px); margin: 0 auto; }
+.header { height: 92px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
+.name { font-family: var(--serif); font-size: 19px; font-weight: 700; letter-spacing: -0.02em; }
+nav { display: flex; gap: 24px; }
+nav a, .section-head a { color: var(--muted); font-size: 13px; font-weight: 500; }
+nav a:hover, .section-head a:hover, .post-title:hover { color: var(--ink); }
+.intro { padding: 112px 0 104px; border-bottom: 1px solid var(--line); }
+.eyebrow { margin: 0 0 22px; color: var(--muted); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+h1 { max-width: 650px; margin: 0; font-family: var(--serif); font-size: clamp(44px, 8vw, 68px); font-weight: 400; line-height: 1.16; letter-spacing: -0.045em; }
+.lead { max-width: 520px; margin: 30px 0 0; color: var(--muted); font-family: var(--serif); font-size: 17px; line-height: 1.85; }
+.recent { padding: 64px 0 88px; }
+.section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
+h2 { margin: 0; font-family: var(--serif); font-size: 21px; font-weight: 700; letter-spacing: -0.025em; }
+.post-item { display: grid; grid-template-columns: 1fr auto; gap: 24px; padding: 24px 0; border-top: 1px solid var(--line); }
+.post-title { font-family: var(--serif); font-size: 19px; font-weight: 700; line-height: 1.55; transition: color .15s ease; }
+.post-description { margin: 7px 0 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.post-date { padding-top: 5px; color: var(--muted); font-size: 11px; white-space: nowrap; }
+.empty { padding: 24px 0; border-top: 1px solid var(--line); color: var(--muted); font-family: var(--serif); font-size: 15px; }
+footer { display: flex; justify-content: space-between; padding: 25px 0 42px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
+@media (max-width: 600px) {
+    .site { width: min(100% - 36px, 760px); }
+    .header { height: 76px; }
+    nav { gap: 18px; }
+    .intro { padding: 78px 0 72px; }
+    h1 { font-size: clamp(40px, 13vw, 54px); }
+    .lead { font-size: 16px; }
+    .recent { padding: 50px 0 64px; }
+    .post-item { grid-template-columns: 1fr; gap: 7px; }
+    .post-date { padding-top: 0; }
+    footer { gap: 20px; }
 }
