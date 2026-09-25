@@ -9,7 +9,7 @@
   {
     "id": "inf_min_sup_max",
     "title": "infimum과 minimum, supremum과 maximum",
-    "description": "infimum과 minimum, supremum과 maximum Definition 부분순서집합 (P, \\leq)와 부분집합 A \\subset P를 생각하자. 어떤 l \\in P가 모든 a \\in A에 대해 l \\leq a 를 만족하면 l을 A의 lower bound라고 한다. A의 lower bound 중 가장 큰 원소를 infimum이라 하고, \\inf",
+    "description": "infimum과 minimum, supremum과 maximum Definition 부분순서집합 (P, \\leq)와 부분집합 A \\subseteq P를 생각하자. 어떤 l \\in P가 모든 a \\in A에 대해 l \\leq a 를 만족하면 l을 A의 lower bound라고 한다. A의 lower bound 중 가장 큰 원소를 infimum이라 하고, \\i",
     "date": "2026. 09. 25.",
     "category": "mathematics"
   },
