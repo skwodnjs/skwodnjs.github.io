@@ -108,21 +108,11 @@ h2 {
 }
 
 .section-title-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+    transition: color 0.15s ease;
 }
 
-.section-title-link::after {
-    content: "→";
-    color: var(--soft);
-    font-size: 14px;
-    transition: color 0.15s ease, transform 0.15s ease;
-}
-
-.section-title-link:hover::after {
-    color: var(--ink);
-    transform: translateX(2px);
+.section-title-link:hover {
+    color: var(--muted);
 }
 
 .interest-list {

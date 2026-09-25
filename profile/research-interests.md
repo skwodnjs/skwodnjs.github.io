@@ -1,28 +1,27 @@
 ---
-title: Research Interests
+title: 연구 관심 분야
 author: JWN
-date: 2026. 09. 25.
 ---
 
-My research interests are centered on **convex optimization** and **duality-based reformulation**. I am interested in using these tools not only as abstract theory, but as a common language for turning difficult problems into formulations that can be analyzed and solved reliably.
+나의 연구 관심은 **볼록 최적화(Convex Optimization)**와 **쌍대성을 이용한 재구성(Duality-based Reformulation)**을 중심으로 한다. 두 개념을 독립적인 이론으로 공부하는 데 그치기보다, 복잡한 문제의 구조를 파악하고 이를 분석 및 계산이 가능한 형태로 바꾸는 공통적인 방법론으로 활용하는 데 관심이 있다.
 
-The specific application areas may change over time. At the moment, I am particularly interested in two directions: **distributionally robust portfolio optimization** and **AI / scientific machine learning**.
+구체적인 응용 분야는 앞으로 변할 수 있다. 현재는 특히 **분포강건 포트폴리오 최적화(Distributionally Robust Portfolio Optimization)**와 **AI / Scientific Machine Learning**을 주요 탐색 방향으로 생각하고 있다.
 
-## Convex Optimization and Duality
+## 볼록 최적화와 쌍대성
 
-Convex optimization provides a setting in which global optimality, tractable algorithms, and structural analysis can often be developed together. I am especially interested in problems where an apparently complicated formulation can be transformed into a convex problem by identifying the right variables, constraints, or representation.
+볼록 최적화에서는 전역 최적성, 계산 가능한 알고리즘, 문제의 구조에 대한 분석을 비교적 일관된 틀 안에서 다룰 수 있다. 특히 처음에는 복잡해 보이는 문제가 적절한 변수, 제약식, 표현 방식을 선택함으로써 볼록 최적화 문제로 바뀌는 과정에 관심이 있다.
 
-Duality is closely connected to this viewpoint. A dual formulation can provide more than an alternative optimization problem: it can expose hidden structure, produce useful bounds, and convert an infinite-dimensional or nested problem into a finite-dimensional tractable one.
+쌍대성은 이러한 관점과 밀접하게 연결된다. 쌍대 문제는 단순히 원문제와 다른 형태의 최적화 문제를 제공하는 데 그치지 않고, 원문제에 숨어 있는 구조를 드러내고, 유용한 bound를 제공하며, 경우에 따라 무한차원 또는 중첩된 최적화 문제를 유한차원의 계산 가능한 문제로 바꾸어 준다.
 
-For this reason, my main methodological interest is not limited to solving a given optimization problem numerically. I am interested in understanding **how a problem can be reformulated through convexity and duality, and what information becomes visible after that reformulation**.
+따라서 나의 관심은 주어진 최적화 문제를 단순히 수치적으로 푸는 데 있지 않다. **볼록성과 쌍대성을 이용해 문제를 어떻게 재구성할 수 있는지, 그리고 그 재구성을 통해 어떤 구조가 새롭게 드러나는지**를 이해하는 것이 주요 관심사다.
 
-## Distributionally Robust Portfolio Optimization
+## 분포강건 포트폴리오 최적화
 
-One application direction is **Distributionally Robust Portfolio Optimization (DRPO)**.
+현재 관심을 두고 있는 응용 방향 중 하나는 **분포강건 포트폴리오 최적화(DRPO)**이다.
 
-Classical portfolio optimization typically assumes that the distribution of asset returns is known or estimated from historical data. In practice, however, the estimated distribution is itself uncertain. Distributionally robust optimization addresses this by optimizing against a set of plausible probability distributions rather than a single estimated model.
+전통적인 포트폴리오 최적화에서는 자산 수익률의 확률분포가 알려져 있거나 과거 데이터로부터 충분히 잘 추정되었다고 가정하는 경우가 많다. 그러나 실제로는 추정된 분포 자체에도 불확실성이 존재한다. 분포강건 최적화는 하나의 추정 분포만을 사용하는 대신, 가능한 확률분포들의 집합을 고려하고 그중 불리한 경우에 대해서도 강건한 의사결정을 찾는다.
 
-A generic formulation has the form
+전형적인 형태는 다음과 같이 쓸 수 있다.
 
 $$
 \min_{w \in \mathcal{W}}
@@ -30,56 +29,56 @@ $$
 \rho_{\mathbb{P}}\!\left(L(w,\xi)\right),
 $$
 
-where $w$ is the portfolio, $\mathcal{W}$ represents portfolio constraints, $\mathcal{P}$ is an ambiguity set for the return distribution, and $\rho_{\mathbb{P}}$ is a risk measure such as CVaR.
+여기서 $w$는 포트폴리오, $\mathcal{W}$는 포트폴리오 제약집합, $\mathcal{P}$는 수익률 분포에 대한 ambiguity set, $\rho_{\mathbb{P}}$는 CVaR과 같은 위험측도를 나타낸다.
 
-### Role of optimization
+### 최적화의 역할
 
-Optimization determines how portfolio constraints, risk measures, transaction restrictions, sparsity, and robustness can be incorporated into a single decision problem. An important question is whether the resulting problem remains computationally tractable when realistic constraints are added.
+최적화는 포트폴리오 제약, 위험측도, 거래 제한, 희소성, 강건성 등을 하나의 의사결정 문제 안에 통합하는 역할을 한다. 이때 실제적인 제약을 추가하더라도 문제가 여전히 계산 가능한 형태를 유지하는지가 중요한 질문이 된다.
 
-I am particularly interested in data-driven ambiguity sets and in models that incorporate additional market structure, such as regime information, while retaining a formulation that can be solved efficiently.
+특히 데이터로부터 정의되는 ambiguity set이나 시장의 regime 정보를 반영하면서도 효율적으로 풀 수 있는 최적화 모델에 관심이 있다.
 
-### Role of duality
+### 쌍대성의 역할
 
-The inner worst-case problem over $\mathbb{P}$ is often infinite-dimensional. Duality can transform this distributional optimization problem into a finite-dimensional reformulation involving the portfolio variables and additional dual variables.
+$\mathbb{P}$에 대한 내부 worst-case 문제는 흔히 무한차원 최적화 문제가 된다. 이때 쌍대성을 이용하면 확률분포 자체를 직접 최적화하는 문제를 포트폴리오 변수와 추가적인 쌍대변수로 이루어진 유한차원 문제로 재구성할 수 있다.
 
-This is one of the clearest examples of the role I would like duality to play in my research:
+이것은 내가 연구에서 쌍대성을 활용하고 싶은 방식을 가장 직접적으로 보여주는 예 중 하나다.
 
-> Use duality not merely to prove strong duality, but to obtain a formulation that can actually be analyzed and computed.
+> 쌍대성을 strong duality를 증명하기 위한 도구로만 사용하는 것이 아니라, 실제로 분석하고 계산할 수 있는 문제를 얻기 위한 재구성 도구로 사용한다.
 
-Possible directions include richer ambiguity sets, regime-dependent uncertainty, and portfolio constraints whose interaction with the dual reformulation is not yet fully understood.
+앞으로는 더 다양한 ambiguity set, regime-dependent uncertainty, 그리고 여러 포트폴리오 제약이 이러한 쌍대 재구성과 어떻게 상호작용하는지를 살펴볼 수 있다.
 
-## AI and Scientific Machine Learning
+## AI와 Scientific Machine Learning
 
-A second direction is the intersection of optimization with **AI and scientific machine learning**.
+또 다른 관심 방향은 최적화와 **AI / Scientific Machine Learning**의 접점이다.
 
-I am particularly interested in learning-based methods for problems that are difficult to solve with classical numerical methods in high dimensions. Examples include neural approaches to PDEs and BSDEs, such as Deep BSDE methods, where neural networks are used to approximate unknown solution components or controls.
+특히 고차원에서 전통적인 수치해석 방법으로 풀기 어려운 문제를 학습 기반 방법으로 해결하는 접근에 관심이 있다. 대표적인 예로 PDE나 BSDE를 신경망으로 근사하는 방법이 있으며, Deep BSDE 계열에서는 미지의 해나 제어변수를 신경망으로 매개화한다.
 
-For a forward-backward stochastic differential equation,
+예를 들어 forward-backward stochastic differential equation을
 
 $$
 \begin{aligned}
 dX_t &= \mu(t,X_t)\,dt + \sigma(t,X_t)\,dW_t, \\
-dY_t &= -f(t,X_t,Y_t,Z_t)\,dt + Z_t\,dW_t,
+dY_t &= -f(t,X_t,Y_t,Z_t)\,dt + Z_t\,dW_t
 \end{aligned}
 $$
 
-a neural model can be used to parameterize quantities such as $Z_t$ or the solution map. This turns a high-dimensional numerical problem into a learning problem, but it also raises questions about stability, consistency, constraints, and the structure of the resulting optimization landscape.
+와 같이 쓸 수 있다. 여기서 $Z_t$ 또는 해의 일부를 신경망으로 근사하면 고차원 수치 문제를 학습 문제로 바꿀 수 있지만, 동시에 안정성, 일관성, 제약조건, 그리고 학습 문제의 최적화 구조에 대한 새로운 질문이 생긴다.
 
-### Role of optimization
+### 최적화의 역할
 
-Training itself is an optimization problem, but my interest is broader than choosing a neural-network architecture or optimizer. I am interested in how the mathematical structure of the original problem can be preserved or exploited during learning.
+신경망의 학습 자체가 최적화 문제이지만, 관심은 단순히 어떤 optimizer를 사용할지에만 있지 않다. 원래 문제에 존재하는 수학적 구조를 학습 과정에서 어떻게 보존하고 활용할 수 있는지가 더 중요한 문제라고 생각한다.
 
-Examples include constrained learning, control and hedging interpretations of $Z$, structure-aware loss functions, and hybrid methods that combine numerical optimization with neural approximation.
+예를 들어 constrained learning, $Z$의 control 또는 hedging 해석, 문제 구조를 반영한 loss function, 그리고 전통적인 수치 최적화와 신경망 근사를 결합한 hybrid method 등을 생각할 수 있다.
 
-### Role of duality
+### 쌍대성의 역할
 
-Duality may be useful when learning problems contain constraints, robust objectives, or nested optimization. Primal-dual formulations can provide a natural way to incorporate constraints, while dual reformulations may turn robust or adversarial components into more tractable training objectives.
+학습 문제에 제약조건, robust objective, nested optimization 등이 포함되는 경우 쌍대성이 유용할 수 있다. Primal-dual formulation을 통해 제약조건을 자연스럽게 포함하거나, robust 또는 adversarial component를 쌍대 재구성을 통해 더 계산하기 쉬운 학습 문제로 바꾸는 접근을 생각할 수 있다.
 
-Not every AI problem has a useful dual formulation, so the goal is not to apply duality mechanically. The more interesting question is **when duality reveals enough structure to make a learning-based method more interpretable, stable, or computationally manageable**.
+모든 AI 문제에 쌍대성을 적용할 필요는 없다. 오히려 관심 있는 질문은 **어떤 문제에서 쌍대성이 충분한 구조를 드러내어 학습 방법을 더 해석 가능하고 안정적이며 계산 가능한 형태로 만들어 주는가**이다.
 
-## Direction
+## 방향
 
-The common theme across these areas is therefore
+현재 생각하는 공통적인 연구 흐름은 다음과 같다.
 
 $$
 \text{problem structure}
@@ -91,4 +90,4 @@ $$
 \text{tractable computation}.
 $$
 
-The application domain may vary, but I would like the mathematical core of my work to remain centered on optimization and duality. Over time, this page will serve as a working description of the directions I am exploring rather than a fixed list of topics.
+구체적인 응용 분야는 앞으로 달라질 수 있지만, 연구의 수학적 중심은 최적화와 쌍대성에 두고 싶다. 이 페이지는 고정된 연구 분야 목록이라기보다, 앞으로 탐색하고 발전시켜 나갈 연구 방향을 정리하는 공간으로 사용할 예정이다.
