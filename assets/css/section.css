@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600&display=swap');
+
+:root {
+    --ink: #191919;
+    --muted: #77746f;
+    --soft: #aaa69f;
+    --line: #e6e3dd;
+    --paper: #fbfaf7;
+    --font: "Inter", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.site {
+    width: min(100% - 48px, 820px);
+    margin: 0 auto;
+}
+
+.header {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+}
+
+.site-name {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+nav {
+    display: flex;
+    gap: 22px;
+}
+
+nav a,
+footer a {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 500;
+    transition: color 0.15s ease;
+}
+
+nav a:hover,
+nav a.active,
+footer a:hover {
+    color: var(--ink);
+}
+
+.page-hero {
+    padding: 72px 0 66px;
+    border-bottom: 1px solid var(--line);
+}
+
+.eyebrow {
+    margin: 0 0 16px;
+    color: var(--soft);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+h1 {
+    margin: 0;
+    font-size: clamp(42px, 8vw, 64px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.055em;
+}
+
+.page-desc {
+    max-width: 580px;
+    margin: 20px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+.profile-section,
+.notes-section {
+    padding: 42px 0 46px;
+    border-bottom: 1px solid var(--line);
+}
+
+h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+}
+
+.interest-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.interest-list span {
+    padding: 8px 11px;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.timeline {
+    margin-top: 20px;
+}
+
+.timeline-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 24px;
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+}
+
+.timeline-row:last-child {
+    border-bottom: 1px solid var(--line);
+}
+
+.timeline-row time {
+    color: var(--soft);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.timeline-row p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.empty-text {
+    margin: 18px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.notes-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+#post-count {
+    color: var(--soft);
+    font-size: 11px;
+}
+
+.note-item {
+    display: grid;
+    grid-template-columns: 92px 1fr;
+    gap: 24px;
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+}
+
+.note-date {
+    padding-top: 3px;
+    color: var(--soft);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.note-title {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.45;
+    letter-spacing: -0.025em;
+    transition: color 0.15s ease;
+}
+
+.note-title:hover {
+    color: var(--muted);
+}
+
+.note-description {
+    display: -webkit-box;
+    max-width: 590px;
+    margin: 8px 0 0;
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.note-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.note-tags span {
+    color: var(--soft);
+    font-size: 11px;
+}
+
+.empty-state {
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 13px;
+}
+
+footer {
+    display: flex;
+    gap: 22px;
+    padding: 24px 0 42px;
+}
+
+@media (max-width: 600px) {
+    .site {
+        width: min(100% - 36px, 820px);
+    }
+
+    .header {
+        height: 72px;
+    }
+
+    .site-name {
+        font-size: 14px;
+    }
+
+    nav {
+        gap: 14px;
+    }
+
+    nav a {
+        font-size: 11px;
+    }
+
+    .page-hero {
+        padding: 58px 0 54px;
+    }
+
+    .profile-section,
+    .notes-section {
+        padding: 34px 0 38px;
+    }
+
+    .timeline-row,
+    .note-item {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    .note-item {
+        padding: 20px 0;
+    }
+
+    .timeline-row {
+        padding: 14px 0;
+    }
+}
