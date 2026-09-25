@@ -1,5 +1,3 @@
-// /assets/js/post.js
-
 (function () {
     function getParam(name) {
         return new URL(location.href).searchParams.get(name);
@@ -52,42 +50,24 @@
                 value = value.slice(1, -1);
             }
 
-            if (value.startsWith("[") && value.endsWith("]")) {
-                const inner = value.slice(1, -1).trim();
-
-                meta[key] = inner
-                    ? inner.split(",").map(v => v.trim()).filter(Boolean)
-                    : [];
-
-                return;
-            }
-
             meta[key] = value;
         });
 
         return { meta, content };
     }
 
-    function normalizeTags(value) {
-        if (!value) return [];
+    function categoryInfo(value) {
+        const category = String(value || "").trim().toLowerCase();
 
-        if (Array.isArray(value)) {
-            return value.map(v => String(v).trim()).filter(Boolean);
+        if (category === "mathematics") {
+            return { label: "Mathematics", href: "/mathematics/" };
         }
 
-        return String(value)
-            .split(",")
-            .map(v => v.trim())
-            .filter(Boolean);
-    }
+        if (category === "research") {
+            return { label: "Research", href: "/research/" };
+        }
 
-    function escapeHtml(str) {
-        return String(str)
-            .replaceAll("&", "&amp;")
-            .replaceAll("<", "&lt;")
-            .replaceAll(">", "&gt;")
-            .replaceAll('"', "&quot;")
-            .replaceAll("'", "&#039;");
+        return null;
     }
 
     function protectMath(md) {
@@ -143,14 +123,10 @@
             wrapper.className = "image-wrapper";
 
             const parent = img.parentNode;
-
             parent.insertBefore(wrapper, img);
             wrapper.appendChild(img);
 
-            if (
-                parent.tagName === "P" &&
-                parent.childNodes.length === 0
-            ) {
+            if (parent.tagName === "P" && parent.childNodes.length === 0) {
                 parent.remove();
             }
         });
@@ -162,25 +138,31 @@
         wrapImages(container);
     }
 
+    function makeBackLink(info) {
+        const href = info?.href || "/";
+        const label = info ? `${info.label}로 돌아가기` : "Home으로 돌아가기";
+
+        return `
+            <a href="${href}">
+                <button class="back-btn">${label}</button>
+            </a>
+        `;
+    }
+
     function renderNotFound() {
         const postTitle = document.querySelector(".post-title");
-        const postTags = document.querySelector(".post-tags");
+        const postCategory = document.querySelector(".post-category");
         const postDate = document.querySelector(".post-date");
         const postContent = document.querySelector(".post-content");
 
         if (postTitle) postTitle.textContent = "글을 찾을 수 없습니다";
-        if (postTags) postTags.innerHTML = "";
+        if (postCategory) postCategory.innerHTML = "";
         if (postDate) postDate.textContent = "";
 
         if (postContent) {
             postContent.innerHTML = `
                 <p>요청한 게시글이 존재하지 않거나, Markdown 파일을 불러오지 못했습니다.</p>
-
-                <a href="/posts">
-                    <button class="back-btn">
-                        전체 글로 돌아가기
-                    </button>
-                </a>
+                ${makeBackLink(null)}
             `;
         }
 
@@ -196,21 +178,14 @@
         }
 
         const postTitle = document.querySelector(".post-title");
-        const postTags = document.querySelector(".post-tags");
+        const postCategory = document.querySelector(".post-category");
         const postDate = document.querySelector(".post-date");
         const postContent = document.querySelector(".post-content");
 
-        if (!postContent) {
-            console.error(".post-content element not found");
-            return;
-        }
+        if (!postContent) return;
 
         try {
-            const folder = /^save-\d+$/.test(id)
-                ? "save"
-                : "articles";
-
-            const res = await fetch(`/post/${folder}/${id}.md`, {
+            const res = await fetch(`/post/articles/${id}.md`, {
                 cache: "no-store"
             });
 
@@ -221,24 +196,16 @@
 
             const raw = await res.text();
             const { meta, content } = parseFrontMatter(raw);
+            const info = categoryInfo(meta.category);
 
             if (postTitle) {
                 postTitle.textContent = meta.title || "Untitled";
             }
 
-            if (postTags) {
-                const tags = normalizeTags(meta.tags || meta.tag);
-
-                postTags.innerHTML = tags
-                    .map(tag => `
-                        <a
-                            class="post-tag"
-                            href="/posts/?tag=${encodeURIComponent(tag)}"
-                        >
-                            ${escapeHtml(tag)}
-                        </a>
-                    `)
-                    .join('<span class="tag-separator">·</span>');
+            if (postCategory) {
+                postCategory.innerHTML = info
+                    ? `<a class="post-category-link" href="${info.href}">${info.label}</a>`
+                    : "";
             }
 
             if (postDate) {
@@ -247,20 +214,15 @@
 
             const { replaced, mathBlocks } = protectMath(content);
 
-            let html = window.marked
+            let rendered = window.marked
                 ? marked.parse(replaced)
                 : replaced;
 
-            html = restoreMath(html, mathBlocks);
+            rendered = restoreMath(rendered, mathBlocks);
 
             postContent.innerHTML = `
-                ${html}
-
-                <a href="/posts">
-                    <button class="back-btn">
-                        전체 글로 돌아가기
-                    </button>
-                </a>
+                ${rendered}
+                ${makeBackLink(info)}
             `;
 
             prepareContent(postContent);
@@ -278,11 +240,10 @@
             }
 
             if (meta.title) {
-                document.title = meta.title;
+                document.title = `${meta.title} | JWN`;
             }
-
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            console.error(error);
             renderNotFound();
         }
     }
