@@ -14,13 +14,6 @@
     "category": "mathematics"
   },
   {
-    "id": "markdown-render-test",
-    "title": "Markdown Render Test",
-    "description": "Heading 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris",
-    "date": "2026. 02. 17.",
-    "category": "mathematics"
-  },
-  {
     "id": "pde-and-bsde",
     "title": "PDE & BSDE",
     "description": "PDE & BSDE Classical Feynman-Kac Theorem Linear PDE의 경우, Feynman-Kac 정리를 통해 PDE의 해를 확률과정의 기댓값으로 표현할 수 있다. Quasilinear Parabolic PDEs & BSDE 논문 1에서는, 다음과 같은 흐름으로 BSDE와 Quasilinear Parabolic PDEs의 관계에 대",

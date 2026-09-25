@@ -1,6 +1,5 @@
 ---
 title: Markdown Render Test
-category: mathematics
 author: JWN
 date: 2026. 02. 17.
 ---
