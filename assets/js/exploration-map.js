@@ -2,15 +2,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById("exploration-map");
     if (!container || typeof cytoscape === "undefined") return;
 
-    cytoscape({
+    const cy = cytoscape({
         container,
         elements: [
-            { data: { id: "convex", label: "Convex Optimization" }, position: { x: 285, y: 185 } },
-            { data: { id: "duality", label: "Duality-based Reformulation" }, position: { x: 535, y: 185 } },
-            { data: { id: "ai", label: "AI / ML" }, position: { x: 285, y: 55 } },
-            { data: { id: "deep-bsde", label: "Deep BSDE" }, position: { x: 95, y: 55 } },
-            { data: { id: "sciml", label: "Scientific ML" }, position: { x: 475, y: 55 } },
-            { data: { id: "drpo", label: "DRPO" }, position: { x: 410, y: 310 } },
+            { data: { id: "convex", label: "Convex Optimization", width: 142 }, position: { x: 285, y: 185 } },
+            { data: { id: "duality", label: "Duality-based Reformulation", width: 188 }, position: { x: 535, y: 185 } },
+            { data: { id: "ai", label: "AI / ML", width: 72 }, position: { x: 285, y: 55 } },
+            { data: { id: "deep-bsde", label: "Deep BSDE", width: 92 }, position: { x: 95, y: 55 } },
+            { data: { id: "sciml", label: "Scientific ML", width: 108 }, position: { x: 475, y: 55 } },
+            { data: { id: "drpo", label: "DRPO", width: 62 }, position: { x: 410, y: 310 } },
 
             { data: { id: "edge-core", source: "convex", target: "duality" } },
             { data: { id: "edge-ai", source: "ai", target: "convex" } },
@@ -21,8 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ],
         layout: {
             name: "preset",
-            fit: true,
-            padding: 36
+            fit: false
         },
         style: [
             {
@@ -32,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "border-color": "#c4c0b8",
                     "border-width": 1,
                     "shape": "round-rectangle",
-                    "width": "label",
+                    "width": "data(width)",
                     "height": 30,
                     "padding": 10,
                     "label": "data(label)",
@@ -77,4 +76,12 @@ document.addEventListener("DOMContentLoaded", () => {
         userPanningEnabled: false,
         userZoomingEnabled: false
     });
+
+    const fit = () => {
+        cy.resize();
+        cy.fit(cy.elements(), window.innerWidth <= 600 ? 24 : 36);
+    };
+
+    cy.ready(fit);
+    window.addEventListener("resize", fit);
 });
