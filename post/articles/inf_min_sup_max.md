@@ -5,9 +5,7 @@ author: JWN
 date: 2026. 09. 25.
 ---
 
-# infimum과 minimum, supremum과 maximum
-
-## Definition
+# Definition
 
 부분순서집합 $(P, \leq)$와 부분집합 $A \subseteq P$를 생각하자.
 
@@ -71,7 +69,7 @@ $$
 
 로 나타낸다.
 
-## Infimum과 minimum
+# Infimum과 minimum
 
 $\inf A$가 정의되어 있다고 하자. 그러면
 
@@ -87,7 +85,7 @@ $$
 
 가 성립한다.
 
-### Proof
+## Proof
 
 먼저 $m = \min A$인 $m \in A$가 있다고 하자. 그러면
 
@@ -131,7 +129,7 @@ $$
 
 이다.
 
-## Supremum과 maximum
+# Supremum과 maximum
 
 같은 논리를 반대 순서에 적용하면
 
@@ -149,7 +147,7 @@ $$
 
 즉, $\inf A$와 $\sup A$는 $A$의 원소일 필요가 없지만, $\min A$와 $\max A$는 반드시 $A$의 원소다.
 
-## Example
+# Example
 
 $$
 	A = [0,1]

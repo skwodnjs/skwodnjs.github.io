@@ -1,6 +1,11 @@
-# Duality와 Lagrangian Duality
+---
+title: Duality와 Lagrangian Duality
+category: mathematics
+author: JWN
+date: 2026. 09. 25.
+---
 
-## Duality의 기본 아이디어
+# Duality의 기본 아이디어
 
 최적화 문제에서는 하나의 문제를 직접 푸는 대신, 그 문제와 밀접하게 연결된 또 다른 최적화 문제를 구성하는 경우가 많다. 원래 문제를 **primal problem**, 새롭게 구성한 문제를 **dual problem**이라고 한다.
 
@@ -46,7 +51,7 @@ $$
 
 는 것이다.
 
-## Strong Duality
+# Strong Duality
 
 Minimization primal과 그에 대한 dual problem을 생각하면 weak duality에 의해
 
@@ -90,11 +95,11 @@ $$
 
 어떤 조건이 strong duality를 보장하는지는 사용하는 duality framework에 따라 달라진다. 따라서 실제 문제에서는 어떤 방식으로 dual problem을 구성했는지와 그 framework에서 어떤 strong duality theorem을 적용할 수 있는지를 함께 확인해야 한다.
 
-## Lagrangian Duality
+# Lagrangian Duality
 
 여러 duality framework 중 가장 대표적인 것이 **Lagrangian duality**이다. Lagrangian duality에서는 constraint를 objective function과 결합한 Lagrangian을 이용하여 primal optimal value에 대한 bound를 구성하고, 그중 가장 좋은 bound를 찾는다.
 
-### Primal problem과 Lagrangian
+## Primal problem과 Lagrangian
 
 다음 constrained minimization problem을 생각하자.
 
@@ -150,7 +155,7 @@ $$
 
 즉 Lagrangian은 feasible point에서 원래 objective function의 값을 넘지 않도록 구성된다.
 
-### Dual function
+## Dual function
 
 이제 multiplier $(\lambda, \nu)$를 고정하고 primal variable $x$에 대해 Lagrangian의 infimum을 취한다.
 
@@ -184,7 +189,7 @@ $$
 
 즉 $\lambda \ge 0$인 각각의 $(\lambda, \nu)$는 primal optimal value에 대한 하나의 lower bound를 제공한다.
 
-### Lagrangian dual problem
+## Lagrangian dual problem
 
 각 $(\lambda, \nu)$가 하나의 lower bound를 제공하므로, 자연스럽게 가능한 lower bound 중 가장 큰 것을 찾을 수 있다.
 
@@ -220,7 +225,7 @@ $$
 
 로 이해할 수 있다.
 
-### Minimax 관점
+## Minimax 관점
 
 Lagrangian duality는 minimax inequality와도 직접 연결된다.
 
@@ -302,7 +307,7 @@ $$
 
 가 성립하면 Lagrangian strong duality가 성립한다.
 
-### Strong duality와 Slater condition
+## Strong duality와 Slater condition
 
 Lagrangian weak duality는 항상 성립하지만, strong duality는 일반적으로 자동으로 성립하지 않는다.
 
