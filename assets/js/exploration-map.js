@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "background-opacity": 0,
                     "border-color": "#cbc7bf",
                     "border-width": 1,
-                    "shape": "rectangle",
+                    "shape": "round-rectangle",
                     "width": "data(width)",
                     "height": "data(height)",
                     "label": "data(label)",
