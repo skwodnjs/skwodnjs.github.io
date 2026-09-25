@@ -8,14 +8,17 @@
                     const star = src.indexOf("*");
                     const underscore = src.indexOf("_");
                     const tilde = src.indexOf("~");
-                    return [star, underscore, tilde]
-                        .filter(index => index >= 0)
-                        .reduce((min, index) => Math.min(min, index), Infinity);
+                    const indexes = [star, underscore, tilde]
+                        .filter(index => index >= 0);
+
+                    return indexes.length
+                        ? Math.min(...indexes)
+                        : undefined;
                 },
                 tokenizer(src) {
                     const suffix = "(?=[가-힣ㄱ-ㅎㅏ-ㅣ])";
                     const patterns = [
-                        { regex: new RegExp("^\\*\\*\\*([^\\n]+?)\\*\\*" + suffix, "u"), kind: "strong-em" },
+                        { regex: new RegExp("^\\*\\*\\*([^\\n]+?)\\*\\*\\*" + suffix, "u"), kind: "strong-em" },
                         { regex: new RegExp("^___([^\\n]+?)___" + suffix, "u"), kind: "strong-em" },
                         { regex: new RegExp("^\\*\\*([^\\n]+?)\\*\\*" + suffix, "u"), kind: "strong" },
                         { regex: new RegExp("^__([^\\n]+?)__" + suffix, "u"), kind: "strong" },
