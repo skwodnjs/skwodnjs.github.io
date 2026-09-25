@@ -60,7 +60,10 @@ footer a:hover,
 }
 
 .hero {
-    padding: 66px 0 60px;
+    min-height: 490px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 h1 {
@@ -154,6 +157,8 @@ footer {
     }
 
     .hero {
+        min-height: 0;
+        display: block;
         padding: 82px 0 74px;
     }
 
