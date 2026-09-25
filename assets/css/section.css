@@ -207,17 +207,6 @@ h2 {
     -webkit-line-clamp: 2;
 }
 
-.note-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 10px;
-}
-
-.note-tags span {
-    color: var(--soft);
-    font-size: 11px;
-}
 
 .empty-state {
     padding: 24px 0;
