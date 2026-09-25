@@ -1,130 +1,21 @@
-async function loadRecentData() {
-    const tagContainer = document.getElementById("tag-list");
-    const postsContainer = document.getElementById("post-list");
-
+async function loadRecentPosts() {
+    const container = document.getElementById("post-list");
+    if (!container) return;
     try {
-        const response = await fetch("/posts/posts.json", {
-            cache: "no-store"
-        });
-
+        const response = await fetch("/posts/posts.json", { cache: "no-store" });
+        if (!response.ok) throw new Error("Failed to load posts");
         const posts = await response.json();
-
-        const sortedPosts = posts
-            .slice()
-            .sort((a, b) => parseDate(b.date) - parseDate(a.date));
-
-        /* =========================
-           최근 태그 8개
-           ========================= */
-
-        if (tagContainer) {
-            const recentTags = sortedPosts
-                .flatMap(post => normalizeTags(post.tags || post.tag))
-                .filter(unique())
-                .slice(0, 8);
-
-            tagContainer.innerHTML = recentTags
-                .map(tag => `
-                    <a
-                        class="recent-tag"
-                        href="/posts/?tag=${encodeURIComponent(tag)}"
-                    >
-                        ${escapeHtml(tag)}
-                    </a>
-                `)
-                .join("");
+        const recent = posts.slice().sort((a, b) => parseDate(b.date) - parseDate(a.date)).slice(0, 5);
+        if (!recent.length) {
+            container.innerHTML = '<div class="empty">아직 작성된 글이 없습니다.</div>';
+            return;
         }
-
-        /* =========================
-           최근 글 3개
-           ========================= */
-
-        if (postsContainer) {
-            postsContainer.innerHTML = sortedPosts
-                .slice(0, 3)
-                .map(post => {
-                    const tags = normalizeTags(post.tags || post.tag);
-
-                    return `
-                        <article class="post-item">
-
-                            <div class="post-tags">
-                                ${tags
-                                    .map(tag => `
-                                        <span>
-                                            ${escapeHtml(tag)}
-                                        </span>
-                                    `)
-                                    .join("")}
-                            </div>
-
-                            <h3>
-                                <a
-                                    class="post-link"
-                                    href="/post/?id=${encodeURIComponent(post.id)}"
-                                >
-                                    ${escapeHtml(post.title)}
-                                </a>
-                            </h3>
-
-                            <p>
-                                ${escapeHtml(post.description || "")}
-                            </p>
-
-                        </article>
-                    `;
-                })
-                .join("");
-        }
-
+        container.innerHTML = recent.map(post => `<article class="post-item"><div><a class="post-title" href="/post/?id=${encodeURIComponent(post.id)}">${escapeHtml(post.title || "Untitled")}</a><p class="post-description">${escapeHtml(post.description || "")}</p></div><time class="post-date">${escapeHtml(post.date || "")}</time></article>`).join("");
     } catch (error) {
-        console.error("최근 데이터 로드 실패:", error);
+        container.innerHTML = '<div class="empty">글 목록을 불러오지 못했습니다.</div>';
+        console.error(error);
     }
 }
-
-function parseDate(value) {
-    return new Date(
-        String(value)
-            .trim()
-            .replace(/\s/g, "")
-            .replace(/\./g, "-")
-            .replace(/-$/, "")
-    );
-}
-
-function normalizeTags(value) {
-    if (!value) return [];
-
-    if (Array.isArray(value)) {
-        return value
-            .map(v => String(v).trim())
-            .filter(Boolean);
-    }
-
-    return String(value)
-        .split(",")
-        .map(v => v.trim())
-        .filter(Boolean);
-}
-
-function unique() {
-    const seen = new Set();
-
-    return value => {
-        if (seen.has(value)) return false;
-
-        seen.add(value);
-        return true;
-    };
-}
-
-function escapeHtml(value) {
-    return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-}
-
-document.addEventListener("DOMContentLoaded", loadRecentData);
+function parseDate(value) { return new Date(String(value || "").trim().replace(/\s/g, "").replace(/\./g, "-").replace(/-$/, "")); }
+function escapeHtml(value) { return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;"); }
+document.addEventListener("DOMContentLoaded", loadRecentPosts);
