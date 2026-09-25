@@ -3,7 +3,7 @@ name: Build post index
 on:
   push:
     paths:
-      - "post/*.md"
+      - "post/articles/*.md"
   workflow_dispatch:
 
 permissions:
