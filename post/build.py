@@ -18,27 +18,26 @@ def parse_frontmatter(text, path):
 
     for i, line in enumerate(lines[1:], start=1):
         if line.strip() == "---":
-            body = "\n".join(lines[i + 1:]).strip()
-            return frontmatter, body
+            return frontmatter, "\n".join(lines[i + 1:]).strip()
 
-        if ":" not in line:
-            continue
-
-        key, value = line.split(":", 1)
-        key, value = key.strip(), value.strip()
-
-        if len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
-            value = value[1:-1]
-
-        frontmatter[key] = value
+        if ":" in line:
+            key, value = line.split(":", 1)
+            frontmatter[key.strip()] = value.strip()
 
     raise ValueError(f"{path}: unclosed front matter")
 
 
 def make_description(body, length=200):
-    text = re.sub(r"```[\s\S]*?```", " ", body)
-    text = re.sub(r"\$\$[\s\S]*?\$\$", " ", text)
-    text = re.sub(r"\$[^$\n]+\$", " ", text)
+    math = []
+
+    def protect_math(match):
+        content = match.group(1) if match.group(1) is not None else match.group(2)
+        token = f"@@MATH{len(math)}@@"
+        math.append(content.strip())
+        return token
+
+    text = re.sub(r"\$\$([\s\S]*?)\$\$|\$([^$\n]+)\$", protect_math, body)
+    text = re.sub(r"\x60{3}[\s\S]*?\x60{3}", " ", text)
     text = re.sub(r"!\[([^\]]*)\]\([^)]*\)", r"\1", text)
     text = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", text)
     text = re.sub(r"<[^>]+>", " ", text)
@@ -46,7 +45,11 @@ def make_description(body, length=200):
     text = re.sub(r"(?m)^\s*>\s?", "", text)
     text = re.sub(r"(?m)^\s*(?:[-+*]|\d+\.)\s+", "", text)
     text = re.sub(r"(?m)^\s*[-*_]{3,}\s*$", " ", text)
-    text = re.sub(r"[`*_~]", "", text)
+    text = re.sub(r"[\x60*_~]", "", text)
+
+    for i, content in enumerate(math):
+        text = text.replace(f"@@MATH{i}@@", content)
+
     text = re.sub(r"\s+", " ", text).strip()
     return text[:length]
 
@@ -73,7 +76,7 @@ def build_index():
         posts.append({
             "id": path.stem,
             "title": title,
-            "description": frontmatter.get("description", "").strip() or make_description(body),
+            "description": make_description(body),
             "date": date,
             "category": category,
         })
