@@ -1,4 +1,30 @@
 (function () {
+    if (window.marked) {
+        marked.use({
+            extensions: [{
+                name: "koreanStrong",
+                level: "inline",
+                start(src) {
+                    return src.indexOf("**");
+                },
+                tokenizer(src) {
+                    const match = /^\*\*([^\n]+?)\*\*(?=[가-힣ㄱ-ㅎㅏ-ㅣ])/u.exec(src);
+                    if (!match) return;
+
+                    return {
+                        type: "koreanStrong",
+                        raw: match[0],
+                        text: match[1],
+                        tokens: this.lexer.inlineTokens(match[1])
+                    };
+                },
+                renderer(token) {
+                    return `<strong>${this.parser.parseInline(token.tokens)}</strong>`;
+                }
+            }]
+        });
+    }
+
     function getParam(name) {
         return new URL(location.href).searchParams.get(name);
     }
