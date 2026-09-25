@@ -3,7 +3,8 @@ import json
 import re
 
 articles_dir = Path("post/articles")
-json_path = Path("posts/posts.json")
+json_path = Path("data/posts.json")
+allowed_categories = {"mathematics", "research"}
 
 
 def parse_frontmatter_and_body(text):
@@ -31,19 +32,6 @@ def parse_frontmatter_and_body(text):
     return frontmatter, body
 
 
-def parse_tags(value):
-    value = value.strip()
-
-    if value.startswith("[") and value.endswith("]"):
-        return [
-            tag.strip()
-            for tag in value[1:-1].split(",")
-            if tag.strip()
-        ]
-
-    return []
-
-
 def make_description(body, length=200):
     body = re.sub(r"\s+", " ", body).strip()
     return body[:length]
@@ -51,24 +39,30 @@ def make_description(body, length=200):
 
 posts = []
 
-article_files = sorted(
-    articles_dir.glob("*.md"),
-    key=lambda file: file.name
-)
-
-for file in article_files:
+for file in sorted(articles_dir.glob("*.md"), key=lambda file: file.name):
     text = file.read_text(encoding="utf-8")
     frontmatter, body = parse_frontmatter_and_body(text)
 
-    post_id = file.stem
+    category = frontmatter.get("category", "").strip().lower()
+
+    if not category:
+        continue
+
+    if category not in allowed_categories:
+        raise ValueError(f"{file}: unknown category '{category}'")
+
+    title = frontmatter.get("title", "").strip()
+    date = frontmatter.get("date", "").strip()
+
+    if not title or not date:
+        raise ValueError(f"{file}: published posts require title and date")
 
     posts.append({
-        "id": post_id,
-        "title": frontmatter.get("title", ""),
+        "id": file.stem,
+        "title": title,
         "description": make_description(body),
-        "date": frontmatter.get("date", ""),
-        "category": frontmatter.get("category", "").strip().lower(),
-        "tags": parse_tags(frontmatter.get("tags", "[]")),
+        "date": date,
+        "category": category,
     })
 
 
@@ -76,3 +70,4 @@ json_path.parent.mkdir(parents=True, exist_ok=True)
 
 with json_path.open("w", encoding="utf-8") as f:
     json.dump(posts, f, ensure_ascii=False, indent=2)
+    f.write("\n")
