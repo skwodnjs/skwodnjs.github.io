@@ -147,11 +147,11 @@ Markdown 링크:
 
 내부 글 이동 테스트:
 
-<a href="?id=3">내부 글 이동</a>
+<a href="/post/?id=black-scholes-equation">내부 글 이동</a>
 
 카테고리 페이지 이동 테스트:
 
-<a href="/category#mathematics">수학 카테고리</a>
+<a href="/mathematics/">수학 카테고리</a>
 
 ---
 
@@ -212,7 +212,7 @@ HTML 박스 테스트
 
 - 리스트도 가능
 - **강조도 가능**
-- <a href="?id=1">내부 링크도 가능</a>
+- <a href="/post/?id=black-scholes-equation">내부 링크도 가능</a>
 
 </details>
 
