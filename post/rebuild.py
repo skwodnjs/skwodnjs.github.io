@@ -67,6 +67,7 @@ for file in article_files:
         "title": frontmatter.get("title", ""),
         "description": make_description(body),
         "date": frontmatter.get("date", ""),
+        "category": frontmatter.get("category", "").strip().lower(),
         "tags": parse_tags(frontmatter.get("tags", "[]")),
     })
 
