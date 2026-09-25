@@ -2,24 +2,57 @@
     if (window.marked) {
         marked.use({
             extensions: [{
-                name: "koreanStrong",
+                name: "koreanInlineDelimiter",
                 level: "inline",
                 start(src) {
-                    return src.indexOf("**");
+                    const star = src.indexOf("*");
+                    const underscore = src.indexOf("_");
+                    const tilde = src.indexOf("~");
+                    return [star, underscore, tilde]
+                        .filter(index => index >= 0)
+                        .reduce((min, index) => Math.min(min, index), Infinity);
                 },
                 tokenizer(src) {
-                    const match = /^\*\*([^\n]+?)\*\*(?=[가-힣ㄱ-ㅎㅏ-ㅣ])/u.exec(src);
-                    if (!match) return;
+                    const suffix = "(?=[가-힣ㄱ-ㅎㅏ-ㅣ])";
+                    const patterns = [
+                        { regex: new RegExp("^\\*\\*\\*([^\\n]+?)\\*\\*" + suffix, "u"), kind: "strong-em" },
+                        { regex: new RegExp("^___([^\\n]+?)___" + suffix, "u"), kind: "strong-em" },
+                        { regex: new RegExp("^\\*\\*([^\\n]+?)\\*\\*" + suffix, "u"), kind: "strong" },
+                        { regex: new RegExp("^__([^\\n]+?)__" + suffix, "u"), kind: "strong" },
+                        { regex: new RegExp("^\\*(?!\\*)([^\\n]+?)\\*(?!\\*)" + suffix, "u"), kind: "em" },
+                        { regex: new RegExp("^_(?!_)([^\\n]+?)_(?!_)" + suffix, "u"), kind: "em" },
+                        { regex: new RegExp("^~~([^\\n]+?)~~" + suffix, "u"), kind: "del" }
+                    ];
 
-                    return {
-                        type: "koreanStrong",
-                        raw: match[0],
-                        text: match[1],
-                        tokens: this.lexer.inlineTokens(match[1])
-                    };
+                    for (const pattern of patterns) {
+                        const match = pattern.regex.exec(src);
+                        if (!match) continue;
+
+                        return {
+                            type: "koreanInlineDelimiter",
+                            raw: match[0],
+                            text: match[1],
+                            kind: pattern.kind,
+                            tokens: this.lexer.inlineTokens(match[1])
+                        };
+                    }
                 },
                 renderer(token) {
-                    return `<strong>${this.parser.parseInline(token.tokens)}</strong>`;
+                    const inner = this.parser.parseInline(token.tokens);
+
+                    if (token.kind === "strong") {
+                        return `<strong>${inner}</strong>`;
+                    }
+
+                    if (token.kind === "em") {
+                        return `<em>${inner}</em>`;
+                    }
+
+                    if (token.kind === "strong-em") {
+                        return `<strong><em>${inner}</em></strong>`;
+                    }
+
+                    return `<del>${inner}</del>`;
                 }
             }]
         });
