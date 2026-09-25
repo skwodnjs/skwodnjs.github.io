@@ -46,7 +46,7 @@ a {
 .site-name {
     font-size: 15px;
     font-weight: 600;
-    letter-spacing: -0.025em;
+    letter-spacing: 0.02em;
 }
 
 nav {
@@ -68,7 +68,7 @@ footer a:hover {
 }
 
 .hero {
-    padding: 112px 0 104px;
+    padding: 86px 0 80px;
 }
 
 h1 {
@@ -80,16 +80,11 @@ h1 {
 }
 
 .identity {
-    margin: 24px 0 0;
+    margin: 22px 0 0;
     color: var(--muted);
     font-size: 15px;
     line-height: 1.7;
     letter-spacing: -0.015em;
-}
-
-.identity span {
-    margin: 0 5px;
-    color: #aaa69f;
 }
 
 .categories {
@@ -164,7 +159,7 @@ footer {
     }
 
     .hero {
-        padding: 84px 0 76px;
+        padding: 82px 0 74px;
     }
 
     h1 {
