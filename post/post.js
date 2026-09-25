@@ -185,7 +185,7 @@
         if (!postContent) return;
 
         try {
-            const res = await fetch(`/post/articles/${id}.md`, {
+            const res = await fetch(`/post/${id}.md`, {
                 cache: "no-store"
             });
 

@@ -1,24 +1,24 @@
-name: Rebuild post index
+name: Build post index
 
 on:
   push:
     paths:
-      - "post/articles/**/*.md"
+      - "post/*.md"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  rebuild:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Rebuild post index
-        run: python post/rebuild.py
+      - name: Build post index
+        run: python post/build.py
 
       - name: Commit updated index
         run: |

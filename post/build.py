@@ -2,7 +2,7 @@ from pathlib import Path
 import json
 import re
 
-articles_dir = Path("post/articles")
+post_dir = Path("post")
 json_path = Path("data/posts.json")
 allowed_categories = {"mathematics", "research"}
 
@@ -39,7 +39,7 @@ def make_description(body, length=200):
 
 posts = []
 
-for file in sorted(articles_dir.glob("*.md"), key=lambda file: file.name):
+for file in sorted(post_dir.glob("*.md"), key=lambda file: file.name):
     text = file.read_text(encoding="utf-8")
     frontmatter, body = parse_frontmatter_and_body(text)
 
