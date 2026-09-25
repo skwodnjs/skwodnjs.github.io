@@ -9,7 +9,7 @@ date: 2026. 09. 25.
 
 ## Definition
 
-부분순서집합 $(P, \leq)$와 부분집합 $A \subset P$를 생각하자.
+부분순서집합 $(P, \leq)$와 부분집합 $A \subseteq P$를 생각하자.
 
 어떤 $l \in P$가 모든 $a \in A$에 대해
 

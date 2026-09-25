@@ -6,6 +6,8 @@
     <meta name="description" content="Profile — Jaewon Na">
     <title>Profile | Jaewon Na</title>
     <link rel="stylesheet" href="/assets/css/section.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/cytoscape/dist/cytoscape.min.js"></script>
+    <script defer src="/assets/js/exploration-map.js"></script>
 </head>
 <body>
     <div class="site">
@@ -31,6 +33,12 @@
                     <span>Convex Optimization</span>
                     <span>Duality-based Reformulation</span>
                 </div>
+            </section>
+
+            <section class="profile-section">
+                <h2>Exploration Map</h2>
+                <p class="section-desc">Current and prospective directions. This map may evolve over time.</p>
+                <div id="exploration-map" class="exploration-map" aria-label="Research exploration map"></div>
             </section>
 
             <section class="profile-section">
