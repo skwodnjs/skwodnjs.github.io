@@ -8,13 +8,7 @@
     --font: "Inter", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-* {
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
@@ -25,10 +19,7 @@ body {
     text-rendering: optimizeLegibility;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
-}
+a { color: inherit; text-decoration: none; }
 
 .site {
     width: min(100% - 48px, 820px);
@@ -36,7 +27,7 @@ a {
 }
 
 .header {
-    height: 84px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -63,12 +54,13 @@ footer a {
 }
 
 nav a:hover,
-footer a:hover {
+footer a:hover,
+.category-body h2 a:hover {
     color: var(--ink);
 }
 
 .hero {
-    padding: 86px 0 80px;
+    padding: 66px 0 60px;
 }
 
 h1 {
@@ -80,7 +72,7 @@ h1 {
 }
 
 .identity {
-    margin: 22px 0 0;
+    margin: 20px 0 0;
     color: var(--muted);
     font-size: 15px;
     line-height: 1.7;
@@ -93,11 +85,10 @@ h1 {
 
 .category {
     display: grid;
-    grid-template-columns: 52px 1fr;
-    gap: 28px;
-    padding: 36px 0 40px;
+    grid-template-columns: 48px 1fr;
+    gap: 24px;
+    padding: 30px 0 32px;
     border-bottom: 1px solid var(--line);
-    scroll-margin-top: 24px;
 }
 
 .category-index {
@@ -109,11 +100,15 @@ h1 {
 }
 
 .category-body h2 {
-    margin: 0 0 12px;
+    margin: 0 0 10px;
     font-size: 22px;
     font-weight: 500;
     line-height: 1.25;
     letter-spacing: -0.035em;
+}
+
+.category-body h2 a {
+    transition: color 0.15s ease;
 }
 
 .category-body p {
@@ -121,12 +116,12 @@ h1 {
     margin: 0;
     color: var(--muted);
     font-size: 14px;
-    line-height: 1.8;
+    line-height: 1.7;
     letter-spacing: -0.01em;
 }
 
 .category-body .detail {
-    margin-top: 5px;
+    margin-top: 4px;
     color: #918d86;
     font-size: 12px;
 }
@@ -134,7 +129,7 @@ h1 {
 footer {
     display: flex;
     gap: 22px;
-    padding: 28px 0 48px;
+    padding: 22px 0 34px;
 }
 
 @media (max-width: 600px) {
@@ -182,5 +177,9 @@ footer {
 
     .category-body p {
         font-size: 13px;
+    }
+
+    footer {
+        padding: 26px 0 42px;
     }
 }
