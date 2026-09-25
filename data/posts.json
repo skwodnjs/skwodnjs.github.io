@@ -7,9 +7,16 @@
     "category": "mathematics"
   },
   {
+    "id": "duality-and-lagrangian-duality",
+    "title": "Duality와 Lagrangian Duality",
+    "description": "Duality의 기본 아이디어 최적화 문제에서는 하나의 문제를 직접 푸는 대신, 그 문제와 밀접하게 연결된 또 다른 최적화 문제를 구성하는 경우가 많다. 원래 문제를 primal problem, 새롭게 구성한 문제를 dual problem이라고 한다. Dual problem에 대해 모든 최적화 문제를 포괄하는 하나의 유일한 형식적 정의가 존재하는 것은 아니",
+    "date": "2026. 09. 25.",
+    "category": "mathematics"
+  },
+  {
     "id": "inf_min_sup_max",
     "title": "infimum과 minimum, supremum과 maximum",
-    "description": "infimum과 minimum, supremum과 maximum Definition 부분순서집합 (P, \\leq)와 부분집합 A \\subseteq P를 생각하자. 어떤 l \\in P가 모든 a \\in A에 대해 l \\leq a 를 만족하면 l을 A의 lower bound라고 한다. A의 lower bound 중 가장 큰 원소를 infimum이라 하고, \\i",
+    "description": "Definition 부분순서집합 (P, \\leq)와 부분집합 A \\subseteq P를 생각하자. 어떤 l \\in P가 모든 a \\in A에 대해 l \\leq a 를 만족하면 l을 A의 lower bound라고 한다. A의 lower bound 중 가장 큰 원소를 infimum이라 하고, \\inf A 로 나타낸다. 즉, \\inf A는 \\inf A \\leq ",
     "date": "2026. 09. 25.",
     "category": "mathematics"
   },
