@@ -83,13 +83,13 @@ nav a:hover {
     margin-bottom: 22px;
 }
 
-.post-tags {
+.post-category {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
 }
 
-.post-tag,
+.post-category-link,
 .post-date {
     color: var(--soft);
     font-size: 11px;
@@ -98,17 +98,12 @@ nav a:hover {
     letter-spacing: 0.04em;
 }
 
-.post-tag {
+.post-category-link {
     transition: color 0.15s ease;
 }
 
-.post-tag:hover {
+.post-category-link:hover {
     color: var(--ink);
-}
-
-.tag-separator {
-    margin: 0 7px;
-    color: var(--line);
 }
 
 .post-title {
