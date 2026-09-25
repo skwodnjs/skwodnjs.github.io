@@ -41,15 +41,7 @@
             if (idx === -1) return;
 
             const key = trimmed.slice(0, idx).trim();
-            let value = trimmed.slice(idx + 1).trim();
-
-            if (
-                (value.startsWith('"') && value.endsWith('"')) ||
-                (value.startsWith("'") && value.endsWith("'"))
-            ) {
-                value = value.slice(1, -1);
-            }
-
+            const value = trimmed.slice(idx + 1).trim();
             meta[key] = value;
         });
 
