@@ -255,8 +255,11 @@ nav a:hover {
 }
 
 .post-content mjx-container {
-    overflow-x: auto;
-    overflow-y: hidden;
+    max-width: 100%;
+}
+
+.post-content mjx-container[display="true"] {
+    margin: 1.2em 0;
 }
 
 .back-btn {
