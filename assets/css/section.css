@@ -80,10 +80,10 @@ footer a:hover {
 
 h1 {
     margin: 0;
-    font-size: clamp(42px, 8vw, 64px);
+    font-size: clamp(48px, 9vw, 72px);
     font-weight: 500;
-    line-height: 1.05;
-    letter-spacing: -0.055em;
+    line-height: 1;
+    letter-spacing: -0.06em;
 }
 
 .page-desc {
