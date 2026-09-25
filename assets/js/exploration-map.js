@@ -5,12 +5,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const cy = cytoscape({
         container,
         elements: [
-            { data: { id: "convex", label: "Convex Optimization", width: 142 }, position: { x: 285, y: 185 } },
-            { data: { id: "duality", label: "Duality-based Reformulation", width: 188 }, position: { x: 535, y: 185 } },
-            { data: { id: "ai", label: "AI / ML", width: 72 }, position: { x: 285, y: 55 } },
-            { data: { id: "deep-bsde", label: "Deep BSDE", width: 92 }, position: { x: 95, y: 55 } },
-            { data: { id: "sciml", label: "Scientific ML", width: 108 }, position: { x: 475, y: 55 } },
-            { data: { id: "drpo", label: "DRPO", width: 62 }, position: { x: 410, y: 310 } },
+            { data: { id: "convex", label: "Convex Optimization", width: 150 }, position: { x: 300, y: 205 } },
+            { data: { id: "duality", label: "Duality-based Reformulation", width: 190 }, position: { x: 535, y: 205 } },
+
+            { data: { id: "ai", label: "AI / ML", width: 82 }, position: { x: 265, y: 82 } },
+            { data: { id: "deep-bsde", label: "Deep BSDE", width: 92 }, position: { x: 92, y: 112 } },
+            { data: { id: "sciml", label: "Scientific ML", width: 108 }, position: { x: 450, y: 58 } },
+
+            { data: { id: "drpo", label: "DRPO", width: 72 }, position: { x: 430, y: 318 } },
 
             { data: { id: "edge-core", source: "convex", target: "duality" } },
             { data: { id: "edge-ai", source: "ai", target: "convex" } },
@@ -28,19 +30,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 selector: "node",
                 style: {
                     "background-color": "#fbfaf7",
-                    "border-color": "#c4c0b8",
-                    "border-width": 1,
+                    "border-width": 0,
                     "shape": "round-rectangle",
                     "width": "data(width)",
                     "height": 30,
-                    "padding": 10,
+                    "padding": 8,
                     "label": "data(label)",
                     "font-family": "Inter, Noto Sans KR, sans-serif",
                     "font-size": 11,
                     "font-weight": "normal",
-                    "color": "#5f5c57",
+                    "color": "#77746f",
                     "text-wrap": "wrap",
-                    "text-max-width": 165,
+                    "text-max-width": 170,
                     "text-valign": "center",
                     "text-halign": "center"
                 }
@@ -48,26 +49,48 @@ document.addEventListener("DOMContentLoaded", () => {
             {
                 selector: "#convex, #duality",
                 style: {
-                    "border-color": "#77746f",
-                    "border-width": 1.5,
+                    "background-color": "#252422",
+                    "color": "#fbfaf7",
+                    "height": 34,
+                    "padding": 12,
                     "font-size": 12,
-                    "font-weight": "bold",
-                    "color": "#191919"
+                    "font-weight": "bold"
                 }
             },
             {
-                selector: "#ai",
+                selector: "#ai, #drpo",
                 style: {
-                    "border-color": "#9f9b94",
-                    "color": "#3f3d3a"
+                    "background-color": "#efede8",
+                    "color": "#4f4c48",
+                    "height": 28,
+                    "padding": 9,
+                    "font-weight": 500
+                }
+            },
+            {
+                selector: "#deep-bsde, #sciml",
+                style: {
+                    "background-opacity": 0,
+                    "color": "#77746f",
+                    "font-size": 11
                 }
             },
             {
                 selector: "edge",
                 style: {
-                    "width": 1.25,
-                    "line-color": "#aaa69f",
-                    "curve-style": "bezier"
+                    "width": 1.15,
+                    "line-color": "#d6d2ca",
+                    "curve-style": "unbundled-bezier",
+                    "control-point-distances": 18,
+                    "control-point-weights": 0.5
+                }
+            },
+            {
+                selector: "#edge-core",
+                style: {
+                    "width": 1.35,
+                    "line-color": "#9f9b94",
+                    "control-point-distances": 0
                 }
             }
         ],
@@ -79,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const fit = () => {
         cy.resize();
-        cy.fit(cy.elements(), window.innerWidth <= 600 ? 24 : 36);
+        cy.fit(cy.elements(), window.innerWidth <= 600 ? 20 : 34);
     };
 
     cy.ready(fit);
