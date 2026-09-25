@@ -117,13 +117,12 @@ nav a:hover {
 }
 
 .post-content {
-    max-width: 720px;
+    max-width: 800px;
     margin: 0 auto;
     padding-top: 64px;
     color: #2b2a28;
     font-size: 16px;
     line-height: 1.85;
-    overflow-x: hidden;
 }
 
 .post-content p {
@@ -252,10 +251,6 @@ nav a:hover {
 
 .post-content tbody tr:last-child td {
     border-bottom: none;
-}
-
-.post-content mjx-container {
-    max-width: 100%;
 }
 
 .post-content mjx-container[display="true"] {
