@@ -1,0 +1,33 @@
+name: Rebuild post index
+
+on:
+  push:
+    paths:
+      - "post/articles/**/*.md"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Rebuild post index
+        run: python post/rebuild.py
+
+      - name: Commit updated index
+        run: |
+          if git diff --quiet -- data/posts.json; then
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/posts.json
+          git commit -m "Update post index"
+          git push
